@@ -2,11 +2,18 @@ package br.com.ies.entity;
 
 import java.util.Date;
 
+import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.Tabela;
+
+@Tabela(schema="usuario", nome= "controle_acesso")
 public class ControleAcessoEntity {
 
 	
+	@Coluna(nome= "coa_codigo")
 	private Integer 		coaCodigo;
 	private UsuarioEntity   usuarioEntity;
+	
+	@Coluna(nome="coa_data")
 	private Date            coaData;
 	
 	

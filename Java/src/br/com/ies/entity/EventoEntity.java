@@ -1,14 +1,26 @@
 package br.com.ies.entity;
 
+import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.Tabela;
+
+@Tabela(schema="evento", nome="evento")
 public class EventoEntity {
 
+	@Coluna(nome="eve_codigo")
 	private Integer          eveCodigo;
+	
 	private LocalEntity      localEntity;
 	private ArtistaEntity    artistaEntity;
 	private TipoEventoEntity tipoEventoEntity;
 	private UsuarioEntity    aberturaUsuarioEntity;
+	
+	@Coluna(nome="eve_titulo")
 	private String           eveTitulo;
+	
+	@Coluna(nome="eve_qtd_ingressos")
 	private Integer          eveQtdIngressos;
+	
+	@Coluna(nome="eve_valor_ingresso")
 	private Double           eveValorIngresso;
 	
 	

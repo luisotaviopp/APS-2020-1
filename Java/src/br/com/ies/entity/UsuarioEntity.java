@@ -1,15 +1,30 @@
 package br.com.ies.entity;
 
+import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.Tabela;
+
+@Tabela(schema="usuario", nome="usuario")
 public class UsuarioEntity {
 
-	private Integer     usrCodigo;
+	@Coluna(nome = "usr_codigo")
+	private Integer usrCodigo;
+
 	private NivelEntity nivelEntity;
-	private String      usrNome;
-	private String      usrEmail;
-	private String      usrLogin;
-	private String      usrSenha;
-	private Boolean     usrAtivo;
-	
+
+	@Coluna(nome = "usr_nome")
+	private String usrNome;
+
+	@Coluna(nome = "usr_email")
+	private String usrEmail;
+
+	@Coluna(nome = "usr_login")
+	private String usrLogin;
+
+	@Coluna(nome = "usr_senha")
+	private String usrSenha;
+
+	@Coluna(nome = "usr_ativo")
+	private Boolean usrAtivo;
 	
 	public Integer getUsrCodigo() {
 		return usrCodigo;

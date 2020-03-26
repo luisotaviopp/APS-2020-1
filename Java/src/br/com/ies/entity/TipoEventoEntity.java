@@ -1,8 +1,15 @@
 package br.com.ies.entity;
 
+import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.Tabela;
+
+@Tabela(schema="evento", nome="tipo_evento")
 public class TipoEventoEntity {
 
+	@Coluna(nome="tie_codigo")
 	private Integer tieCodigo;
+	
+	@Coluna(nome="tie_descricao")
 	private String  ticDescricao;
 	
 	public Integer getTieCodigo() {

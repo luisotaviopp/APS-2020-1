@@ -1,12 +1,31 @@
 package br.com.ies.entity;
 
+import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.Tabela;
+
+@Tabela(schema="evento", nome="local")
 public class LocalEntity {
 
+	
+	@Coluna(nome = "loc_codigo")
 	private Integer locCodigo;
-	private String  locLogradouro;
-	private String  locBairro;
-	private String  locCidade;
-	private String  locUf;
+
+	@Coluna(nome = "loc_logradouro")
+	private String locLogradouro;
+
+	@Coluna(nome = "loc_numero")
+	private String locNumero;
+
+	@Coluna(nome = "loc_bairro")
+	private String locBairro;
+
+	@Coluna(nome = "loc_cidade")
+	private String locCidade;
+
+	@Coluna(nome = "loc_uf")
+	private String locUf;
+
+	@Coluna(nome = "loc_lotacao_maxima")
 	private Integer locLotacaoMaxima;
 	
 	

@@ -1,11 +1,20 @@
 package br.com.ies.entity;
 
+import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.Tabela;
+
+@Tabela(schema="evento", nome="artista")
 public class ArtistaEntity {
 
-	
+	@Coluna(nome="art_codigo")
 	private Integer artCodigo;
+	
+	@Coluna(nome="art_nome")
 	private String  artNome;
+	
+	@Coluna(nome="art_descricao")
 	private String  artDescricao;
+	
 	
 	public Integer getArtCodigo() {
 		return artCodigo;

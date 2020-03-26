@@ -1,13 +1,25 @@
 package br.com.ies.entity;
 
+import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.Tabela;
+
+@Tabela(schema="faturamento", nome="venda_ingresso")
 public class VendaIngressoEntity {
 
 	
-	private Integer     veiCodigo;
+	@Coluna(nome = "vei_codigo")
+	private Integer veiCodigo;
+
 	private VendaEntity vendaEntity;
-	private String      veiNome;
-	private String      veiDocumento;
-	private Boolean     veiUtilizado;
+
+	@Coluna(nome = "vei_nome")
+	private String veiNome;
+
+	@Coluna(nome = "vei_documento")
+	private String veiDocumento;
+
+	@Coluna(nome = "vei_utilizado")
+	private Boolean veiUtilizado;
 	
 	
 	public Integer getVeiCodigo() {

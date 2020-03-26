@@ -1,9 +1,14 @@
 package br.com.ies.entity;
 
+import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.Tabela;
+
+@Tabela(schema="faturamento", nome="venda")
 public class VendaEntity {
 
-	
+	@Coluna(nome="ven_codigo")
 	private Integer              venCodigo;
+	
 	private SituacaoVendaEntity  situacaoVendaEntity;
 	private VendaPagamentoEntity vendaPagamentoEntity;
 	private UsuarioEntity        usuarioEntity;

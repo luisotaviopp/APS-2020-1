@@ -1,9 +1,16 @@
 package br.com.ies.entity;
 
+import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.Tabela;
+
+@Tabela(schema="faturamento", nome="forma_pagamento")
 public class FormaPagamentoEntity {
 
 	
+	@Coluna(nome="fop_codigo")
 	private Integer fopCodigo;
+	
+	@Coluna(nome="fop_descricao")
 	private String  fopDescricao;
 	
 	
