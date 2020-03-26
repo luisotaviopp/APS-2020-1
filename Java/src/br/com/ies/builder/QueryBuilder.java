@@ -17,7 +17,7 @@ public class QueryBuilder {
 		this.object = object;
 	}
 
-	public QueryDTO construir() throws IllegalArgumentException, IllegalAccessException {
+	public QueryDTO build() throws IllegalArgumentException, IllegalAccessException {
 		QueryDTO queryDto = new QueryDTO();
 		
 		Tabela tabela = Utils.getTabelaFromClass(object.getClass());
@@ -29,8 +29,10 @@ public class QueryBuilder {
 
 		for(Field field : Utils.getDeclaredFieldsByAnnotation(object.getClass(), Coluna.class)) {
 			ColunaValorDTO colunaValorDto = new ColunaValorDTO();
+			Object valor = Utils.getFieldValue(field, object);
+			
 			colunaValorDto.setColuna(Utils.getColunaFromField(field).nome());
-			colunaValorDto.setValor(Utils.getFieldValue(field, object));
+			colunaValorDto.setValor(Utils.isChaveEstrageira(field) ? Utils.getFieldValue(Utils.getChavePrimaria(valor), valor) : valor);
 			
 			setColunaValor.add(colunaValorDto);
 		}

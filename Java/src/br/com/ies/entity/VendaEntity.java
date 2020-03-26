@@ -1,18 +1,32 @@
 package br.com.ies.entity;
 
 import br.com.ies.annotation.Coluna;
+import br.com.ies.annotation.ChaveEstrangeira;
+import br.com.ies.annotation.ChavePrimaria;
 import br.com.ies.annotation.Tabela;
 
 @Tabela(schema="faturamento", nome="venda")
 public class VendaEntity {
 
-	@Coluna(nome="ven_codigo")
-	private Integer              venCodigo;
-	
-	private SituacaoVendaEntity  situacaoVendaEntity;
+	@ChavePrimaria
+	@Coluna(nome = "ven_codigo")
+	private Integer venCodigo;
+
+	@ChaveEstrangeira
+	@Coluna(nome = "siv_codigo")
+	private SituacaoVendaEntity situacaoVendaEntity;
+
+	@ChaveEstrangeira
+	@Coluna(nome = "vep_codigo")
 	private VendaPagamentoEntity vendaPagamentoEntity;
-	private UsuarioEntity        usuarioEntity;
-	private EventoEntity         eventoEntity;
+
+	@ChaveEstrangeira
+	@Coluna(nome = "usr_codigo")
+	private UsuarioEntity usuarioEntity;
+
+	@ChaveEstrangeira
+	@Coluna(nome = "eve_codigo")
+	private EventoEntity eventoEntity;
 	
 	
 	public Integer getVenCodigo() {
