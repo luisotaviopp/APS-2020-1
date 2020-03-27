@@ -99,9 +99,9 @@ CREATE TABLE evento.evento (
     loc_codigo integer,
     art_codigo integer,
     tie_codigo integer,
-    usr_codigo_aberturo integer,
+    usr_codigo_abertura integer,
     eve_titulo character(50),
-    eve_quantidade_ingressos integer,
+    eve_qtd_ingressos integer,
     eve_valor_ingresso double precision
 );
 
@@ -118,7 +118,8 @@ CREATE TABLE evento.local (
     loc_numero character(10) NOT NULL,
     loc_bairro character(100) NOT NULL,
     loc_cidade character(100) NOT NULL,
-    loc_uf character(50) NOT NULL
+    loc_uf character(50) NOT NULL,
+    loc_lotacao_maxima integer
 );
 
 
@@ -243,11 +244,11 @@ ALTER TABLE faturamento.venda OWNER TO postgres;
 --
 
 CREATE TABLE faturamento.venda_ingresso (
-    vel_codigo integer NOT NULL,
+    vei_codigo integer NOT NULL,
     ven_codigo integer,
-    vel_nome character(50),
-    vel_documento character(50),
-    vel_utilizado boolean
+    vei_nome character(50),
+    vei_documento character(50),
+    vei_utilizado boolean
 );
 
 
@@ -340,7 +341,7 @@ ALTER SEQUENCE usuario.nivel_nvl_codigo_seq OWNED BY usuario.nivel.nvl_codigo;
 
 CREATE TABLE usuario.usuario (
     usr_codigo integer NOT NULL,
-    nlv_codigo integer,
+    nvl_codigo integer,
     usr_nome character(100),
     usr_email character(50),
     usr_login character(50),
@@ -474,7 +475,7 @@ ALTER TABLE ONLY faturamento.situacao_venda
 --
 
 ALTER TABLE ONLY faturamento.venda_ingresso
-    ADD CONSTRAINT vel_codigo PRIMARY KEY (vel_codigo);
+    ADD CONSTRAINT vel_codigo PRIMARY KEY (vei_codigo);
 
 
 --
@@ -546,7 +547,7 @@ ALTER TABLE ONLY evento.evento
 --
 
 ALTER TABLE ONLY evento.evento
-    ADD CONSTRAINT usr_codigo_abertura FOREIGN KEY (usr_codigo_aberturo) REFERENCES usuario.usuario(usr_codigo);
+    ADD CONSTRAINT usr_codigo_abertura FOREIGN KEY (usr_codigo_abertura) REFERENCES usuario.usuario(usr_codigo);
 
 
 --
@@ -602,7 +603,7 @@ ALTER TABLE ONLY faturamento.venda
 --
 
 ALTER TABLE ONLY usuario.usuario
-    ADD CONSTRAINT nlv_codigo FOREIGN KEY (nlv_codigo) REFERENCES usuario.nivel(nvl_codigo);
+    ADD CONSTRAINT nlv_codigo FOREIGN KEY (nvl_codigo) REFERENCES usuario.nivel(nvl_codigo);
 
 
 --
