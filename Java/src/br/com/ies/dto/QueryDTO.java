@@ -1,18 +1,20 @@
 package br.com.ies.dto;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class QueryDTO {
 
 	private String schema;
 	private String tabela;
+	private Field  chavePrimaria;
 
-	private HashSet<ColunaValorDTO> setColunaValor;
+	private ArrayList<ColumnValueDTO> columnValueSet;
 
 	public QueryDTO() {
-		setColunaValor = new HashSet<>();
+		columnValueSet = new ArrayList<>();
 	}
 
 	public String getSchema() {
@@ -31,12 +33,18 @@ public class QueryDTO {
 		this.tabela = tabela;
 	}
 
-	public void setColunaValor(HashSet<ColunaValorDTO> setColunaValor) {
-		this.setColunaValor = setColunaValor;
+	public void setColumnValue(ArrayList<ColumnValueDTO> columnValueSet) {
+		this.columnValueSet = columnValueSet;
 	}
 
-	public Set<ColunaValorDTO> getColunaValor() {
-		return Collections.unmodifiableSet(setColunaValor);
+	public List<ColumnValueDTO> getColumnValue() {
+		return Collections.unmodifiableList(columnValueSet);
+	}
+	public Field getChavePrimaria() {
+		return chavePrimaria;
+	}
+	public void setChavePrimaria(Field chavePrimaria) {
+		this.chavePrimaria = chavePrimaria;
 	}
 
 }

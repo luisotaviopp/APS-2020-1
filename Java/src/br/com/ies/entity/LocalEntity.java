@@ -28,6 +28,9 @@ public class LocalEntity {
 
 	@Coluna(nome = "loc_lotacao_maxima")
 	private Integer locLotacaoMaxima;
+	
+	@Coluna(nome= "loc_cep")
+	private String locCep;
 
 	public Integer getLocCodigo() {
 		return locCodigo;
@@ -76,5 +79,22 @@ public class LocalEntity {
 	public void setLocLotacaoMaxima(Integer locLotacaoMaxima) {
 		this.locLotacaoMaxima = locLotacaoMaxima;
 	}
+
+	public String getLocNumero() {
+		return locNumero;
+	}
+
+	public void setLocNumero(String locNumero) {
+		this.locNumero = locNumero;
+	}
+
+	public String getLocCep() {
+		return locCep;
+	}
+
+	public void setLocCep(String locCep) {
+		this.locCep = locCep;
+	}
+	
 	
 }

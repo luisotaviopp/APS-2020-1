@@ -15,7 +15,7 @@ public class ControleAcessoEntity {
 	private Integer coaCodigo;
 
 	@ChaveEstrangeira
-	@Coluna(nome = "teste")
+	@Coluna(nome = "usr_codigo")
 	private UsuarioEntity usuarioEntity;
 
 	@Coluna(nome = "coa_data")

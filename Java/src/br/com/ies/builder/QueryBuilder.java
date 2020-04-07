@@ -1,11 +1,11 @@
 package br.com.ies.builder;
 
 import java.lang.reflect.Field;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import br.com.ies.annotation.Coluna;
 import br.com.ies.annotation.Tabela;
-import br.com.ies.dto.ColunaValorDTO;
+import br.com.ies.dto.ColumnValueDTO;
 import br.com.ies.dto.QueryDTO;
 import br.com.ies.util.Utils;
 
@@ -20,25 +20,24 @@ public class QueryBuilder {
 	public QueryDTO build() throws IllegalArgumentException, IllegalAccessException {
 		QueryDTO queryDto = new QueryDTO();
 		
-		Tabela tabela = Utils.getTabelaFromClass(object.getClass());
-		HashSet<ColunaValorDTO> setColunaValor = new HashSet<>();
+		Tabela table = Utils.getTabelaFromClass(object.getClass());
+		ArrayList<ColumnValueDTO> columnValueSet = new ArrayList<>();
 
-		queryDto.setSchema(tabela.schema());
-		queryDto.setTabela(tabela.nome());
+		queryDto.setSchema(table.schema());
+		queryDto.setTabela(table.nome());
 		
-
 		for(Field field : Utils.getDeclaredFieldsByAnnotation(object.getClass(), Coluna.class)) {
-			ColunaValorDTO colunaValorDto = new ColunaValorDTO();
-			Object valor = Utils.getFieldValue(field, object);
+			ColumnValueDTO columnValueDto = new ColumnValueDTO();
+			Object value = Utils.getFieldValue(field, object);
 			
-			colunaValorDto.setColuna(Utils.getColunaFromField(field).nome());
-			colunaValorDto.setValor(Utils.isChaveEstrageira(field) ? Utils.getFieldValue(Utils.getChavePrimaria(valor), valor) : valor);
+			columnValueDto.setColumn(Utils.getColunaFromField(field).nome());
+			columnValueDto.setValue(Utils.getFieldValue(field, object) == null ? null : (Utils.isChaveEstrageira(field) ? Utils.getFieldValue(Utils.getChavePrimaria(value), value) : value));
 			
-			setColunaValor.add(colunaValorDto);
+			columnValueSet.add(columnValueDto);
 		}
+		queryDto.setColumnValue(columnValueSet);
+		queryDto.setChavePrimaria(Utils.getChavePrimaria(object));
 		
-		queryDto.setColunaValor(setColunaValor);
-
 		return queryDto;
 	}
 }
