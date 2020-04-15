@@ -2,6 +2,7 @@ package br.com.ies.builder;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.ies.annotation.Coluna;
 import br.com.ies.annotation.Tabela;
@@ -21,7 +22,7 @@ public class QueryBuilder {
 		QueryDTO queryDto = new QueryDTO();
 		
 		Tabela table = Utils.getTabelaFromClass(object.getClass());
-		ArrayList<ColumnValueDTO> columnValueSet = new ArrayList<>();
+		List<ColumnValueDTO> columnValueSet = new ArrayList<>();
 
 		queryDto.setSchema(table.schema());
 		queryDto.setTabela(table.nome());

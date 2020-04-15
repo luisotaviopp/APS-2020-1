@@ -11,7 +11,7 @@ public class QueryDTO {
 	private String tabela;
 	private Field  chavePrimaria;
 
-	private ArrayList<ColumnValueDTO> columnValueSet;
+	private List<ColumnValueDTO> columnValueSet;
 
 	public QueryDTO() {
 		columnValueSet = new ArrayList<>();
@@ -33,7 +33,7 @@ public class QueryDTO {
 		this.tabela = tabela;
 	}
 
-	public void setColumnValue(ArrayList<ColumnValueDTO> columnValueSet) {
+	public void setColumnValue(List<ColumnValueDTO> columnValueSet) {
 		this.columnValueSet = columnValueSet;
 	}
 
