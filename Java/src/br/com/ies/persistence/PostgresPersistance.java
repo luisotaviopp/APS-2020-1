@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 import br.com.ies.Main;
 import br.com.ies.dto.QueryDTO;
 import br.com.ies.persistence.impl.PersistanceImpl;
-import br.com.ies.type.QueryParameterType;
 import br.com.ies.type.QueryType;
 import br.com.ies.util.Utils;
 
@@ -26,7 +25,7 @@ public class PostgresPersistance extends PersistanceImpl {
 		try {
 			List<String> columnValueStringList = queryDTO.getColumnValue().stream().map(cv -> cv.getColumn() + "=" + (cv.getValue() == null ? null : "'" + cv.getValue() + "'")).collect(Collectors.toList());
 			String insertQuery = String.format(QueryType.INSERT_QUERY.getQuery(), queryDTO.getSchema().concat(".").concat(queryDTO.getTabela()), Utils.fillColunasNameByColumnValueList(queryDTO.getColumnValue()), Utils.fillCharInString('?', queryDTO.getColumnValue().size()));
-			String updateQuery = String.format(QueryParameterType.VALUES.getText(), Utils.fillColunasAndValuesFromColumnStringList(columnValueStringList));
+			String updateQuery = String.format(QueryType.UPDATE_QUERY.getQuery(), Utils.fillColunasAndValuesFromColumnStringList(columnValueStringList));
 			String conflictQuery = String.format(QueryType.CONFLICT_QUERY.getQuery(), insertQuery, Utils.getColunaFromField(queryDTO.getChavePrimaria()).nome(), updateQuery);
 			PreparedStatement preparedStatement  = Main.getConnectionFactory().getPreparedStatement(conflictQuery);
 			IntStream.range(0, queryDTO.getColumnValue().size()).forEachOrdered(i -> Utils.setParameter(preparedStatement, i + 1, queryDTO.getColumnValue().get(i).getValue()));

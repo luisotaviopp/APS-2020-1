@@ -19,7 +19,7 @@ public class Main {
 		LocalEntity localEntity = new LocalEntity();
 		
 		localEntity.setLocBairro("Campinas");
-		localEntity.setLocCidade("Sao Jose");
+		localEntity.setLocCidade("Palhoca");
 		localEntity.setLocCodigo(14);
 		localEntity.setLocNumero("158");
 		localEntity.setLocLogradouro("Rua: Nada");

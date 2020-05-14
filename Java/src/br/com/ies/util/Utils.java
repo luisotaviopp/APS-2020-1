@@ -64,6 +64,8 @@ public class Utils {
 	public static void setParameter(PreparedStatement preparedStatement, int index, Object value) {
 		String typeName = value == null ? "null" : value.getClass().getTypeName();
 
+System.out.println(index + "/" + value);
+		
 		try {
 			switch (typeName) {
 			case "java.lang.String":
