@@ -25,14 +25,11 @@ public class PostgresPersistance extends PersistanceImpl {
 	public void persist(QueryDTO queryDTO) {
 		try {
 			List<String> columnValueStringList = queryDTO.getColumnValue().stream().map(cv -> cv.getColumn() + "=" + (cv.getValue() == null ? null : "'" + cv.getValue() + "'")).collect(Collectors.toList());
-			
-			String insertQuery = QueryType.INSERT_QUERY.getQuery().replace(QueryParameterType.TABLE.getText(), queryDTO.getSchema().concat(".").concat(queryDTO.getTabela())).replace(QueryParameterType.TABLE_VALUES.getText(), Utils.fillColunasNameByColumnValueList(queryDTO.getColumnValue())).replace(QueryParameterType.VALUES.getText(), Utils.fillCharInString('?', queryDTO.getColumnValue().size()));
-			String updateQuery = QueryType.UPDATE_QUERY.getQuery().replace(QueryParameterType.VALUES.getText(), Utils.fillColunasAndValuesFromColumnStringList(columnValueStringList));
-			String conflictQuery = QueryType.CONFLICT_QUERY.getQuery().replace(QueryParameterType.INSERT_QUERY.getText(), insertQuery).replace(QueryParameterType.PRIMARY_KEY.getText(), Utils.getColunaFromField(queryDTO.getChavePrimaria()).nome()).replace(QueryParameterType.UPDATE.getText(), updateQuery);
-			
+			String insertQuery = String.format(QueryType.INSERT_QUERY.getQuery(), queryDTO.getSchema().concat(".").concat(queryDTO.getTabela()), Utils.fillColunasNameByColumnValueList(queryDTO.getColumnValue()), Utils.fillCharInString('?', queryDTO.getColumnValue().size()));
+			String updateQuery = String.format(QueryParameterType.VALUES.getText(), Utils.fillColunasAndValuesFromColumnStringList(columnValueStringList));
+			String conflictQuery = String.format(QueryType.CONFLICT_QUERY.getQuery(), insertQuery, Utils.getColunaFromField(queryDTO.getChavePrimaria()).nome(), updateQuery);
 			PreparedStatement preparedStatement  = Main.getConnectionFactory().getPreparedStatement(conflictQuery);
 			IntStream.range(0, queryDTO.getColumnValue().size()).forEachOrdered(i -> Utils.setParameter(preparedStatement, i + 1, queryDTO.getColumnValue().get(i).getValue()));
-			
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

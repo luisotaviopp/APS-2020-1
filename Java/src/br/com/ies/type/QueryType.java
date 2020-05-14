@@ -2,9 +2,9 @@ package br.com.ies.type;
 
 public enum QueryType {
 
-	CONFLICT_QUERY("%insert_query% ON CONFLICT(%primary_key%) DO %update%"),
-	INSERT_QUERY("INSERT INTO %table% (%format%) VALUES(%values%)"),
-	UPDATE_QUERY("UPDATE SET %values%");
+	CONFLICT_QUERY("%s ON CONFLICT(%s) DO %s"),
+	INSERT_QUERY("INSERT INTO %s (%s) VALUES(%s)"),
+	UPDATE_QUERY("UPDATE SET %s");
 	
 	private String query;
 	

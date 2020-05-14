@@ -26,9 +26,7 @@ public class Main {
 		localEntity.setLocLotacaoMaxima(40000);
 		localEntity.setLocUf("SC");
 		
-		QueryBuilder queryBuilder = new QueryBuilder(localEntity);
-		QueryDTO queryDTO = queryBuilder.build();
-
+		QueryDTO queryDTO = QueryBuilder.build(localEntity);
 		PERSISTANCE_MANAGER.getPersistanceList().forEach(p -> p.persist(queryDTO));
 	}
 
