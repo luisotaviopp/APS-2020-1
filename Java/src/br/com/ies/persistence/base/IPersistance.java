@@ -1,6 +1,7 @@
 package br.com.ies.persistence.base;
 
 import br.com.ies.dto.QueryDTO;
+import br.com.ies.util.Callback;
 
 public interface IPersistance {
 
@@ -10,6 +11,6 @@ public interface IPersistance {
 	
 	public abstract void persist(QueryDTO queryDTO);
 	
-	public abstract Object select(Integer primaryKeyId, Object fromObject);
+	public abstract void select(String select, Callback callback);
 	
 }

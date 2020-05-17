@@ -4,7 +4,8 @@ public enum QueryType {
 
 	CONFLICT_QUERY("%s ON CONFLICT(%s) DO %s"),
 	INSERT_QUERY("INSERT INTO %s (%s) VALUES(%s)"),
-	UPDATE_QUERY("UPDATE SET %s");
+	UPDATE_QUERY("UPDATE SET %s"),
+	SELECT_QUERY("SELECT %s FROM %s.%s ");
 	
 	private String query;
 	

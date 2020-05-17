@@ -1,6 +1,7 @@
 package br.com.ies.persistence;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ import br.com.ies.Main;
 import br.com.ies.dto.QueryDTO;
 import br.com.ies.persistence.impl.PersistanceImpl;
 import br.com.ies.type.QueryType;
+import br.com.ies.util.Callback;
 import br.com.ies.util.Utils;
 
 public class PostgresPersistance extends PersistanceImpl {
@@ -36,7 +38,20 @@ public class PostgresPersistance extends PersistanceImpl {
 	}
 
 	@Override
-	public Object select(Integer primaryKeyId, Object fromObject) {
-		return null;
+	public void select(String sql, Callback callback) {
+		PreparedStatement preparedStatement  = Main.getConnectionFactory().getPreparedStatement(sql);
+		try {
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			callback.call(rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

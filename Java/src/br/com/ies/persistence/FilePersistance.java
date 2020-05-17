@@ -2,6 +2,7 @@ package br.com.ies.persistence;
 
 import br.com.ies.dto.QueryDTO;
 import br.com.ies.persistence.impl.PersistanceImpl;
+import br.com.ies.util.Callback;
 
 public class FilePersistance extends PersistanceImpl{
 
@@ -15,8 +16,6 @@ public class FilePersistance extends PersistanceImpl{
 	public void persist(QueryDTO queryDTO) {
 	}
 
-	@Override
-	public Object select(Integer primaryKeyId, Object fromObject) {
-		return null;
+	public void select(String sql, Callback callback) {
 	}
 }
