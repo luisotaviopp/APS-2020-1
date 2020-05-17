@@ -2,8 +2,12 @@ package br.com.ies.persistence;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -40,18 +44,38 @@ public class PostgresPersistance extends PersistanceImpl {
 	@Override
 	public void select(String sql, Callback callback) {
 		PreparedStatement preparedStatement  = Main.getConnectionFactory().getPreparedStatement(sql);
+		ResultSet rs = null;
+		
 		try {
-			ResultSet rs = preparedStatement.executeQuery();
+			rs = preparedStatement.executeQuery();
+			List<Object[]> lista = resultSetToList(rs);
 			
-			callback.call(rs);
+			callback.call(lista);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				if(rs != null) {
+					rs.close();
+				}
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private List<Object[]> resultSetToList(ResultSet rs) throws SQLException {
+	    ResultSetMetaData md = rs.getMetaData();
+	    int columns = md.getColumnCount();
+	    List<Object[]> rows = new ArrayList<Object[]>();
+	    while (rs.next()){
+	    	Object[] row = new Object[columns];
+	        for(int i = 1; i <= columns; ++i){
+	        	row[i - 1] = rs.getObject(i);
+	        }
+	        rows.add(row);
+	    }
+	    return rows;
 	}
 }
