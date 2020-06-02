@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 import br.com.ies.Main;
 import br.com.ies.dto.PersistanceParameterDTO;
-import br.com.ies.dto.QueryDTO;
+import br.com.ies.dto.PersistanceDTO;
 import br.com.ies.persistence.impl.PersistanceImpl;
 import br.com.ies.type.QueryType;
 import br.com.ies.util.Callback;
@@ -24,7 +24,7 @@ public class PostgresPersistance extends PersistanceImpl {
 	}
 
 	@Override
-	public void persist(QueryDTO queryDTO) {
+	public void persist(PersistanceDTO queryDTO) {
 		try {
 			List<String> columnValueStringList = queryDTO.getColumnValue().stream().map(cv -> cv.getColumn() + "=" + (cv.getValue() == null ? null : "'" + cv.getValue() + "'")).collect(Collectors.toList());
 			String insertQuery = String.format(QueryType.INSERT_QUERY.getQuery(), queryDTO.getSchema().concat(".").concat(queryDTO.getTabela()), Util.fillColunasNameByColumnValueList(queryDTO.getColumnValue()), Util.fillCharInString('?', queryDTO.getColumnValue().size()));

@@ -3,7 +3,7 @@ package br.com.ies;
 import java.sql.SQLException;
 
 import br.com.ies.builder.QueryBuilder;
-import br.com.ies.dto.QueryDTO;
+import br.com.ies.dto.PersistanceDTO;
 import br.com.ies.entity.LocalEntity;
 import br.com.ies.manager.PersistanceManager;
 import br.com.ies.postgres.ConnectionFactory;
@@ -27,7 +27,7 @@ public class Main {
 		localEntity.setLocLotacaoMaxima(80000);
 		localEntity.setLocUf("SC");
 		
-		QueryDTO queryDTO = QueryBuilder.build(localEntity);
+		PersistanceDTO queryDTO = QueryBuilder.build(localEntity);
 		PERSISTANCE_MANAGER.getPersistanceList().forEach(p -> p.persist(queryDTO));
 		
 		

@@ -3,7 +3,7 @@ package br.com.ies.persistence;
 import java.util.Arrays;
 
 import br.com.ies.dto.PersistanceParameterDTO;
-import br.com.ies.dto.QueryDTO;
+import br.com.ies.dto.PersistanceDTO;
 import br.com.ies.persistence.impl.PersistanceImpl;
 import br.com.ies.util.Callback;
 import br.com.ies.util.Util;
@@ -18,7 +18,7 @@ public class FilePersistance extends PersistanceImpl {
 	}
 
 	@Override
-	public void persist(QueryDTO queryDTO) {
+	public void persist(PersistanceDTO queryDTO) {
 		Object object = queryDTO.getObject();
 		Util.writeObjectInFile(object, FILE_NAME);
 	}
