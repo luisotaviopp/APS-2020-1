@@ -33,14 +33,17 @@ public class Main {
 
 		// Select do file
 
+		/*
 		PersistanceParameterDTO<Integer> persistanceParameterDTO = new PersistanceParameterDTO<>();
+		 
 		persistanceParameterDTO.setObject(localEntity);
 		persistanceParameterDTO.setParameter(17);
 
 		PERSISTANCE_MANAGER.getPersistanceList().get(0).select(persistanceParameterDTO, (object) -> {
 			System.out.println(object.toString());
 		});
-
+        */
+		
 		// Select do postgres
 
 		/*
