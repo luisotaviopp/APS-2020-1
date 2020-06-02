@@ -14,6 +14,7 @@ public class Main {
 	private static final PersistanceManager PERSISTANCE_MANAGER = new PersistanceManager();
 	private static final ConnectionFactory CONNECTION_FACTORY = new ConnectionFactory(StringType.DATABASE_URL.getText(), "postgres", "postgres");
 
+	
 	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException, SQLException {
 		
 		LocalEntity localEntity = new LocalEntity();
@@ -22,12 +23,43 @@ public class Main {
 		localEntity.setLocCidade("Palhoca");
 		localEntity.setLocCodigo(14);
 		localEntity.setLocNumero("158");
-		localEntity.setLocLogradouro("Rua: Nada");
-		localEntity.setLocLotacaoMaxima(40000);
+		localEntity.setLocLogradouro("Rua: Nada2");
+		localEntity.setLocLotacaoMaxima(80000);
 		localEntity.setLocUf("SC");
 		
 		QueryDTO queryDTO = QueryBuilder.build(localEntity);
 		PERSISTANCE_MANAGER.getPersistanceList().forEach(p -> p.persist(queryDTO));
+		
+		
+		  //Select do file
+		
+		/*
+		PersistanceParameterDTO<Integer> persistanceParameterDTO = new PersistanceParameterDTO<>();
+		persistanceParameterDTO.setObject(localEntity);
+		persistanceParameterDTO.setParameter(14);
+		
+		PERSISTANCE_MANAGER.getPersistanceList().get(0).select(persistanceParameterDTO, (object) -> {
+			System.out.println(object.toString());
+		});
+		*/
+		
+		
+		// Select do postgres
+		
+	/*	
+	    PersistanceParameterDTO<String> persistanceParameterDTO = new PersistanceParameterDTO<>();
+		persistanceParameterDTO.setObject(localEntity);
+		persistanceParameterDTO.setParameter("SELECT * FROM evento.local");
+		
+		PERSISTANCE_MANAGER.getPersistanceList().get(1).select(persistanceParameterDTO, (object) ->{
+			List<Object[]> objetos = (List<Object[]>) object;
+			for(int i =0;i<objetos.size();i++) {
+				for(Object t : objetos.get(i)) {
+					System.out.println(t);
+				}
+			}
+		});
+		*/
 	}
 
 	public static ConnectionFactory getConnectionFactory() {
