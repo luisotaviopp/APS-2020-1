@@ -118,6 +118,7 @@ public class Util {
 		Object[] objects = new Object[1];
 		try (ObjectInputStream ins = new ObjectInputStream(new FileInputStream(fileName))) {
 			objects = (Object[]) ins.readObject();
+			ins.close();
 		} catch (Exception e) {
 		}
 		return Arrays.stream(objects).filter(Objects::nonNull)
