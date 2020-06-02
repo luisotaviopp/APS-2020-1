@@ -1,6 +1,5 @@
 package br.com.ies.util;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,8 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -99,36 +98,30 @@ public class Util {
 			if (!file.exists())
 				file.createNewFile();
 
+			Object[] oldObjects = listObjectsFromFile(null, fileName);
+			Object[] objects = Arrays.copyOf(oldObjects, oldObjects.length + 1);
+			objects[objects.length - 1] = object;
+
 			FileOutputStream fileOutputStream = new FileOutputStream(file);
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-			objectOutputStream.writeObject(object);
+			objectOutputStream.writeObject(objects);
 			objectOutputStream.close();
 			fileOutputStream.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("File is not present.");
 		}
 	}
 
-	public static List<Object> listObjectsFromFile(Class<?> objectClass, String fileName) {
-		List<Object> objectList = new LinkedList<>();
-		try {
-			ObjectInputStream ins = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
-
-			for (;;) {
-				try {
-					Object object = ins.readObject();
-					if (object.getClass().equals(objectClass)) 
-						objectList.add(object);
-				} catch (Exception e) {
-					break;
-				}
-			}
-			ins.close();
+	public static Object[] listObjectsFromFile(Class<?> objectClass, String fileName) {
+		Object[] objects = new Object[1];
+		try (ObjectInputStream ins = new ObjectInputStream(new FileInputStream(fileName))) {
+			objects = (Object[]) ins.readObject();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		return objectList;
+		return Arrays.stream(objects).filter(Objects::nonNull)
+				.filter(o -> objectClass == null || o.getClass().equals(objectClass)).toArray();
 	}
 
 	public static void setParameter(PreparedStatement preparedStatement, int index, Object value) {
