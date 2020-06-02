@@ -1,6 +1,5 @@
 package br.com.ies.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import br.com.ies.annotation.Coluna;
@@ -9,9 +8,7 @@ import br.com.ies.annotation.ChavePrimaria;
 import br.com.ies.annotation.Tabela;
 
 @Tabela(schema="usuario", nome= "controle_acesso")
-public class ControleAcessoEntity implements Serializable{
-
-	private static final long serialVersionUID = 6349572135807823337L;
+public class ControleAcessoEntity {
 
 	@ChavePrimaria
 	@Coluna(nome = "coa_codigo")
@@ -47,11 +44,4 @@ public class ControleAcessoEntity implements Serializable{
 	public void setCoaData(Date coaData) {
 		this.coaData = coaData;
 	}
-
-	@Override
-	public String toString() {
-		return "ControleAcessoEntity [coaCodigo=" + coaCodigo + ", usuarioEntity=" + usuarioEntity + ", coaData="
-				+ coaData + "]";
-	}
-	
 }

@@ -1,16 +1,11 @@
 package br.com.ies.entity;
 
 import br.com.ies.annotation.Coluna;
-
-import java.io.Serializable;
-
 import br.com.ies.annotation.ChavePrimaria;
 import br.com.ies.annotation.Tabela;
 
 @Tabela(schema="faturamento", nome="situacao_venda")
-public class SituacaoVendaEntity implements Serializable{
-
-	private static final long serialVersionUID = -4972110639559479610L;
+public class SituacaoVendaEntity {
 
 	@ChavePrimaria
 	@Coluna(nome = "siv_codigo")
@@ -33,11 +28,6 @@ public class SituacaoVendaEntity implements Serializable{
 
 	public void setSivDescricao(String sivDescricao) {
 		this.sivDescricao = sivDescricao;
-	}
-
-	@Override
-	public String toString() {
-		return "SituacaoVendaEntity [sivCodigo=" + sivCodigo + ", sivDescricao=" + sivDescricao + "]";
 	}
 
 }

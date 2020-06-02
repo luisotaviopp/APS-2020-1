@@ -1,16 +1,11 @@
 package br.com.ies.entity;
 
 import br.com.ies.annotation.Coluna;
-
-import java.io.Serializable;
-
 import br.com.ies.annotation.ChavePrimaria;
 import br.com.ies.annotation.Tabela;
 
 @Tabela(schema="evento", nome="artista")
-public class ArtistaEntity implements Serializable {
-
-	private static final long serialVersionUID = -3115497542555497567L;
+public class ArtistaEntity {
 
 	@ChavePrimaria
 	@Coluna(nome = "art_codigo")
@@ -44,12 +39,6 @@ public class ArtistaEntity implements Serializable {
 
 	public void setArtDescricao(String artDescricao) {
 		this.artDescricao = artDescricao;
-	}
-
-	@Override
-	public String toString() {
-		return "ArtistaEntity [artCodigo=" + artCodigo + ", artNome=" + artNome + ", artDescricao=" + artDescricao
-				+ "]";
 	}
 	
 }
