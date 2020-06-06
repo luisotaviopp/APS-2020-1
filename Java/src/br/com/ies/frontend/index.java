@@ -13,7 +13,7 @@ import javax.swing.SwingConstants;
 
 import br.com.ies.frontend.builder.ComponentBuilder;
 
-public class index {
+public class Index {
 
 	private JFrame frame;
 
@@ -24,7 +24,7 @@ public class index {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					index window = new index();
+					Index window = new Index();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class index {
 	/**
 	 * Create the application.
 	 */
-	public index() {
+	public Index() {
 		initialize();
 	}
 
@@ -59,7 +59,7 @@ public class index {
 
 		// Botão Entrar
 		frame.getContentPane().add(ComponentBuilder.buildButton("ENTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266,
-				440, 350, 58, new Color(0, 250, 154), () -> {
+				440, 350, 58, new Color(0, 250, 154),null, () -> {
 					new Login().toggleFrame();
 					toggleFrame();
 				}));

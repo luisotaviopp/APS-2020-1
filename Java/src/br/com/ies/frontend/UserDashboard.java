@@ -38,24 +38,24 @@ public class UserDashboard {
 				20, SwingConstants.CENTER, 0, 30, 882, 30));
 
 		frame.getContentPane().add(ComponentBuilder.buildButton("EVENTOS", "Franklin Gothic Medium", Font.PLAIN, 13, 27,
-				90, 400, 200,null, () -> {
+				90, 400, 200,null,null, () -> {
 					new ListaEventos().toggleFrame();
 					toggleFrame();
 				}));
 		frame.getContentPane().add(ComponentBuilder.buildButton("MEU PERFIL", "Franklin Gothic Medium", Font.PLAIN, 13,
-				27, 320, 400, 200,null, () -> {
+				27, 320, 400, 200,null,null, () -> {
 					new PerfilUsuario().toggleFrame();
 					toggleFrame();
 				}));
 
 		frame.getContentPane().add(ComponentBuilder.buildButton("MEUS INGRESSOS", "Franklin Gothic Medium", Font.PLAIN,
-				13, 454, 90, 400, 200,null, () -> {
+				13, 454, 90, 400, 200,null,null, () -> {
 					new MeusIngressos().toggleFrame();
 					toggleFrame();
 				}));
 
 		frame.getContentPane().add(ComponentBuilder.buildButton("SAIR", "Franklin Gothic Medium", Font.PLAIN, 13, 454,
-				320, 400, 200,null, () -> {
+				320, 400, 200,null,null, () -> {
 					System.exit(0);
 				}));
 	}
