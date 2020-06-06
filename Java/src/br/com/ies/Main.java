@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import br.com.ies.builder.QueryBuilder;
 import br.com.ies.dto.PersistanceDTO;
-import br.com.ies.dto.PersistanceParameterDTO;
 import br.com.ies.entity.LocalEntity;
 import br.com.ies.manager.PersistanceManager;
 import br.com.ies.postgres.ConnectionFactory;
