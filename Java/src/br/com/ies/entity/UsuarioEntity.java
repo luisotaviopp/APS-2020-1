@@ -1,17 +1,12 @@
 package br.com.ies.entity;
 
 import br.com.ies.annotation.Coluna;
-
-import java.io.Serializable;
-
 import br.com.ies.annotation.ChaveEstrangeira;
 import br.com.ies.annotation.ChavePrimaria;
 import br.com.ies.annotation.Tabela;
 
-@Tabela(schema = "usuario", nome = "usuario")
-public class UsuarioEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+@Tabela(schema="usuario", nome="usuario")
+public class UsuarioEntity {
 
 	@ChavePrimaria
 	@Coluna(nome = "usr_codigo")
@@ -35,7 +30,7 @@ public class UsuarioEntity implements Serializable {
 
 	@Coluna(nome = "usr_ativo")
 	private Boolean usrAtivo;
-
+	
 	public Integer getUsrCodigo() {
 		return usrCodigo;
 	}
@@ -90,13 +85,6 @@ public class UsuarioEntity implements Serializable {
 
 	public void setUsrAtivo(Boolean usrAtivo) {
 		this.usrAtivo = usrAtivo;
-	}
-
-	@Override
-	public String toString() {
-		return "UsuarioEntity [usrCodigo=" + usrCodigo + ", nivelEntity=" + nivelEntity + ", usrNome=" + usrNome
-				+ ", usrEmail=" + usrEmail + ", usrLogin=" + usrLogin + ", usrSenha=" + usrSenha + ", usrAtivo="
-				+ usrAtivo + "]";
 	}
 
 }

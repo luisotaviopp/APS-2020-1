@@ -1,17 +1,13 @@
 package br.com.ies.entity;
 
 import br.com.ies.annotation.Coluna;
-
-import java.io.Serializable;
-
 import br.com.ies.annotation.ChavePrimaria;
 import br.com.ies.annotation.Tabela;
 
-@Tabela(schema = "usuario", nome = "nivel")
-public class NivelEntity implements Serializable {
+@Tabela(schema="usuario", nome="nivel")
+public class NivelEntity {
 
-	private static final long serialVersionUID = 1L;
-
+	
 	@ChavePrimaria
 	@Coluna(nome = "nvl_codigo")
 	private Integer nvlCodigo;
@@ -33,11 +29,6 @@ public class NivelEntity implements Serializable {
 
 	public void setNvlDescricao(String nvlDescricao) {
 		this.nvlDescricao = nvlDescricao;
-	}
-
-	@Override
-	public String toString() {
-		return "NivelEntity [nvlCodigo=" + nvlCodigo + ", nvlDescricao=" + nvlDescricao + "]";
 	}
 
 }

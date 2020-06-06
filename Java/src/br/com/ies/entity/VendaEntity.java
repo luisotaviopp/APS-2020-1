@@ -1,17 +1,12 @@
 package br.com.ies.entity;
 
 import br.com.ies.annotation.Coluna;
-
-import java.io.Serializable;
-
 import br.com.ies.annotation.ChaveEstrangeira;
 import br.com.ies.annotation.ChavePrimaria;
 import br.com.ies.annotation.Tabela;
 
 @Tabela(schema="faturamento", nome="venda")
-public class VendaEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class VendaEntity {
 
 	@ChavePrimaria
 	@Coluna(nome = "ven_codigo")
@@ -63,12 +58,6 @@ public class VendaEntity implements Serializable {
 	}
 	public void setEventoEntity(EventoEntity eventoEntity) {
 		this.eventoEntity = eventoEntity;
-	}
-	@Override
-	public String toString() {
-		return "VendaEntity [venCodigo=" + venCodigo + ", situacaoVendaEntity=" + situacaoVendaEntity
-				+ ", vendaPagamentoEntity=" + vendaPagamentoEntity + ", usuarioEntity=" + usuarioEntity
-				+ ", eventoEntity=" + eventoEntity + "]";
 	}
 	
 	

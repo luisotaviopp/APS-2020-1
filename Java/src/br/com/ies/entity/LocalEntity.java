@@ -1,16 +1,11 @@
 package br.com.ies.entity;
 
 import br.com.ies.annotation.Coluna;
-
-import java.io.Serializable;
-
 import br.com.ies.annotation.ChavePrimaria;
 import br.com.ies.annotation.Tabela;
 
-@Tabela(schema = "evento", nome = "local")
-public class LocalEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+@Tabela(schema="evento", nome="local")
+public class LocalEntity {
 
 	@ChavePrimaria
 	@Coluna(nome = "loc_codigo")
@@ -33,8 +28,8 @@ public class LocalEntity implements Serializable {
 
 	@Coluna(nome = "loc_lotacao_maxima")
 	private Integer locLotacaoMaxima;
-
-	@Coluna(nome = "loc_cep")
+	
+	@Coluna(nome= "loc_cep")
 	private String locCep;
 
 	public Integer getLocCodigo() {
@@ -100,11 +95,6 @@ public class LocalEntity implements Serializable {
 	public void setLocCep(String locCep) {
 		this.locCep = locCep;
 	}
-
-	@Override
-	public String toString() {
-		return "LocalEntity [locCodigo=" + locCodigo + ", locLogradouro=" + locLogradouro + ", locNumero=" + locNumero
-				+ ", locBairro=" + locBairro + ", locCidade=" + locCidade + ", locUf=" + locUf + ", locLotacaoMaxima="
-				+ locLotacaoMaxima + ", locCep=" + locCep + "]";
-	}
+	
+	
 }

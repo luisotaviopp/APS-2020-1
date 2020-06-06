@@ -5,25 +5,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PersistanceDTO {
+public class QueryDTO {
 
-	private Object object;
 	private String schema;
 	private String tabela;
-	private Field chavePrimaria;
+	private Field  chavePrimaria;
 
 	private List<ColumnValueDTO> columnValueSet;
 
-	public PersistanceDTO() {
+	public QueryDTO() {
 		columnValueSet = new ArrayList<>();
-	}
-
-	public Object getObject() {
-		return object;
-	}
-
-	public void setObject(Object object) {
-		this.object = object;
 	}
 
 	public String getSchema() {
@@ -49,11 +40,9 @@ public class PersistanceDTO {
 	public List<ColumnValueDTO> getColumnValue() {
 		return Collections.unmodifiableList(columnValueSet);
 	}
-
 	public Field getChavePrimaria() {
 		return chavePrimaria;
 	}
-
 	public void setChavePrimaria(Field chavePrimaria) {
 		this.chavePrimaria = chavePrimaria;
 	}

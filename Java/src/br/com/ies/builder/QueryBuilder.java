@@ -7,31 +7,30 @@ import java.util.List;
 import br.com.ies.annotation.Coluna;
 import br.com.ies.annotation.Tabela;
 import br.com.ies.dto.ColumnValueDTO;
-import br.com.ies.dto.PersistanceDTO;
-import br.com.ies.util.Util;
+import br.com.ies.dto.QueryDTO;
+import br.com.ies.util.Utils;
 
 public class QueryBuilder {
 
-	public static <T> PersistanceDTO build(T object) throws IllegalArgumentException, IllegalAccessException {
-		PersistanceDTO queryDto = new PersistanceDTO();
+	public static <T> QueryDTO build(T object) throws IllegalArgumentException, IllegalAccessException {
+		QueryDTO queryDto = new QueryDTO();
 
-		Tabela table = Util.getTabelaFromClass(object.getClass());
+		Tabela table = Utils.getTabelaFromClass(object.getClass());
 		List<ColumnValueDTO> columnValueSet = new ArrayList<>();
 
-		queryDto.setObject(object);
 		queryDto.setSchema(table.schema());
 		queryDto.setTabela(table.nome());
 
-		for (Field field : Util.getDeclaredFieldsByAnnotation(object.getClass(), Coluna.class)) {
+		for (Field field : Utils.getDeclaredFieldsByAnnotation(object.getClass(), Coluna.class)) {
 			ColumnValueDTO columnValueDto = new ColumnValueDTO();
-			Object value = Util.getFieldValue(field, object);
+			Object value = Utils.getFieldValue(field, object);
 
-			columnValueDto.setColumn(Util.getColunaFromField(field).nome());
-			columnValueDto.setValue(Util.getFieldValue(field, object) == null ? null: (Util.isChaveEstrageira(field) ? Util.getFieldValue(Util.getChavePrimaria(value), value): value));
+			columnValueDto.setColumn(Utils.getColunaFromField(field).nome());
+			columnValueDto.setValue(Utils.getFieldValue(field, object) == null ? null: (Utils.isChaveEstrageira(field) ? Utils.getFieldValue(Utils.getChavePrimaria(value), value): value));
 			columnValueSet.add(columnValueDto);
 		}
 		queryDto.setColumnValue(columnValueSet);
-		queryDto.setChavePrimaria(Util.getChavePrimaria(object));
+		queryDto.setChavePrimaria(Utils.getChavePrimaria(object));
 
 		return queryDto;
 	}
