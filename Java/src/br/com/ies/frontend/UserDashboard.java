@@ -51,7 +51,7 @@ public class UserDashboard {
 
 		frame.getContentPane().add(ComponentBuilder.buildButton("EVENTOS", "Franklin Gothic Medium", Font.PLAIN, 13, 27,
 				90, 400, 200, () -> {
-					new AdmEventos().toggleFrame();
+					new ListaEventos().toggleFrame();
 					toggleFrame();
 				}));
 		frame.getContentPane().add(ComponentBuilder.buildButton("MEU PERFIL", "Franklin Gothic Medium", Font.PLAIN, 13,
