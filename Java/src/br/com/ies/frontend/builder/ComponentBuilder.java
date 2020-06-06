@@ -1,5 +1,6 @@
 package br.com.ies.frontend.builder;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -25,10 +26,12 @@ public class ComponentBuilder {
      * @return : botao a ser adicionado no content panel
      */
 	
-	public static JButton buildButton(String displayName, String fontName, int font, int fontSize, int xBound, int yBound, int widthBound, int heightBound, Runnable clickListener) {
+	public static JButton buildButton(String displayName, String fontName, int font, int fontSize, int xBound, int yBound, int widthBound, int heightBound, Color color,Runnable clickListener) {
 		JButton button = new JButton(displayName);
 		button.setFont(new Font(fontName, font, fontSize));
 		button.setBounds(xBound, yBound, widthBound, heightBound);
+		if(color != null)
+			button.setBackground(color);
 		return (JButton) buildEventComponent(button, clickListener);
 	}
 	

@@ -17,18 +17,6 @@ public class UserDashboard {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UserDashboard window = new UserDashboard();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -50,24 +38,24 @@ public class UserDashboard {
 				20, SwingConstants.CENTER, 0, 30, 882, 30));
 
 		frame.getContentPane().add(ComponentBuilder.buildButton("EVENTOS", "Franklin Gothic Medium", Font.PLAIN, 13, 27,
-				90, 400, 200, () -> {
+				90, 400, 200,null, () -> {
 					new ListaEventos().toggleFrame();
 					toggleFrame();
 				}));
 		frame.getContentPane().add(ComponentBuilder.buildButton("MEU PERFIL", "Franklin Gothic Medium", Font.PLAIN, 13,
-				27, 320, 400, 200, () -> {
+				27, 320, 400, 200,null, () -> {
 					new PerfilUsuario().toggleFrame();
 					toggleFrame();
 				}));
 
 		frame.getContentPane().add(ComponentBuilder.buildButton("MEUS INGRESSOS", "Franklin Gothic Medium", Font.PLAIN,
-				13, 454, 90, 400, 200, () -> {
+				13, 454, 90, 400, 200,null, () -> {
 					new MeusIngressos().toggleFrame();
 					toggleFrame();
 				}));
 
 		frame.getContentPane().add(ComponentBuilder.buildButton("SAIR", "Franklin Gothic Medium", Font.PLAIN, 13, 454,
-				320, 400, 200, () -> {
+				320, 400, 200,null, () -> {
 					System.exit(0);
 				}));
 	}

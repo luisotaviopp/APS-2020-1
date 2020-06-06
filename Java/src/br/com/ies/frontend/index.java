@@ -11,6 +11,8 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 
+import br.com.ies.frontend.builder.ComponentBuilder;
+
 public class index {
 
 	private JFrame frame;
@@ -46,30 +48,27 @@ public class index {
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		
-		//Título
+
+		// Título
 		JLabel lblTitulo = new JLabel("BILHETERIA");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setForeground(Color.DARK_GRAY);
 		lblTitulo.setFont(new Font("Franklin Gothic Medium", Font.BOLD, 30));
 		lblTitulo.setBounds(266, 53, 350, 58);
 		frame.getContentPane().add(lblTitulo);
-		
+
 		// Botão Entrar
-		JButton btnEntrar = new JButton("ENTRAR");
-		btnEntrar.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnEntrar.setBounds(266, 440, 350, 58);
-		btnEntrar.setBackground(new Color(0, 250, 154));
-		frame.getContentPane().add(btnEntrar);
+		frame.getContentPane().add(ComponentBuilder.buildButton("ENTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266,
+				440, 350, 58, new Color(0, 250, 154), () -> {
+					new Login().toggleFrame();
+					toggleFrame();
+				}));
 	}
+
 	public JFrame getFrame() {
 		return frame;
 	}
+
 	public void toggleFrame() {
 		frame.setVisible(!frame.isVisible());
 	}

@@ -26,18 +26,6 @@ public class Login {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login window = new Login();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -93,11 +81,6 @@ public class Login {
 		btnRegistrar.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
 		btnRegistrar.setBounds(266, 384, 350, 40);
 		frame.getContentPane().add(btnRegistrar);
-		
-		btnEsqueciSenha = new JButton("ESQUECI A SENHA");
-		btnEsqueciSenha.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
-		btnEsqueciSenha.setBounds(266, 447, 350, 40);
-		frame.getContentPane().add(btnEsqueciSenha);
 		
 		inputSenha = new JPasswordField();
 		inputSenha.setBounds(266, 238, 350, 41);
