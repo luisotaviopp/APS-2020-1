@@ -20,11 +20,13 @@ import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import br.com.ies.Main;
 import br.com.ies.annotation.ChaveEstrangeira;
 import br.com.ies.annotation.ChavePrimaria;
 import br.com.ies.annotation.Coluna;
 import br.com.ies.annotation.Tabela;
 import br.com.ies.dto.ColumnValueDTO;
+import br.com.ies.dto.PersistanceDTO;
 
 public class Util {
 
@@ -38,6 +40,9 @@ public class Util {
 
 	public static boolean isChaveEstrageira(Field field) {
 		return field.getAnnotation(ChaveEstrangeira.class) != null;
+	}
+	public static void persist(PersistanceDTO persistanceDTO) {
+		Main.getPersistanceManager().getPersistanceList().forEach(persist -> persist.persist(persistanceDTO));
 	}
 
 	public static List<Field> getDeclaredFieldsByAnnotation(Class<?> clazz, Class<? extends Annotation> annotation) {

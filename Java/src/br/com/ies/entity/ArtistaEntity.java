@@ -34,6 +34,7 @@ public class ArtistaEntity implements Serializable {
 		return artNome;
 	}
 
+	
 	public void setArtNome(String artNome) {
 		this.artNome = artNome;
 	}
