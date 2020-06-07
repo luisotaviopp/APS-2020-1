@@ -2,14 +2,19 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 12.2
+-- Dumped by pg_dump version 12.2
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: evento; Type: SCHEMA; Schema: -; Owner: postgres
@@ -38,26 +43,12 @@ CREATE SCHEMA usuario;
 
 ALTER SCHEMA usuario OWNER TO postgres;
 
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
--- Name: artista; Type: TABLE; Schema: evento; Owner: postgres; Tablespace: 
+-- Name: artista; Type: TABLE; Schema: evento; Owner: postgres
 --
 
 CREATE TABLE evento.artista (
@@ -91,7 +82,7 @@ ALTER SEQUENCE evento.artista_art_codigo_seq OWNED BY evento.artista.art_codigo;
 
 
 --
--- Name: evento; Type: TABLE; Schema: evento; Owner: postgres; Tablespace: 
+-- Name: evento; Type: TABLE; Schema: evento; Owner: postgres
 --
 
 CREATE TABLE evento.evento (
@@ -109,7 +100,7 @@ CREATE TABLE evento.evento (
 ALTER TABLE evento.evento OWNER TO postgres;
 
 --
--- Name: local; Type: TABLE; Schema: evento; Owner: postgres; Tablespace: 
+-- Name: local; Type: TABLE; Schema: evento; Owner: postgres
 --
 
 CREATE TABLE evento.local (
@@ -119,7 +110,8 @@ CREATE TABLE evento.local (
     loc_bairro character(100) NOT NULL,
     loc_cidade character(100) NOT NULL,
     loc_uf character(50) NOT NULL,
-    loc_lotacao_maxima integer
+    loc_lotacao_maxima integer,
+    loc_cep character varying(16)
 );
 
 
@@ -147,7 +139,7 @@ ALTER SEQUENCE evento.local_loc_codigo_seq OWNED BY evento.local.loc_codigo;
 
 
 --
--- Name: tipo_evento; Type: TABLE; Schema: evento; Owner: postgres; Tablespace: 
+-- Name: tipo_evento; Type: TABLE; Schema: evento; Owner: postgres
 --
 
 CREATE TABLE evento.tipo_evento (
@@ -180,7 +172,7 @@ ALTER SEQUENCE evento.tipo_evento_tie_codigo_seq OWNED BY evento.tipo_evento.tie
 
 
 --
--- Name: forma_pagamento; Type: TABLE; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: forma_pagamento; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
 CREATE TABLE faturamento.forma_pagamento (
@@ -213,7 +205,7 @@ ALTER SEQUENCE faturamento.forma_pagamento_fop_codigo_seq OWNED BY faturamento.f
 
 
 --
--- Name: situacao_venda; Type: TABLE; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: situacao_venda; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
 CREATE TABLE faturamento.situacao_venda (
@@ -225,7 +217,7 @@ CREATE TABLE faturamento.situacao_venda (
 ALTER TABLE faturamento.situacao_venda OWNER TO postgres;
 
 --
--- Name: venda; Type: TABLE; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: venda; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
 CREATE TABLE faturamento.venda (
@@ -240,7 +232,7 @@ CREATE TABLE faturamento.venda (
 ALTER TABLE faturamento.venda OWNER TO postgres;
 
 --
--- Name: venda_ingresso; Type: TABLE; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: venda_ingresso; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
 CREATE TABLE faturamento.venda_ingresso (
@@ -255,7 +247,7 @@ CREATE TABLE faturamento.venda_ingresso (
 ALTER TABLE faturamento.venda_ingresso OWNER TO postgres;
 
 --
--- Name: venda_pagamento; Type: TABLE; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: venda_pagamento; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
 CREATE TABLE faturamento.venda_pagamento (
@@ -269,7 +261,7 @@ CREATE TABLE faturamento.venda_pagamento (
 ALTER TABLE faturamento.venda_pagamento OWNER TO postgres;
 
 --
--- Name: controle_acesso; Type: TABLE; Schema: usuario; Owner: postgres; Tablespace: 
+-- Name: controle_acesso; Type: TABLE; Schema: usuario; Owner: postgres
 --
 
 CREATE TABLE usuario.controle_acesso (
@@ -303,7 +295,7 @@ ALTER SEQUENCE usuario.controle_acesso_coa_codigo_seq OWNED BY usuario.controle_
 
 
 --
--- Name: nivel; Type: TABLE; Schema: usuario; Owner: postgres; Tablespace: 
+-- Name: nivel; Type: TABLE; Schema: usuario; Owner: postgres
 --
 
 CREATE TABLE usuario.nivel (
@@ -336,7 +328,7 @@ ALTER SEQUENCE usuario.nivel_nvl_codigo_seq OWNED BY usuario.nivel.nvl_codigo;
 
 
 --
--- Name: usuario; Type: TABLE; Schema: usuario; Owner: postgres; Tablespace: 
+-- Name: usuario; Type: TABLE; Schema: usuario; Owner: postgres
 --
 
 CREATE TABLE usuario.usuario (
@@ -374,56 +366,216 @@ ALTER SEQUENCE usuario.usuario_usr_codigo_seq OWNED BY usuario.usuario.usr_codig
 
 
 --
--- Name: art_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
+-- Name: artista art_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.artista ALTER COLUMN art_codigo SET DEFAULT nextval('evento.artista_art_codigo_seq'::regclass);
 
 
 --
--- Name: loc_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
+-- Name: local loc_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.local ALTER COLUMN loc_codigo SET DEFAULT nextval('evento.local_loc_codigo_seq'::regclass);
 
 
 --
--- Name: tie_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
+-- Name: tipo_evento tie_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.tipo_evento ALTER COLUMN tie_codigo SET DEFAULT nextval('evento.tipo_evento_tie_codigo_seq'::regclass);
 
 
 --
--- Name: fop_codigo; Type: DEFAULT; Schema: faturamento; Owner: postgres
+-- Name: forma_pagamento fop_codigo; Type: DEFAULT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.forma_pagamento ALTER COLUMN fop_codigo SET DEFAULT nextval('faturamento.forma_pagamento_fop_codigo_seq'::regclass);
 
 
 --
--- Name: coa_codigo; Type: DEFAULT; Schema: usuario; Owner: postgres
+-- Name: controle_acesso coa_codigo; Type: DEFAULT; Schema: usuario; Owner: postgres
 --
 
 ALTER TABLE ONLY usuario.controle_acesso ALTER COLUMN coa_codigo SET DEFAULT nextval('usuario.controle_acesso_coa_codigo_seq'::regclass);
 
 
 --
--- Name: nvl_codigo; Type: DEFAULT; Schema: usuario; Owner: postgres
+-- Name: nivel nvl_codigo; Type: DEFAULT; Schema: usuario; Owner: postgres
 --
 
 ALTER TABLE ONLY usuario.nivel ALTER COLUMN nvl_codigo SET DEFAULT nextval('usuario.nivel_nvl_codigo_seq'::regclass);
 
 
 --
--- Name: usr_codigo; Type: DEFAULT; Schema: usuario; Owner: postgres
+-- Name: usuario usr_codigo; Type: DEFAULT; Schema: usuario; Owner: postgres
 --
 
 ALTER TABLE ONLY usuario.usuario ALTER COLUMN usr_codigo SET DEFAULT nextval('usuario.usuario_usr_codigo_seq'::regclass);
 
 
 --
--- Name: art_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres; Tablespace: 
+-- Data for Name: artista; Type: TABLE DATA; Schema: evento; Owner: postgres
+--
+
+COPY evento.artista (art_codigo, art_nome, art_descricao) FROM stdin;
+\.
+
+
+--
+-- Data for Name: evento; Type: TABLE DATA; Schema: evento; Owner: postgres
+--
+
+COPY evento.evento (eve_codigo, loc_codigo, art_codigo, tie_codigo, usr_codigo_abertura, eve_titulo, eve_qtd_ingressos, eve_valor_ingresso) FROM stdin;
+\.
+
+
+--
+-- Data for Name: local; Type: TABLE DATA; Schema: evento; Owner: postgres
+--
+
+COPY evento.local (loc_codigo, loc_logradouro, loc_numero, loc_bairro, loc_cidade, loc_uf, loc_lotacao_maxima, loc_cep) FROM stdin;
+18	Rua: Nada4                                                                                                                                                                                                                                                     	159       	Campinas                                                                                            	Palhoca23                                                                                           	SC                                                	80000	\N
+12	Rua: Nada                                                                                                                                                                                                                                                      	158       	Campinas                                                                                            	Sao Jose                                                                                            	SC                                                	10000	881132321
+13	Rua: Nada2                                                                                                                                                                                                                                                     	158       	Campinas                                                                                            	Palhoca                                                                                             	SC                                                	80000	\N
+19	Rua: Nada4                                                                                                                                                                                                                                                     	159       	Campinas                                                                                            	Palhoca23                                                                                           	SC                                                	80000	\N
+4	teste                                                                                                                                                                                                                                                          	24        	Daniel                                                                                              	teste                                                                                               	sc                                                	\N	\N
+16	Rua: Nada4                                                                                                                                                                                                                                                     	159       	Campinas                                                                                            	Palhoca23                                                                                           	SC                                                	80000	\N
+14	Rua: Nada                                                                                                                                                                                                                                                      	158       	Campinas                                                                                            	Palhoca                                                                                             	SC                                                	80000	\N
+15	Rua: Nada4                                                                                                                                                                                                                                                     	159       	Campinas                                                                                            	Palhoca23                                                                                           	SC                                                	80000	\N
+20	Rua: Nada7                                                                                                                                                                                                                                                     	159       	Campinas                                                                                            	Palhoca23                                                                                           	SC                                                	80000	\N
+17	Rua: Nada9                                                                                                                                                                                                                                                     	120       	Campinas                                                                                            	Palhoca23                                                                                           	SC                                                	80000	\N
+\.
+
+
+--
+-- Data for Name: tipo_evento; Type: TABLE DATA; Schema: evento; Owner: postgres
+--
+
+COPY evento.tipo_evento (tie_codigo, tie_descricao) FROM stdin;
+\.
+
+
+--
+-- Data for Name: forma_pagamento; Type: TABLE DATA; Schema: faturamento; Owner: postgres
+--
+
+COPY faturamento.forma_pagamento (fop_codigo, fop_descricao) FROM stdin;
+\.
+
+
+--
+-- Data for Name: situacao_venda; Type: TABLE DATA; Schema: faturamento; Owner: postgres
+--
+
+COPY faturamento.situacao_venda (siv_codigo, siv_descricao) FROM stdin;
+\.
+
+
+--
+-- Data for Name: venda; Type: TABLE DATA; Schema: faturamento; Owner: postgres
+--
+
+COPY faturamento.venda (ven_codigo, siv_codigo, vep_codigo, usr_codigo, eve_codigo) FROM stdin;
+\.
+
+
+--
+-- Data for Name: venda_ingresso; Type: TABLE DATA; Schema: faturamento; Owner: postgres
+--
+
+COPY faturamento.venda_ingresso (vei_codigo, ven_codigo, vei_nome, vei_documento, vei_utilizado) FROM stdin;
+\.
+
+
+--
+-- Data for Name: venda_pagamento; Type: TABLE DATA; Schema: faturamento; Owner: postgres
+--
+
+COPY faturamento.venda_pagamento (vep_codigo, vep_valor, vep_qtd_parcelas, fop_codigo) FROM stdin;
+\.
+
+
+--
+-- Data for Name: controle_acesso; Type: TABLE DATA; Schema: usuario; Owner: postgres
+--
+
+COPY usuario.controle_acesso (usr_codigo, coa_codigo, coa_data) FROM stdin;
+\.
+
+
+--
+-- Data for Name: nivel; Type: TABLE DATA; Schema: usuario; Owner: postgres
+--
+
+COPY usuario.nivel (nvl_codigo, nvl_descricao) FROM stdin;
+24	talvez                                                                                              
+12	Teste                                                                                               
+1	teste                                                                                               
+\.
+
+
+--
+-- Data for Name: usuario; Type: TABLE DATA; Schema: usuario; Owner: postgres
+--
+
+COPY usuario.usuario (usr_codigo, nvl_codigo, usr_nome, usr_email, usr_login, usr_senha, usr_ativo) FROM stdin;
+1	12	Jorge1585357796086                                                                                  	teste@teste.com                                   	teste                                             	1235436                                           	t
+2	12	Jorge1585357845389                                                                                  	asfasfteste.com                                   	teste                                             	1235436                                           	t
+\.
+
+
+--
+-- Name: artista_art_codigo_seq; Type: SEQUENCE SET; Schema: evento; Owner: postgres
+--
+
+SELECT pg_catalog.setval('evento.artista_art_codigo_seq', 1, false);
+
+
+--
+-- Name: local_loc_codigo_seq; Type: SEQUENCE SET; Schema: evento; Owner: postgres
+--
+
+SELECT pg_catalog.setval('evento.local_loc_codigo_seq', 1, false);
+
+
+--
+-- Name: tipo_evento_tie_codigo_seq; Type: SEQUENCE SET; Schema: evento; Owner: postgres
+--
+
+SELECT pg_catalog.setval('evento.tipo_evento_tie_codigo_seq', 1, false);
+
+
+--
+-- Name: forma_pagamento_fop_codigo_seq; Type: SEQUENCE SET; Schema: faturamento; Owner: postgres
+--
+
+SELECT pg_catalog.setval('faturamento.forma_pagamento_fop_codigo_seq', 1, false);
+
+
+--
+-- Name: controle_acesso_coa_codigo_seq; Type: SEQUENCE SET; Schema: usuario; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usuario.controle_acesso_coa_codigo_seq', 1, false);
+
+
+--
+-- Name: nivel_nvl_codigo_seq; Type: SEQUENCE SET; Schema: usuario; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usuario.nivel_nvl_codigo_seq', 1, false);
+
+
+--
+-- Name: usuario_usr_codigo_seq; Type: SEQUENCE SET; Schema: usuario; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usuario.usuario_usr_codigo_seq', 1, false);
+
+
+--
+-- Name: artista art_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.artista
@@ -431,7 +583,7 @@ ALTER TABLE ONLY evento.artista
 
 
 --
--- Name: eve_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres; Tablespace: 
+-- Name: evento eve_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.evento
@@ -439,7 +591,7 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- Name: loc_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres; Tablespace: 
+-- Name: local loc_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.local
@@ -447,7 +599,7 @@ ALTER TABLE ONLY evento.local
 
 
 --
--- Name: tie_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres; Tablespace: 
+-- Name: tipo_evento tie_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.tipo_evento
@@ -455,7 +607,7 @@ ALTER TABLE ONLY evento.tipo_evento
 
 
 --
--- Name: fop_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: forma_pagamento fop_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.forma_pagamento
@@ -463,7 +615,7 @@ ALTER TABLE ONLY faturamento.forma_pagamento
 
 
 --
--- Name: siv_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: situacao_venda siv_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.situacao_venda
@@ -471,7 +623,7 @@ ALTER TABLE ONLY faturamento.situacao_venda
 
 
 --
--- Name: vel_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: venda_ingresso vel_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.venda_ingresso
@@ -479,7 +631,7 @@ ALTER TABLE ONLY faturamento.venda_ingresso
 
 
 --
--- Name: ven_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: venda ven_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.venda
@@ -487,7 +639,7 @@ ALTER TABLE ONLY faturamento.venda
 
 
 --
--- Name: vep_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres; Tablespace: 
+-- Name: venda_pagamento vep_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.venda_pagamento
@@ -495,7 +647,7 @@ ALTER TABLE ONLY faturamento.venda_pagamento
 
 
 --
--- Name: coa_codigo; Type: CONSTRAINT; Schema: usuario; Owner: postgres; Tablespace: 
+-- Name: controle_acesso coa_codigo; Type: CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
 ALTER TABLE ONLY usuario.controle_acesso
@@ -503,7 +655,7 @@ ALTER TABLE ONLY usuario.controle_acesso
 
 
 --
--- Name: nivel_pkey; Type: CONSTRAINT; Schema: usuario; Owner: postgres; Tablespace: 
+-- Name: nivel nivel_pkey; Type: CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
 ALTER TABLE ONLY usuario.nivel
@@ -511,7 +663,7 @@ ALTER TABLE ONLY usuario.nivel
 
 
 --
--- Name: usr_codigo; Type: CONSTRAINT; Schema: usuario; Owner: postgres; Tablespace: 
+-- Name: usuario usr_codigo; Type: CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
 ALTER TABLE ONLY usuario.usuario
@@ -519,7 +671,7 @@ ALTER TABLE ONLY usuario.usuario
 
 
 --
--- Name: art_codigo; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
+-- Name: evento art_codigo; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.evento
@@ -527,7 +679,7 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- Name: loc_codigo; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
+-- Name: evento loc_codigo; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.evento
@@ -535,7 +687,7 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- Name: tie_codigo; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
+-- Name: evento tie_codigo; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.evento
@@ -543,7 +695,7 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- Name: usr_codigo_abertura; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
+-- Name: evento usr_codigo_abertura; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
 --
 
 ALTER TABLE ONLY evento.evento
@@ -551,7 +703,7 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- Name: fop_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
+-- Name: venda_pagamento fop_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.venda_pagamento
@@ -559,7 +711,7 @@ ALTER TABLE ONLY faturamento.venda_pagamento
 
 
 --
--- Name: siv_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
+-- Name: venda siv_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.venda
@@ -567,7 +719,7 @@ ALTER TABLE ONLY faturamento.venda
 
 
 --
--- Name: usr_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
+-- Name: venda usr_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.venda
@@ -575,7 +727,7 @@ ALTER TABLE ONLY faturamento.venda
 
 
 --
--- Name: ven_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
+-- Name: venda_ingresso ven_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.venda_ingresso
@@ -583,7 +735,7 @@ ALTER TABLE ONLY faturamento.venda_ingresso
 
 
 --
--- Name: venda_eve_codigo_fkey; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
+-- Name: venda venda_eve_codigo_fkey; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.venda
@@ -591,7 +743,7 @@ ALTER TABLE ONLY faturamento.venda
 
 
 --
--- Name: vep_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
+-- Name: venda vep_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
 ALTER TABLE ONLY faturamento.venda
@@ -599,7 +751,7 @@ ALTER TABLE ONLY faturamento.venda
 
 
 --
--- Name: nlv_codigo; Type: FK CONSTRAINT; Schema: usuario; Owner: postgres
+-- Name: usuario nlv_codigo; Type: FK CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
 ALTER TABLE ONLY usuario.usuario
@@ -607,7 +759,7 @@ ALTER TABLE ONLY usuario.usuario
 
 
 --
--- Name: usr_codigo; Type: FK CONSTRAINT; Schema: usuario; Owner: postgres
+-- Name: controle_acesso usr_codigo; Type: FK CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
 ALTER TABLE ONLY usuario.controle_acesso
