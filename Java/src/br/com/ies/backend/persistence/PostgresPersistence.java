@@ -24,7 +24,7 @@ public class PostgresPersistence extends PersistenceImpl {
 	public PostgresPersistence() {
 		super.setName(PERSISTENCE_NAME);
 	}
-
+	
 	@Override
 	public void persist(PersistenceDTO queryDTO) {
 		try {

@@ -1,20 +1,16 @@
 package br.com.ies.frontend;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import br.com.ies.frontend.builder.ComponentBuilder;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 
 public class Login {
 
@@ -22,7 +18,6 @@ public class Login {
 	private JLabel lblNome;
 	private JLabel lblSenha;
 	private JButton btnRegistrar;
-	private JButton btnEsqueciSenha;
 	private JPasswordField inputSenha;
 	private JTextField inputUsuario;
 
@@ -58,7 +53,7 @@ public class Login {
 				20, SwingConstants.CENTER, 266, 23, 350, 58));
 		
 		frame.getContentPane().add(ComponentBuilder.buildButton("ENTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266, 321, 350, 40, new Color(0, 250, 154), null, () -> {
-			new AdmDashboard().toggleFrame();
+			new PerfilUsuario().toggleFrame();
 			toggleFrame();
 		}));
 		

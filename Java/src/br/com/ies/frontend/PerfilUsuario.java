@@ -48,13 +48,9 @@ public class PerfilUsuario {
 		frame.getContentPane().add(ComponentBuilder.buildLabel("MEU PERFIL", "Franklin Gothic Medium", Font.BOLD, 20,
 				SwingConstants.CENTER, 103, 20, 675, 30));
 
-		inputNome = new JTextField();
-		inputNome.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
-		inputNome.setToolTipText("");
-		inputNome.setBounds(313, 114, 441, 30);
-		frame.getContentPane().add(inputNome);
-		inputNome.setColumns(10);
-
+		// Input Nome
+		frame.getContentPane().add(ComponentBuilder.buildTextField("Franklin Gothic Medium", Font.PLAIN, 13,313, 114, 441, 30, 10));
+		
 		inputEmail = new JTextField();
 		inputEmail.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
 		inputEmail.setBounds(313, 157, 441, 30);

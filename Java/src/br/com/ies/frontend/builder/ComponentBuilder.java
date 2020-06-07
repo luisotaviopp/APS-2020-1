@@ -53,11 +53,15 @@ public class ComponentBuilder {
 	 * @return : retorna o Label a ser adicionado no content panel
 	 */
 	public static JLabel buildLabel(String displayName, String fontName, int font, int fontSize,
-			Integer horizonalAlignment, int xBound, int yBound, int widthBound, int heightBound) {
+			Integer horizontalAlignment,Integer horizontalTextPosition, Integer verticalAlignment, int xBound, int yBound, int widthBound, int heightBound) {
 		JLabel label = new JLabel(displayName);
 		label.setFont(new Font(fontName, font, fontSize));
-		if (horizonalAlignment != null)
-			label.setHorizontalAlignment(horizonalAlignment);
+		if (horizontalAlignment != null)
+			label.setHorizontalAlignment(horizontalAlignment);
+		if(horizontalTextPosition != null)
+			label.setHorizontalTextPosition(horizontalTextPosition);
+		if(verticalAlignment != null)
+			label.setVerticalAlignment(verticalAlignment);
 		label.setBounds(xBound, yBound, widthBound, heightBound);
 		return label;
 	}

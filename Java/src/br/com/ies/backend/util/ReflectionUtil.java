@@ -16,6 +16,7 @@ public class ReflectionUtil {
 	public static Tabela getTabelaFromClass(Class<?> clazz) {
 		return clazz.getAnnotation(Tabela.class);
 	}
+
 	public static Coluna getColunaFromField(Field field) {
 		return field.getAnnotation(Coluna.class);
 	}
@@ -25,8 +26,7 @@ public class ReflectionUtil {
 	}
 
 	public static List<Field> getDeclaredFieldsByAnnotation(Class<?> clazz, Class<? extends Annotation> annotation) {
-		return Arrays.stream(clazz.getDeclaredFields()).filter(field -> field.isAnnotationPresent(annotation))
-				.collect(Collectors.toList());
+		return Arrays.stream(clazz.getDeclaredFields()).filter(field -> field.isAnnotationPresent(annotation)).collect(Collectors.toList());
 	}
 
 	public static Field getChavePrimaria(Object object) {
@@ -41,6 +41,15 @@ public class ReflectionUtil {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static void setFieldValue(Object fromObject, Field field, Object value) {
+		field.setAccessible(true);
+		try {
+			field.set(fromObject, value);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

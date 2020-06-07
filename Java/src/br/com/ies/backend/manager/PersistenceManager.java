@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.ies.backend.persistence.FilePersistence;
 import br.com.ies.backend.persistence.PostgresPersistence;
 import br.com.ies.backend.persistence.base.IPersistence;
+import br.com.ies.backend.type.PersistenceType;
 
 public class PersistenceManager {
 
@@ -30,7 +31,4 @@ public class PersistenceManager {
 		return persistenceType == PersistenceType.FILE ? persistenceList.get(0) : persistenceList.get(1);
 	}
 
-	static enum PersistenceType {
-		POSTGRES, FILE;
-	}
 }

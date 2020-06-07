@@ -19,11 +19,11 @@ public class Main {
 
 		LocalEntity localEntity = new LocalEntity();
 
+		localEntity.setLocCodigo(21);
 		localEntity.setLocBairro("Campinas");
 		localEntity.setLocCidade("Palhoca23");
-		localEntity.setLocCodigo(17);
 		localEntity.setLocNumero("120");
-		localEntity.setLocLogradouro("Rua: Nada9");
+		localEntity.setLocLogradouro("Rua: Nada10");
 		localEntity.setLocLotacaoMaxima(80000);
 		localEntity.setLocUf("SC");
 

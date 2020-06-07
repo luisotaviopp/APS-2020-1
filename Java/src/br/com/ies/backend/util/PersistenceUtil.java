@@ -15,16 +15,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import br.com.ies.backend.Main;
 import br.com.ies.backend.builder.QueryBuilder;
+import br.com.ies.backend.dto.PersistenceDTO;
 
 public class PersistenceUtil {
 
-	private static ExecutorService executorService = Executors.newFixedThreadPool(4);
-	
 	public static void persist(Serializable object) {
 		Main.getPersistenceManager().getPersistenceList().forEach(persist -> {
 			try {
@@ -33,6 +30,25 @@ public class PersistenceUtil {
 				e.printStackTrace();
 			}
 		});
+	}
+
+	public static Integer getValueFromChavePrimaria(PersistenceDTO persistenceDTO) {
+		Integer value = -1;
+
+		try {
+			PreparedStatement preparedStatement = Main.getConnectionFactory().getPreparedStatement("SELECT "
+					+ ReflectionUtil.getColunaFromField(persistenceDTO.getChavePrimaria()).nome() + " FROM "
+					+ persistenceDTO.getSchema().concat(".").concat(persistenceDTO.getTabela()) + " ORDER BY "
+					+ ReflectionUtil.getColunaFromField(persistenceDTO.getChavePrimaria()).nome() + " DESC LIMIT 1");
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				value = resultSet.getInt(ReflectionUtil.getColunaFromField(persistenceDTO.getChavePrimaria()).nome());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return value;
 	}
 
 	public static List<Object[]> resultSetToList(ResultSet resultSet) throws SQLException {
