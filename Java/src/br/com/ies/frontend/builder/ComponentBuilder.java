@@ -52,16 +52,18 @@ public class ComponentBuilder {
 	 * @param heightBound        : Altura
 	 * @return : retorna o Label a ser adicionado no content panel
 	 */
-	public static JLabel buildLabel(String displayName, String fontName, int font, int fontSize, int horizonalAlignment,
-			int xBound, int yBound, int widthBound, int heightBound) {
+	public static JLabel buildLabel(String displayName, String fontName, int font, int fontSize,
+			Integer horizonalAlignment, int xBound, int yBound, int widthBound, int heightBound) {
 		JLabel label = new JLabel(displayName);
 		label.setFont(new Font(fontName, font, fontSize));
-		label.setHorizontalAlignment(horizonalAlignment);
+		if (horizonalAlignment != null)
+			label.setHorizontalAlignment(horizonalAlignment);
 		label.setBounds(xBound, yBound, widthBound, heightBound);
 		return label;
 	}
-	
-	public static JTextField buildTextField(String fontName, int font, int fontSize, int xBound, int yBound, int widthBound, int heightBound, int columns) {
+
+	public static JTextField buildTextField(String fontName, int font, int fontSize, int xBound, int yBound,
+			int widthBound, int heightBound, int columns) {
 		JTextField textField = new JTextField();
 		textField.setFont(new Font(fontName, font, fontSize));
 		textField.setBounds(xBound, yBound, widthBound, heightBound);
