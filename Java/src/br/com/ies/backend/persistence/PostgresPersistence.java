@@ -8,30 +8,32 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import br.com.ies.backend.Main;
-import br.com.ies.backend.dto.PersistanceDTO;
-import br.com.ies.backend.dto.PersistanceParameterDTO;
-import br.com.ies.backend.persistence.impl.PersistanceImpl;
+import br.com.ies.backend.dto.PersistenceDTO;
+import br.com.ies.backend.dto.PersistenceParameterDTO;
+import br.com.ies.backend.persistence.impl.PersistenceImpl;
 import br.com.ies.backend.type.QueryType;
-import br.com.ies.backend.util.Callback;
+import br.com.ies.backend.util.PersistenceUtil;
+import br.com.ies.backend.util.ReflectionUtil;
 import br.com.ies.backend.util.Util;
+import br.com.ies.backend.util.lib.Callback;
 
-public class PostgresPersistance extends PersistanceImpl {
+public class PostgresPersistence extends PersistenceImpl {
 
-	private final String PERSISTANCE_NAME = new String("Postgres");
+	private final String PERSISTENCE_NAME = new String("Postgres");
 
-	public PostgresPersistance() {
-		super.setName(PERSISTANCE_NAME);
+	public PostgresPersistence() {
+		super.setName(PERSISTENCE_NAME);
 	}
 
 	@Override
-	public void persist(PersistanceDTO queryDTO) {
+	public void persist(PersistenceDTO queryDTO) {
 		try {
 			List<String> columnValueStringList = queryDTO.getColumnValue().stream().map(cv -> cv.getColumn() + "=" + (cv.getValue() == null ? null : "'" + cv.getValue() + "'")).collect(Collectors.toList());
 			String insertQuery = String.format(QueryType.INSERT_QUERY.getQuery(), queryDTO.getSchema().concat(".").concat(queryDTO.getTabela()), Util.fillColunasNameByColumnValueList(queryDTO.getColumnValue()), Util.fillCharInString('?', queryDTO.getColumnValue().size()));
 			String updateQuery = String.format(QueryType.UPDATE_QUERY.getQuery(), Util.fillColunasAndValuesFromColumnStringList(columnValueStringList));
-			String conflictQuery = String.format(QueryType.CONFLICT_QUERY.getQuery(), insertQuery, Util.getColunaFromField(queryDTO.getChavePrimaria()).nome(), updateQuery);
+			String conflictQuery = String.format(QueryType.CONFLICT_QUERY.getQuery(), insertQuery, ReflectionUtil.getColunaFromField(queryDTO.getChavePrimaria()).nome(), updateQuery);
 			PreparedStatement preparedStatement  = Main.getConnectionFactory().getPreparedStatement(conflictQuery);
-			IntStream.range(0, queryDTO.getColumnValue().size()).forEachOrdered(i -> Util.setParameter(preparedStatement, i + 1, queryDTO.getColumnValue().get(i).getValue()));
+			IntStream.range(0, queryDTO.getColumnValue().size()).forEachOrdered(i -> PersistenceUtil.setParameter(preparedStatement, i + 1, queryDTO.getColumnValue().get(i).getValue()));
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -39,13 +41,13 @@ public class PostgresPersistance extends PersistanceImpl {
 	}
 
 	@Override
-	public <T> void select(PersistanceParameterDTO<T> select, Callback callback) {
+	public <T> void select(PersistenceParameterDTO<T> select, Callback callback) {
 		PreparedStatement preparedStatement  = Main.getConnectionFactory().getPreparedStatement(select.getParameter().toString());
 		ResultSet resultSet = null;
 		
 		try {
 			resultSet = preparedStatement.executeQuery();
-			List<Object[]> lista = Util.resultSetToList(resultSet);
+			List<Object[]> lista = PersistenceUtil.resultSetToList(resultSet);
 			callback.call(lista);
 		} catch (Exception e) {
 			e.printStackTrace();

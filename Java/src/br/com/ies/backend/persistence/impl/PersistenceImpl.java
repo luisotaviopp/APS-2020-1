@@ -1,8 +1,8 @@
 package br.com.ies.backend.persistence.impl;
 
-import br.com.ies.backend.persistence.base.IPersistance;
+import br.com.ies.backend.persistence.base.IPersistence;
 
-public abstract class PersistanceImpl implements IPersistance {
+public abstract class PersistenceImpl implements IPersistence {
 
 	private String name;
 

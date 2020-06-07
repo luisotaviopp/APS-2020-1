@@ -1,11 +1,8 @@
 package br.com.ies.frontend;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import br.com.ies.frontend.builder.ComponentBuilder;

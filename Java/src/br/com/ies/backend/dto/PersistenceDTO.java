@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PersistanceDTO {
+public class PersistenceDTO {
 
 	private Object object;
 	private String schema;
@@ -14,7 +14,7 @@ public class PersistanceDTO {
 
 	private List<ColumnValueDTO> columnValueSet;
 
-	public PersistanceDTO() {
+	public PersistenceDTO() {
 		columnValueSet = new ArrayList<>();
 	}
 

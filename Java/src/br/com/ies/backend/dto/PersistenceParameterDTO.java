@@ -1,11 +1,11 @@
 package br.com.ies.backend.dto;
 
-public class PersistanceParameterDTO<T> {
+public class PersistenceParameterDTO<T> {
 
 	private Object object;
 	private T parameter;
 
-	public PersistanceParameterDTO() {
+	public PersistenceParameterDTO() {
 	}
 
 	public Object getObject() {

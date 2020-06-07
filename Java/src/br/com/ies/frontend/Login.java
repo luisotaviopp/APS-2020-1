@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import br.com.ies.frontend.builder.ComponentBuilder;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -44,24 +47,20 @@ public class Login {
 		frame.getContentPane().setLayout(null);
 		
 		//Título
-		JLabel lblTitulo = new JLabel("BILHETERIA");
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setForeground(Color.DARK_GRAY);
-		lblTitulo.setFont(new Font("Franklin Gothic Medium", Font.BOLD, 20));
-		lblTitulo.setBounds(266, 23, 350, 58);
-		frame.getContentPane().add(lblTitulo);
+//		JLabel lblTitulo = new JLabel("BILHETERIA");
+//		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblTitulo.setForeground(Color.DARK_GRAY);
+//		lblTitulo.setFont(new Font("Franklin Gothic Medium", Font.BOLD, 20));
+//		lblTitulo.setBounds(266, 23, 350, 58);
+//		frame.getContentPane().add(lblTitulo);
 		
-		// Botão Entrar
-		JButton btnEntrar = new JButton("ENTRAR");
-		btnEntrar.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnEntrar.setBackground(new Color(0, 250, 154));
-		btnEntrar.setBounds(266, 321, 350, 40);
-		frame.getContentPane().add(btnEntrar);
+		frame.getContentPane().add(ComponentBuilder.buildLabel("BILHETERIA", "Franklin Gothic Medium", Font.BOLD,
+				20, SwingConstants.CENTER, 266, 23, 350, 58));
 		
+		frame.getContentPane().add(ComponentBuilder.buildButton("ENTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266, 321, 350, 40, new Color(0, 250, 154), null, () -> {
+			new AdmDashboard().toggleFrame();
+			toggleFrame();
+		}));
 		
 		// Label Username
 		lblNome = new JLabel("NOME");

@@ -3,15 +3,15 @@ package br.com.ies.backend;
 import java.sql.SQLException;
 
 import br.com.ies.backend.entity.LocalEntity;
-import br.com.ies.backend.manager.PersistanceManager;
+import br.com.ies.backend.manager.PersistenceManager;
 import br.com.ies.backend.postgres.ConnectionFactory;
 import br.com.ies.backend.type.StringType;
-import br.com.ies.backend.util.Util;
+import br.com.ies.backend.util.PersistenceUtil;
 
 
 public class Main {
 
-	private static final PersistanceManager PERSISTANCE_MANAGER = new PersistanceManager();
+	private static final PersistenceManager PERSISTENCE_MANAGER = new PersistenceManager();
 	private static final ConnectionFactory CONNECTION_FACTORY = new ConnectionFactory(StringType.DATABASE_URL.getText(),
 			"postgres", "postgres");
 
@@ -27,7 +27,7 @@ public class Main {
 		localEntity.setLocLotacaoMaxima(80000);
 		localEntity.setLocUf("SC");
 
-		Util.persist(localEntity);
+		PersistenceUtil.persist(localEntity);
 		
 		// Select do file
 
@@ -63,7 +63,7 @@ public class Main {
 	public static ConnectionFactory getConnectionFactory() {
 		return CONNECTION_FACTORY;
 	}
-	public static final PersistanceManager getPersistanceManager() {
-		return PERSISTANCE_MANAGER;
+	public static final PersistenceManager getPersistenceManager() {
+		return PERSISTENCE_MANAGER;
 	}
 }

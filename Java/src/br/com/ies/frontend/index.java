@@ -1,14 +1,11 @@
 package br.com.ies.frontend;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
 import javax.swing.SwingConstants;
 
 import br.com.ies.frontend.builder.ComponentBuilder;
