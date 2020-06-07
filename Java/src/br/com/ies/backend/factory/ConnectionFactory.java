@@ -1,4 +1,4 @@
-package br.com.ies.backend.postgres;
+package br.com.ies.backend.factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

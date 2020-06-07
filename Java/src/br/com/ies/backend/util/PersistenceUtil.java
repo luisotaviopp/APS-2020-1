@@ -23,17 +23,19 @@ import br.com.ies.backend.dto.PersistenceDTO;
 public class PersistenceUtil {
 
 	public static void persist(Serializable object) {
-		Main.getPersistenceManager().getPersistenceList().forEach(persist -> {
-			try {
-				persist.persist(QueryBuilder.build(object));
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		});
+		try {
+			PersistenceDTO buildObject = QueryBuilder.build(object);
+			Main.getPersistenceManager().getPersistenceList().stream().forEachOrdered(persist -> persist.persist(buildObject));
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static Integer getValueFromChavePrimaria(PersistenceDTO persistenceDTO) {
 		Integer value = -1;
+
+		if (ReflectionUtil.getFieldValue(persistenceDTO.getChavePrimaria(), persistenceDTO.getObject()) != null)
+			return (Integer) ReflectionUtil.getFieldValue(persistenceDTO.getChavePrimaria(),persistenceDTO.getObject());
 
 		try {
 			PreparedStatement preparedStatement = Main.getConnectionFactory().getPreparedStatement("SELECT "
@@ -44,6 +46,10 @@ public class PersistenceUtil {
 			while (resultSet.next()) {
 				value = resultSet.getInt(ReflectionUtil.getColunaFromField(persistenceDTO.getChavePrimaria()).nome());
 			}
+			
+			resultSet.close();
+			preparedStatement.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

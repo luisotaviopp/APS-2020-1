@@ -1,5 +1,6 @@
 package br.com.ies.backend.util;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.IntStream;
@@ -24,5 +25,12 @@ public class Util {
 		StringJoiner stringJoiner = new StringJoiner(",");
 		columnStringList.forEach(cs -> stringJoiner.add(cs));
 		return stringJoiner.toString();
+	}
+	public static void removeColumnFromList(String column, List<ColumnValueDTO> list) {
+		Iterator<ColumnValueDTO> iterator = list.iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next().getColumn().equalsIgnoreCase(column))
+				iterator.remove();
+		}
 	}
 }

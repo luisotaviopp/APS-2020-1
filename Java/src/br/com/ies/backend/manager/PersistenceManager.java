@@ -23,8 +23,8 @@ public class PersistenceManager {
 	}
 
 	private void addDefaultPersistences() {
-		persistenceList.add(new FilePersistence());
 		persistenceList.add(new PostgresPersistence());
+		persistenceList.add(new FilePersistence());
 	}
 
 	public IPersistence getPersistance(PersistenceType persistenceType) {
