@@ -9,6 +9,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import br.com.ies.frontend.builder.ComponentBuilder;
+
 import java.awt.Color;
 import javax.swing.JPasswordField;
 
@@ -42,11 +45,8 @@ public class PerfilUsuario {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JLabel lblTitulo = new JLabel("MEU PERFIL");
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setFont(new Font("Franklin Gothic Medium", Font.BOLD, 20));
-		lblTitulo.setBounds(103, 20, 675, 30);
-		frame.getContentPane().add(lblTitulo);
+		frame.getContentPane().add(ComponentBuilder.buildLabel("MEU PERFIL", "Franklin Gothic Medium", Font.BOLD, 20,
+				SwingConstants.CENTER, 103, 20, 675, 30));
 
 		inputNome = new JTextField();
 		inputNome.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
@@ -67,21 +67,16 @@ public class PerfilUsuario {
 		frame.getContentPane().add(inputUsuario);
 		inputUsuario.setColumns(10);
 
-		JButton btnVoltar = new JButton("VOLTAR");
-		btnVoltar.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
-		btnVoltar.setBounds(127, 469, 300, 40);
-		frame.getContentPane().add(btnVoltar);
+		frame.getContentPane().add(ComponentBuilder.buildButton("VOLTAR", "Franklin Gothic Medium", Font.PLAIN, 13, 127,
+				469, 300, 40, null, null, () -> {
+					new Index().toggleFrame();
+					toggleFrame();
+				}));
 
-		JLabel lblDadosPessoais = new JLabel("DADOS PESSOAIS");
-		lblDadosPessoais.setFont(new Font("Franklin Gothic Medium", Font.BOLD, 13));
-		lblDadosPessoais.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDadosPessoais.setBounds(127, 78, 250, 30);
-		frame.getContentPane().add(lblDadosPessoais);
-
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
-		lblNome.setBounds(127, 121, 56, 16);
-		frame.getContentPane().add(lblNome);
+		frame.getContentPane().add(ComponentBuilder.buildLabel("DADOS PESSOAIS", "Franklin Gothic Medium", Font.BOLD,
+				13, SwingConstants.LEFT, 127, 78, 250, 30));
+		frame.getContentPane().add(
+				ComponentBuilder.buildLabel("Nome", "Franklin Gothic Medium", Font.PLAIN, 13, null, 127, 121, 56, 16));
 
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
