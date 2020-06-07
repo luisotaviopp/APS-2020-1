@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class ComponentBuilder {
 
@@ -58,6 +59,14 @@ public class ComponentBuilder {
 		label.setHorizontalAlignment(horizonalAlignment);
 		label.setBounds(xBound, yBound, widthBound, heightBound);
 		return label;
+	}
+	
+	public static JTextField buildTextField(String fontName, int font, int fontSize, int xBound, int yBound, int widthBound, int heightBound, int columns) {
+		JTextField textField = new JTextField();
+		textField.setFont(new Font(fontName, font, fontSize));
+		textField.setBounds(xBound, yBound, widthBound, heightBound);
+		textField.setColumns(columns);
+		return textField;
 	}
 
 	private static Component buildEventComponent(Component component, Runnable runnable) {
