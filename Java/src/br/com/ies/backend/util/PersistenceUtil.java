@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import br.com.ies.backend.Main;
 import br.com.ies.backend.builder.QueryBuilder;
@@ -22,13 +24,20 @@ import br.com.ies.backend.dto.PersistenceDTO;
 
 public class PersistenceUtil {
 
+	private static final ExecutorService EXECUTORS = Executors.newFixedThreadPool(2);
+	
 	public static void persist(Serializable object) {
-		try {
-			PersistenceDTO buildObject = QueryBuilder.build(object);
-			Main.getPersistenceManager().getPersistenceList().stream().forEachOrdered(persist -> persist.persist(buildObject));
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
+		EXECUTORS.execute( 
+			() -> {
+				
+			try {
+				PersistenceDTO buildObject = QueryBuilder.build(object);
+				Main.getPersistenceManager().getPersistenceList().stream().forEachOrdered(persist -> persist.persist(buildObject));
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
 		}
+				);
 	}
 
 	public static Integer getValueFromChavePrimaria(PersistenceDTO persistenceDTO) {
@@ -46,7 +55,6 @@ public class PersistenceUtil {
 			while (resultSet.next()) {
 				value = resultSet.getInt(ReflectionUtil.getColunaFromField(persistenceDTO.getChavePrimaria()).nome());
 			}
-			
 			resultSet.close();
 			preparedStatement.close();
 			

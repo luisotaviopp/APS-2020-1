@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class ComponentBuilder {
@@ -53,16 +54,23 @@ public class ComponentBuilder {
 	 * @return : retorna o Label a ser adicionado no content panel
 	 */
 	public static JLabel buildLabel(String displayName, String fontName, int font, int fontSize,
-			Integer horizontalAlignment,Integer horizontalTextPosition, Integer verticalAlignment, int xBound, int yBound, int widthBound, int heightBound) {
+			Integer horizontalAlignment, Integer horizontalTextPosition, Integer verticalAlignment, Float alignmentX,
+			int xBound, int yBound, int widthBound, int heightBound, Color foregroundColor) {
 		JLabel label = new JLabel(displayName);
 		label.setFont(new Font(fontName, font, fontSize));
 		if (horizontalAlignment != null)
 			label.setHorizontalAlignment(horizontalAlignment);
-		if(horizontalTextPosition != null)
+		if (horizontalTextPosition != null)
 			label.setHorizontalTextPosition(horizontalTextPosition);
-		if(verticalAlignment != null)
+		if (verticalAlignment != null)
 			label.setVerticalAlignment(verticalAlignment);
+		if (alignmentX != null)
+			label.setAlignmentX(alignmentX);
+
 		label.setBounds(xBound, yBound, widthBound, heightBound);
+		if (foregroundColor != null)
+			label.setForeground(foregroundColor);
+
 		return label;
 	}
 
@@ -73,6 +81,14 @@ public class ComponentBuilder {
 		textField.setBounds(xBound, yBound, widthBound, heightBound);
 		textField.setColumns(columns);
 		return textField;
+	}
+
+	public static JPasswordField buildPasswordField(String fontName, int font, int fontSize, int xBound, int yBound,
+			int widthBound, int heightBound) {
+		JPasswordField passwordField = new JPasswordField();
+		passwordField.setFont(new Font(fontName, font, fontSize));
+		passwordField.setBounds(xBound, yBound, widthBound, heightBound);
+		return passwordField;
 	}
 
 	private static Component buildEventComponent(Component component, Runnable runnable) {

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.IntStream;
 
+import javax.swing.JOptionPane;
+
 import br.com.ies.backend.dto.ColumnValueDTO;
 
 public class Util {
@@ -20,7 +22,15 @@ public class Util {
 		columnValueList.forEach(cv -> stringJoiner.add(cv.getColumn()));
 		return stringJoiner.toString();
 	}
+	@SuppressWarnings("unchecked")
+	public static List<Object[]> castObjectToList(Object object){
+		return (List<Object[]>)object;
+	}
 
+	public static void showMessage(String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
+	
 	public static String fillColunasAndValuesFromColumnStringList(List<String> columnStringList) {
 		StringJoiner stringJoiner = new StringJoiner(",");
 		columnStringList.forEach(cs -> stringJoiner.add(cs));

@@ -28,7 +28,7 @@ public class PersistenceManager {
 	}
 
 	public IPersistence getPersistance(PersistenceType persistenceType) {
-		return persistenceType == PersistenceType.FILE ? persistenceList.get(0) : persistenceList.get(1);
+		return persistenceType == PersistenceType.POSTGRES ? persistenceList.get(0) : persistenceList.get(1);
 	}
 
 }
