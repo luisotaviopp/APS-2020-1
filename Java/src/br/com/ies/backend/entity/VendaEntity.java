@@ -1,6 +1,7 @@
 package br.com.ies.backend.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import br.com.ies.backend.annotation.ChaveEstrangeira;
 import br.com.ies.backend.annotation.ChavePrimaria;
@@ -21,10 +22,6 @@ public class VendaEntity implements Serializable {
 	private SituacaoVendaEntity situacaoVendaEntity;
 
 	@ChaveEstrangeira
-	@Coluna(nome = "vep_codigo")
-	private VendaPagamentoEntity vendaPagamentoEntity;
-
-	@ChaveEstrangeira
 	@Coluna(nome = "usr_codigo")
 	private UsuarioEntity usuarioEntity;
 
@@ -32,6 +29,8 @@ public class VendaEntity implements Serializable {
 	@Coluna(nome = "eve_codigo")
 	private EventoEntity eventoEntity;
 	
+	@Coluna(nome = "ven_data")
+	private Date venData;
 	
 	public Integer getVenCodigo() {
 		return venCodigo;
@@ -45,12 +44,6 @@ public class VendaEntity implements Serializable {
 	public void setSituacaoVendaEntity(SituacaoVendaEntity situacaoVendaEntity) {
 		this.situacaoVendaEntity = situacaoVendaEntity;
 	}
-	public VendaPagamentoEntity getVendaPagamentoEntity() {
-		return vendaPagamentoEntity;
-	}
-	public void setVendaPagamentoEntity(VendaPagamentoEntity vendaPagamentoEntity) {
-		this.vendaPagamentoEntity = vendaPagamentoEntity;
-	}
 	public UsuarioEntity getUsuarioEntity() {
 		return usuarioEntity;
 	}
@@ -63,12 +56,19 @@ public class VendaEntity implements Serializable {
 	public void setEventoEntity(EventoEntity eventoEntity) {
 		this.eventoEntity = eventoEntity;
 	}
+	
+	public Date getVenData() {
+		return venData;
+	}
+	public void setVenData(Date venData) {
+		this.venData = venData;
+	}
 	@Override
 	public String toString() {
 		return "VendaEntity [venCodigo=" + venCodigo + ", situacaoVendaEntity=" + situacaoVendaEntity
-				+ ", vendaPagamentoEntity=" + vendaPagamentoEntity + ", usuarioEntity=" + usuarioEntity
-				+ ", eventoEntity=" + eventoEntity + "]";
+				+ ", usuarioEntity=" + usuarioEntity + ", eventoEntity=" + eventoEntity + ", venData=" + venData + "]";
 	}
+	
 	
 	
 }

@@ -2,7 +2,7 @@ package br.com.ies.backend.type;
 
 public enum StringType {
 
-	DATABASE_URL("jdbc:postgresql://localhost:5432/faculdade");
+	DATABASE_URL("jdbc:postgresql://localhost:5432/aps");
 
 	private String text;
 	

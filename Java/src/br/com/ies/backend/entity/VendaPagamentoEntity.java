@@ -25,6 +25,10 @@ public class VendaPagamentoEntity implements Serializable {
 
 	@Coluna(nome = "vep_qtd_parcelas")
 	private Integer vepQtdParcelas;
+	
+	@ChaveEstrangeira
+	@Coluna(nome = "ven_codigo")
+	private VendaEntity vendaEntity;
 
 	public Integer getVepCodigo() {
 		return vepCodigo;
@@ -56,6 +60,14 @@ public class VendaPagamentoEntity implements Serializable {
 
 	public void setVepQtdParcelas(Integer vepQtdParcelas) {
 		this.vepQtdParcelas = vepQtdParcelas;
+	}
+	
+	public VendaEntity getVendaEntity() {
+		return vendaEntity;
+	}
+
+	public void setVendaEntity(VendaEntity vendaEntity) {
+		this.vendaEntity = vendaEntity;
 	}
 
 	@Override

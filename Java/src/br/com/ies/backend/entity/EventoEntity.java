@@ -1,6 +1,7 @@
 package br.com.ies.backend.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import br.com.ies.backend.annotation.ChaveEstrangeira;
 import br.com.ies.backend.annotation.ChavePrimaria;
@@ -40,6 +41,9 @@ public class EventoEntity implements Serializable {
 
 	@Coluna(nome = "eve_valor_ingresso")
 	private Double eveValorIngresso;
+	
+	@Coluna(nome = "eve_data")
+	private Date eveData;
 
 	public Integer getEveCodigo() {
 		return eveCodigo;
@@ -104,6 +108,14 @@ public class EventoEntity implements Serializable {
 	public void setEveValorIngresso(Double eveValorIngresso) {
 		this.eveValorIngresso = eveValorIngresso;
 	}
+	
+	public Date getEveData() {
+		return eveData;
+	}
+
+	public void setEveData(Date eveData) {
+		this.eveData = eveData;
+	}
 
 	@Override
 	public String toString() {
@@ -112,6 +124,5 @@ public class EventoEntity implements Serializable {
 				+ aberturaUsuarioEntity + ", eveTitulo=" + eveTitulo + ", eveQtdIngressos=" + eveQtdIngressos
 				+ ", eveValorIngresso=" + eveValorIngresso + "]";
 	}
-	
 
 }

@@ -32,7 +32,8 @@ public class ComponentBuilder {
 			Runnable clickListener) {
 		JButton button = new JButton(displayName);
 		button.setFont(new Font(fontName, font, fontSize));
-		button.setBounds(xBound, yBound, widthBound, heightBound);
+		if(xBound != -1 && yBound != -1 && widthBound != -1 && heightBound != -1)
+			button.setBounds(xBound, yBound, widthBound, heightBound);
 		if (backgroundColor != null)
 			button.setBackground(backgroundColor);
 		if (foregroundColor != null)
