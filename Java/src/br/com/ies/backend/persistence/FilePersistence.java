@@ -27,12 +27,16 @@ public class FilePersistence extends PersistenceImpl {
 
 	@Override
 	public <T> void select(PersistenceParameterDTO<T> select, Callback callback) {
-		Object[] objects = PersistenceUtil.listObjectsFromFile(select.getObject().getClass(), FILE_NAME);
-		Object object = Arrays.stream(objects)
-				.filter(o -> ReflectionUtil.getFieldValue(ReflectionUtil.getChavePrimaria(select.getObject()), o)
-						.toString().equals(select.getParameter().toString()))
-				.reduce((first, second) -> second).orElse(null);
-		
-		callback.call(Arrays.asList(object));
+		PersistenceUtil.execute(new Runnable() {
+			public void run() {
+				Object[] objects = PersistenceUtil.listObjectsFromFile(select.getObject().getClass(), FILE_NAME);
+				Object object = Arrays.stream(objects)
+						.filter(o -> ReflectionUtil.getFieldValue(ReflectionUtil.getChavePrimaria(select.getObject()), o)
+								.toString().equals(select.getParameter().toString()))
+						.reduce((first, second) -> second).orElse(null);
+				
+				callback.call(Arrays.asList(object));
+			}
+		});
 	}
 }

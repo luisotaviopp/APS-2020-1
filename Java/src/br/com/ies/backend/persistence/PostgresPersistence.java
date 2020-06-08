@@ -54,24 +54,28 @@ public class PostgresPersistence extends PersistenceImpl {
 	
 	@Override
 	public <T> void select(PersistenceParameterDTO<T> select, Callback callback) {
-		PreparedStatement preparedStatement  = Main.getConnectionFactory().getPreparedStatement(select.getParameter().toString());
-		ResultSet resultSet = null;
-		
-		try {
-			resultSet = preparedStatement.executeQuery();
-			List<Object[]> lista = PersistenceUtil.resultSetToList(resultSet);
-			callback.call(lista);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(resultSet != null) {
-					resultSet.close();
+		PersistenceUtil.execute(new Runnable() {
+			public void run() {
+				PreparedStatement preparedStatement  = Main.getConnectionFactory().getPreparedStatement(select.getParameter().toString());
+				ResultSet resultSet = null;
+				
+				try {
+					resultSet = preparedStatement.executeQuery();
+					List<Object[]> lista = PersistenceUtil.resultSetToList(resultSet);
+					callback.call(lista);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if(resultSet != null) {
+							resultSet.close();
+						}
+						preparedStatement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
-				preparedStatement.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
-		}
+		});
 	}
 }

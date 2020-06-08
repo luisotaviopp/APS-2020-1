@@ -29,7 +29,6 @@ public class PersistenceUtil {
 	public static void persist(Serializable object) {
 		EXECUTORS.execute( 
 			() -> {
-				
 			try {
 				PersistenceDTO buildObject = QueryBuilder.build(object);
 				Main.getPersistenceManager().getPersistenceList().stream().forEachOrdered(persist -> persist.persist(buildObject));
@@ -38,6 +37,10 @@ public class PersistenceUtil {
 			}
 		}
 				);
+	}
+	
+	public static void execute(Runnable runnable) {
+		EXECUTORS.execute(runnable);
 	}
 
 	public static Integer getValueFromChavePrimaria(PersistenceDTO persistenceDTO) {
