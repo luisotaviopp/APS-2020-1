@@ -3,8 +3,8 @@ package br.com.ies.backend;
 import java.sql.SQLException;
 
 import br.com.ies.backend.entity.LocalEntity;
+import br.com.ies.backend.factory.ConnectionFactory;
 import br.com.ies.backend.manager.PersistenceManager;
-import br.com.ies.backend.postgres.ConnectionFactory;
 import br.com.ies.backend.type.StringType;
 import br.com.ies.backend.util.PersistenceUtil;
 
@@ -19,14 +19,14 @@ public class Main {
 
 		LocalEntity localEntity = new LocalEntity();
 
-		localEntity.setLocCodigo(21);
 		localEntity.setLocBairro("Campinas");
 		localEntity.setLocCidade("Palhoca23");
 		localEntity.setLocNumero("120");
-		localEntity.setLocLogradouro("Rua: Nada10");
+		localEntity.setLocLogradouro("Rua: Vinicius2");
 		localEntity.setLocLotacaoMaxima(80000);
-		localEntity.setLocUf("SC");
-
+		localEntity.setLocUf("SC3");
+		localEntity.setLocCep("2020202-");
+		
 		PersistenceUtil.persist(localEntity);
 		
 		// Select do file

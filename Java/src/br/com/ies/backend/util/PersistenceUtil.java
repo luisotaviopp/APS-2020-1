@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import br.com.ies.backend.Main;
 import br.com.ies.backend.builder.QueryBuilder;
@@ -22,18 +24,27 @@ import br.com.ies.backend.dto.PersistenceDTO;
 
 public class PersistenceUtil {
 
+	private static final ExecutorService EXECUTORS = Executors.newFixedThreadPool(2);
+	
 	public static void persist(Serializable object) {
-		Main.getPersistenceManager().getPersistenceList().forEach(persist -> {
+		EXECUTORS.execute( 
+			() -> {
+				
 			try {
-				persist.persist(QueryBuilder.build(object));
+				PersistenceDTO buildObject = QueryBuilder.build(object);
+				Main.getPersistenceManager().getPersistenceList().stream().forEachOrdered(persist -> persist.persist(buildObject));
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
-		});
+		}
+				);
 	}
 
 	public static Integer getValueFromChavePrimaria(PersistenceDTO persistenceDTO) {
 		Integer value = -1;
+
+		if (ReflectionUtil.getFieldValue(persistenceDTO.getChavePrimaria(), persistenceDTO.getObject()) != null)
+			return (Integer) ReflectionUtil.getFieldValue(persistenceDTO.getChavePrimaria(),persistenceDTO.getObject());
 
 		try {
 			PreparedStatement preparedStatement = Main.getConnectionFactory().getPreparedStatement("SELECT "
@@ -44,6 +55,9 @@ public class PersistenceUtil {
 			while (resultSet.next()) {
 				value = resultSet.getInt(ReflectionUtil.getColunaFromField(persistenceDTO.getChavePrimaria()).nome());
 			}
+			resultSet.close();
+			preparedStatement.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

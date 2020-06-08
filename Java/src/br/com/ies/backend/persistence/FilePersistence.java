@@ -22,7 +22,6 @@ public class FilePersistence extends PersistenceImpl {
 	public void persist(PersistenceDTO queryDTO) {
 		ReflectionUtil.setFieldValue(queryDTO.getObject(), queryDTO.getChavePrimaria(), PersistenceUtil.getValueFromChavePrimaria(queryDTO));
 		Object object = queryDTO.getObject();
-		System.out.println(ReflectionUtil.getFieldValue(ReflectionUtil.getChavePrimaria(object), object));
 		PersistenceUtil.writeObjectInFile(object, FILE_NAME);
 	}
 

@@ -2,7 +2,6 @@ package br.com.ies.backend.dto;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PersistenceDTO {
@@ -47,7 +46,7 @@ public class PersistenceDTO {
 	}
 
 	public List<ColumnValueDTO> getColumnValue() {
-		return Collections.unmodifiableList(columnValueSet);
+		return columnValueSet;
 	}
 
 	public Field getChavePrimaria() {

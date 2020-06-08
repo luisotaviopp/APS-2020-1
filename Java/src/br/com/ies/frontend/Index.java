@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import br.com.ies.frontend.builder.ComponentBuilder;
@@ -47,16 +46,11 @@ public class Index {
 		frame.getContentPane().setLayout(null);
 
 		// Título
-		JLabel lblTitulo = new JLabel("BILHETERIA");
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setForeground(Color.DARK_GRAY);
-		lblTitulo.setFont(new Font("Franklin Gothic Medium", Font.BOLD, 30));
-		lblTitulo.setBounds(266, 53, 350, 58);
-		frame.getContentPane().add(lblTitulo);
+		frame.getContentPane().add(ComponentBuilder.buildLabel("BILHETERIA", "Franklin Gothic Medium", Font.BOLD, 30, SwingConstants.CENTER, null, null, null, 266, 53, 350, 58,Color.DARK_GRAY));
 
 		// Botão Entrar
-		frame.getContentPane().add(ComponentBuilder.buildButton("ENTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266,
-				440, 350, 58, new Color(0, 250, 154),null, () -> {
+		frame.getContentPane().add(ComponentBuilder.buildButton("ENTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266,440, 350, 58, new Color(0, 250, 154),null, 
+				() -> {
 					new Login().toggleFrame();
 					toggleFrame();
 				}));

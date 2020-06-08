@@ -1,8 +1,11 @@
 package br.com.ies.backend.util;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.IntStream;
+
+import javax.swing.JOptionPane;
 
 import br.com.ies.backend.dto.ColumnValueDTO;
 
@@ -19,10 +22,25 @@ public class Util {
 		columnValueList.forEach(cv -> stringJoiner.add(cv.getColumn()));
 		return stringJoiner.toString();
 	}
+	@SuppressWarnings("unchecked")
+	public static List<Object[]> castObjectToList(Object object){
+		return (List<Object[]>)object;
+	}
 
+	public static void showMessage(String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
+	
 	public static String fillColunasAndValuesFromColumnStringList(List<String> columnStringList) {
 		StringJoiner stringJoiner = new StringJoiner(",");
 		columnStringList.forEach(cs -> stringJoiner.add(cs));
 		return stringJoiner.toString();
+	}
+	public static void removeColumnFromList(String column, List<ColumnValueDTO> list) {
+		Iterator<ColumnValueDTO> iterator = list.iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next().getColumn().equalsIgnoreCase(column))
+				iterator.remove();
+		}
 	}
 }

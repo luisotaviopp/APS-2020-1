@@ -23,12 +23,12 @@ public class PersistenceManager {
 	}
 
 	private void addDefaultPersistences() {
-		persistenceList.add(new FilePersistence());
 		persistenceList.add(new PostgresPersistence());
+		persistenceList.add(new FilePersistence());
 	}
 
 	public IPersistence getPersistance(PersistenceType persistenceType) {
-		return persistenceType == PersistenceType.FILE ? persistenceList.get(0) : persistenceList.get(1);
+		return persistenceType == PersistenceType.POSTGRES ? persistenceList.get(0) : persistenceList.get(1);
 	}
 
 }
