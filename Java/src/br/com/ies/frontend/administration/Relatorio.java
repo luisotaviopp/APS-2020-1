@@ -1,12 +1,8 @@
 package br.com.ies.frontend.administration;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -14,12 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ScrollPaneLayout;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +21,6 @@ import br.com.ies.backend.Main;
 import br.com.ies.backend.dto.PersistenceParameterDTO;
 import br.com.ies.backend.type.PersistenceType;
 import br.com.ies.backend.util.Util;
-import br.com.ies.frontend.Login;
 import br.com.ies.frontend.builder.ComponentBuilder;
 import br.com.ies.frontend.util.RelatoriosDisponiveis;
 
@@ -35,19 +28,6 @@ public class Relatorio {
 
 	private JFrame frame;
 	private JScrollPane scrollPaneTabela = new JScrollPane();
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Relatorio window = new Relatorio();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Launch the application.
