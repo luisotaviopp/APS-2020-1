@@ -5,8 +5,6 @@
 -- Dumped from database version 12.2
 -- Dumped by pg_dump version 12.2
 
--- Started on 2020-06-08 20:42:43
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -19,7 +17,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 7 (class 2615 OID 24989)
 -- Name: evento; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -29,7 +26,6 @@ CREATE SCHEMA evento;
 ALTER SCHEMA evento OWNER TO postgres;
 
 --
--- TOC entry 9 (class 2615 OID 24990)
 -- Name: faturamento; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -39,7 +35,6 @@ CREATE SCHEMA faturamento;
 ALTER SCHEMA faturamento OWNER TO postgres;
 
 --
--- TOC entry 10 (class 2615 OID 24991)
 -- Name: usuario; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -53,7 +48,6 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 205 (class 1259 OID 24992)
 -- Name: artista; Type: TABLE; Schema: evento; Owner: postgres
 --
 
@@ -67,7 +61,6 @@ CREATE TABLE evento.artista (
 ALTER TABLE evento.artista OWNER TO postgres;
 
 --
--- TOC entry 206 (class 1259 OID 24995)
 -- Name: artista_art_codigo_seq; Type: SEQUENCE; Schema: evento; Owner: postgres
 --
 
@@ -82,8 +75,6 @@ CREATE SEQUENCE evento.artista_art_codigo_seq
 ALTER TABLE evento.artista_art_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2960 (class 0 OID 0)
--- Dependencies: 206
 -- Name: artista_art_codigo_seq; Type: SEQUENCE OWNED BY; Schema: evento; Owner: postgres
 --
 
@@ -91,7 +82,6 @@ ALTER SEQUENCE evento.artista_art_codigo_seq OWNED BY evento.artista.art_codigo;
 
 
 --
--- TOC entry 207 (class 1259 OID 24997)
 -- Name: evento; Type: TABLE; Schema: evento; Owner: postgres
 --
 
@@ -110,7 +100,6 @@ CREATE TABLE evento.evento (
 ALTER TABLE evento.evento OWNER TO postgres;
 
 --
--- TOC entry 224 (class 1259 OID 25136)
 -- Name: evento_eve_codigo_seq; Type: SEQUENCE; Schema: evento; Owner: postgres
 --
 
@@ -126,8 +115,6 @@ CREATE SEQUENCE evento.evento_eve_codigo_seq
 ALTER TABLE evento.evento_eve_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2961 (class 0 OID 0)
--- Dependencies: 224
 -- Name: evento_eve_codigo_seq; Type: SEQUENCE OWNED BY; Schema: evento; Owner: postgres
 --
 
@@ -135,7 +122,6 @@ ALTER SEQUENCE evento.evento_eve_codigo_seq OWNED BY evento.evento.eve_codigo;
 
 
 --
--- TOC entry 208 (class 1259 OID 25000)
 -- Name: local; Type: TABLE; Schema: evento; Owner: postgres
 --
 
@@ -154,7 +140,6 @@ CREATE TABLE evento.local (
 ALTER TABLE evento.local OWNER TO postgres;
 
 --
--- TOC entry 209 (class 1259 OID 25006)
 -- Name: local_loc_codigo_seq; Type: SEQUENCE; Schema: evento; Owner: postgres
 --
 
@@ -169,8 +154,6 @@ CREATE SEQUENCE evento.local_loc_codigo_seq
 ALTER TABLE evento.local_loc_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2962 (class 0 OID 0)
--- Dependencies: 209
 -- Name: local_loc_codigo_seq; Type: SEQUENCE OWNED BY; Schema: evento; Owner: postgres
 --
 
@@ -178,7 +161,6 @@ ALTER SEQUENCE evento.local_loc_codigo_seq OWNED BY evento.local.loc_codigo;
 
 
 --
--- TOC entry 210 (class 1259 OID 25008)
 -- Name: tipo_evento; Type: TABLE; Schema: evento; Owner: postgres
 --
 
@@ -191,7 +173,6 @@ CREATE TABLE evento.tipo_evento (
 ALTER TABLE evento.tipo_evento OWNER TO postgres;
 
 --
--- TOC entry 211 (class 1259 OID 25011)
 -- Name: tipo_evento_tie_codigo_seq; Type: SEQUENCE; Schema: evento; Owner: postgres
 --
 
@@ -206,8 +187,6 @@ CREATE SEQUENCE evento.tipo_evento_tie_codigo_seq
 ALTER TABLE evento.tipo_evento_tie_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2963 (class 0 OID 0)
--- Dependencies: 211
 -- Name: tipo_evento_tie_codigo_seq; Type: SEQUENCE OWNED BY; Schema: evento; Owner: postgres
 --
 
@@ -215,7 +194,6 @@ ALTER SEQUENCE evento.tipo_evento_tie_codigo_seq OWNED BY evento.tipo_evento.tie
 
 
 --
--- TOC entry 212 (class 1259 OID 25013)
 -- Name: forma_pagamento; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
@@ -228,7 +206,6 @@ CREATE TABLE faturamento.forma_pagamento (
 ALTER TABLE faturamento.forma_pagamento OWNER TO postgres;
 
 --
--- TOC entry 213 (class 1259 OID 25016)
 -- Name: forma_pagamento_fop_codigo_seq; Type: SEQUENCE; Schema: faturamento; Owner: postgres
 --
 
@@ -243,8 +220,6 @@ CREATE SEQUENCE faturamento.forma_pagamento_fop_codigo_seq
 ALTER TABLE faturamento.forma_pagamento_fop_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2964 (class 0 OID 0)
--- Dependencies: 213
 -- Name: forma_pagamento_fop_codigo_seq; Type: SEQUENCE OWNED BY; Schema: faturamento; Owner: postgres
 --
 
@@ -252,7 +227,6 @@ ALTER SEQUENCE faturamento.forma_pagamento_fop_codigo_seq OWNED BY faturamento.f
 
 
 --
--- TOC entry 214 (class 1259 OID 25018)
 -- Name: situacao_venda; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
@@ -265,7 +239,6 @@ CREATE TABLE faturamento.situacao_venda (
 ALTER TABLE faturamento.situacao_venda OWNER TO postgres;
 
 --
--- TOC entry 228 (class 1259 OID 25185)
 -- Name: situacao_venda_siv_codigo_seq; Type: SEQUENCE; Schema: faturamento; Owner: postgres
 --
 
@@ -281,8 +254,6 @@ CREATE SEQUENCE faturamento.situacao_venda_siv_codigo_seq
 ALTER TABLE faturamento.situacao_venda_siv_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2965 (class 0 OID 0)
--- Dependencies: 228
 -- Name: situacao_venda_siv_codigo_seq; Type: SEQUENCE OWNED BY; Schema: faturamento; Owner: postgres
 --
 
@@ -290,7 +261,6 @@ ALTER SEQUENCE faturamento.situacao_venda_siv_codigo_seq OWNED BY faturamento.si
 
 
 --
--- TOC entry 215 (class 1259 OID 25021)
 -- Name: venda; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
@@ -299,14 +269,14 @@ CREATE TABLE faturamento.venda (
     eve_codigo integer,
     ven_codigo integer NOT NULL,
     siv_codigo integer,
-    ven_data date
+    ven_data date,
+    ven_qtd integer NOT NULL
 );
 
 
 ALTER TABLE faturamento.venda OWNER TO postgres;
 
 --
--- TOC entry 216 (class 1259 OID 25024)
 -- Name: venda_ingresso; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
@@ -322,7 +292,6 @@ CREATE TABLE faturamento.venda_ingresso (
 ALTER TABLE faturamento.venda_ingresso OWNER TO postgres;
 
 --
--- TOC entry 226 (class 1259 OID 25158)
 -- Name: venda_ingresso_vei_codigo_seq; Type: SEQUENCE; Schema: faturamento; Owner: postgres
 --
 
@@ -338,8 +307,6 @@ CREATE SEQUENCE faturamento.venda_ingresso_vei_codigo_seq
 ALTER TABLE faturamento.venda_ingresso_vei_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2966 (class 0 OID 0)
--- Dependencies: 226
 -- Name: venda_ingresso_vei_codigo_seq; Type: SEQUENCE OWNED BY; Schema: faturamento; Owner: postgres
 --
 
@@ -347,7 +314,6 @@ ALTER SEQUENCE faturamento.venda_ingresso_vei_codigo_seq OWNED BY faturamento.ve
 
 
 --
--- TOC entry 217 (class 1259 OID 25027)
 -- Name: venda_pagamento; Type: TABLE; Schema: faturamento; Owner: postgres
 --
 
@@ -363,7 +329,6 @@ CREATE TABLE faturamento.venda_pagamento (
 ALTER TABLE faturamento.venda_pagamento OWNER TO postgres;
 
 --
--- TOC entry 227 (class 1259 OID 25172)
 -- Name: venda_pagamento_vep_codigo_seq; Type: SEQUENCE; Schema: faturamento; Owner: postgres
 --
 
@@ -379,8 +344,6 @@ CREATE SEQUENCE faturamento.venda_pagamento_vep_codigo_seq
 ALTER TABLE faturamento.venda_pagamento_vep_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2967 (class 0 OID 0)
--- Dependencies: 227
 -- Name: venda_pagamento_vep_codigo_seq; Type: SEQUENCE OWNED BY; Schema: faturamento; Owner: postgres
 --
 
@@ -388,7 +351,6 @@ ALTER SEQUENCE faturamento.venda_pagamento_vep_codigo_seq OWNED BY faturamento.v
 
 
 --
--- TOC entry 225 (class 1259 OID 25150)
 -- Name: venda_ven_codigo_seq; Type: SEQUENCE; Schema: faturamento; Owner: postgres
 --
 
@@ -404,8 +366,6 @@ CREATE SEQUENCE faturamento.venda_ven_codigo_seq
 ALTER TABLE faturamento.venda_ven_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2968 (class 0 OID 0)
--- Dependencies: 225
 -- Name: venda_ven_codigo_seq; Type: SEQUENCE OWNED BY; Schema: faturamento; Owner: postgres
 --
 
@@ -413,7 +373,6 @@ ALTER SEQUENCE faturamento.venda_ven_codigo_seq OWNED BY faturamento.venda.ven_c
 
 
 --
--- TOC entry 218 (class 1259 OID 25030)
 -- Name: controle_acesso; Type: TABLE; Schema: usuario; Owner: postgres
 --
 
@@ -427,7 +386,6 @@ CREATE TABLE usuario.controle_acesso (
 ALTER TABLE usuario.controle_acesso OWNER TO postgres;
 
 --
--- TOC entry 219 (class 1259 OID 25033)
 -- Name: controle_acesso_coa_codigo_seq; Type: SEQUENCE; Schema: usuario; Owner: postgres
 --
 
@@ -442,8 +400,6 @@ CREATE SEQUENCE usuario.controle_acesso_coa_codigo_seq
 ALTER TABLE usuario.controle_acesso_coa_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2969 (class 0 OID 0)
--- Dependencies: 219
 -- Name: controle_acesso_coa_codigo_seq; Type: SEQUENCE OWNED BY; Schema: usuario; Owner: postgres
 --
 
@@ -451,7 +407,6 @@ ALTER SEQUENCE usuario.controle_acesso_coa_codigo_seq OWNED BY usuario.controle_
 
 
 --
--- TOC entry 220 (class 1259 OID 25035)
 -- Name: nivel; Type: TABLE; Schema: usuario; Owner: postgres
 --
 
@@ -464,7 +419,6 @@ CREATE TABLE usuario.nivel (
 ALTER TABLE usuario.nivel OWNER TO postgres;
 
 --
--- TOC entry 221 (class 1259 OID 25038)
 -- Name: nivel_nvl_codigo_seq; Type: SEQUENCE; Schema: usuario; Owner: postgres
 --
 
@@ -479,8 +433,6 @@ CREATE SEQUENCE usuario.nivel_nvl_codigo_seq
 ALTER TABLE usuario.nivel_nvl_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2970 (class 0 OID 0)
--- Dependencies: 221
 -- Name: nivel_nvl_codigo_seq; Type: SEQUENCE OWNED BY; Schema: usuario; Owner: postgres
 --
 
@@ -488,7 +440,6 @@ ALTER SEQUENCE usuario.nivel_nvl_codigo_seq OWNED BY usuario.nivel.nvl_codigo;
 
 
 --
--- TOC entry 222 (class 1259 OID 25040)
 -- Name: usuario; Type: TABLE; Schema: usuario; Owner: postgres
 --
 
@@ -506,7 +457,6 @@ CREATE TABLE usuario.usuario (
 ALTER TABLE usuario.usuario OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 25043)
 -- Name: usuario_usr_codigo_seq; Type: SEQUENCE; Schema: usuario; Owner: postgres
 --
 
@@ -521,8 +471,6 @@ CREATE SEQUENCE usuario.usuario_usr_codigo_seq
 ALTER TABLE usuario.usuario_usr_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2971 (class 0 OID 0)
--- Dependencies: 223
 -- Name: usuario_usr_codigo_seq; Type: SEQUENCE OWNED BY; Schema: usuario; Owner: postgres
 --
 
@@ -530,7 +478,6 @@ ALTER SEQUENCE usuario.usuario_usr_codigo_seq OWNED BY usuario.usuario.usr_codig
 
 
 --
--- TOC entry 2757 (class 2604 OID 25045)
 -- Name: artista art_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
 --
 
@@ -538,7 +485,6 @@ ALTER TABLE ONLY evento.artista ALTER COLUMN art_codigo SET DEFAULT nextval('eve
 
 
 --
--- TOC entry 2758 (class 2604 OID 25138)
 -- Name: evento eve_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
 --
 
@@ -546,7 +492,6 @@ ALTER TABLE ONLY evento.evento ALTER COLUMN eve_codigo SET DEFAULT nextval('even
 
 
 --
--- TOC entry 2759 (class 2604 OID 25046)
 -- Name: local loc_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
 --
 
@@ -554,7 +499,6 @@ ALTER TABLE ONLY evento.local ALTER COLUMN loc_codigo SET DEFAULT nextval('event
 
 
 --
--- TOC entry 2760 (class 2604 OID 25047)
 -- Name: tipo_evento tie_codigo; Type: DEFAULT; Schema: evento; Owner: postgres
 --
 
@@ -562,7 +506,6 @@ ALTER TABLE ONLY evento.tipo_evento ALTER COLUMN tie_codigo SET DEFAULT nextval(
 
 
 --
--- TOC entry 2761 (class 2604 OID 25048)
 -- Name: forma_pagamento fop_codigo; Type: DEFAULT; Schema: faturamento; Owner: postgres
 --
 
@@ -570,7 +513,6 @@ ALTER TABLE ONLY faturamento.forma_pagamento ALTER COLUMN fop_codigo SET DEFAULT
 
 
 --
--- TOC entry 2762 (class 2604 OID 25187)
 -- Name: situacao_venda siv_codigo; Type: DEFAULT; Schema: faturamento; Owner: postgres
 --
 
@@ -578,7 +520,6 @@ ALTER TABLE ONLY faturamento.situacao_venda ALTER COLUMN siv_codigo SET DEFAULT 
 
 
 --
--- TOC entry 2763 (class 2604 OID 25152)
 -- Name: venda ven_codigo; Type: DEFAULT; Schema: faturamento; Owner: postgres
 --
 
@@ -586,7 +527,6 @@ ALTER TABLE ONLY faturamento.venda ALTER COLUMN ven_codigo SET DEFAULT nextval('
 
 
 --
--- TOC entry 2764 (class 2604 OID 25160)
 -- Name: venda_ingresso vei_codigo; Type: DEFAULT; Schema: faturamento; Owner: postgres
 --
 
@@ -594,7 +534,6 @@ ALTER TABLE ONLY faturamento.venda_ingresso ALTER COLUMN vei_codigo SET DEFAULT 
 
 
 --
--- TOC entry 2765 (class 2604 OID 25174)
 -- Name: venda_pagamento vep_codigo; Type: DEFAULT; Schema: faturamento; Owner: postgres
 --
 
@@ -602,7 +541,6 @@ ALTER TABLE ONLY faturamento.venda_pagamento ALTER COLUMN vep_codigo SET DEFAULT
 
 
 --
--- TOC entry 2766 (class 2604 OID 25049)
 -- Name: controle_acesso coa_codigo; Type: DEFAULT; Schema: usuario; Owner: postgres
 --
 
@@ -610,7 +548,6 @@ ALTER TABLE ONLY usuario.controle_acesso ALTER COLUMN coa_codigo SET DEFAULT nex
 
 
 --
--- TOC entry 2767 (class 2604 OID 25050)
 -- Name: nivel nvl_codigo; Type: DEFAULT; Schema: usuario; Owner: postgres
 --
 
@@ -618,7 +555,6 @@ ALTER TABLE ONLY usuario.nivel ALTER COLUMN nvl_codigo SET DEFAULT nextval('usua
 
 
 --
--- TOC entry 2768 (class 2604 OID 25051)
 -- Name: usuario usr_codigo; Type: DEFAULT; Schema: usuario; Owner: postgres
 --
 
@@ -626,8 +562,6 @@ ALTER TABLE ONLY usuario.usuario ALTER COLUMN usr_codigo SET DEFAULT nextval('us
 
 
 --
--- TOC entry 2931 (class 0 OID 24992)
--- Dependencies: 205
 -- Data for Name: artista; Type: TABLE DATA; Schema: evento; Owner: postgres
 --
 
@@ -636,8 +570,6 @@ COPY evento.artista (art_codigo, art_nome, art_descricao) FROM stdin;
 
 
 --
--- TOC entry 2933 (class 0 OID 24997)
--- Dependencies: 207
 -- Data for Name: evento; Type: TABLE DATA; Schema: evento; Owner: postgres
 --
 
@@ -646,8 +578,6 @@ COPY evento.evento (loc_codigo, art_codigo, tie_codigo, usr_codigo_abertura, eve
 
 
 --
--- TOC entry 2934 (class 0 OID 25000)
--- Dependencies: 208
 -- Data for Name: local; Type: TABLE DATA; Schema: evento; Owner: postgres
 --
 
@@ -666,8 +596,6 @@ COPY evento.local (loc_codigo, loc_logradouro, loc_numero, loc_bairro, loc_cidad
 
 
 --
--- TOC entry 2936 (class 0 OID 25008)
--- Dependencies: 210
 -- Data for Name: tipo_evento; Type: TABLE DATA; Schema: evento; Owner: postgres
 --
 
@@ -676,8 +604,6 @@ COPY evento.tipo_evento (tie_codigo, tie_descricao) FROM stdin;
 
 
 --
--- TOC entry 2938 (class 0 OID 25013)
--- Dependencies: 212
 -- Data for Name: forma_pagamento; Type: TABLE DATA; Schema: faturamento; Owner: postgres
 --
 
@@ -686,8 +612,6 @@ COPY faturamento.forma_pagamento (fop_codigo, fop_descricao) FROM stdin;
 
 
 --
--- TOC entry 2940 (class 0 OID 25018)
--- Dependencies: 214
 -- Data for Name: situacao_venda; Type: TABLE DATA; Schema: faturamento; Owner: postgres
 --
 
@@ -696,18 +620,14 @@ COPY faturamento.situacao_venda (siv_descricao, siv_codigo) FROM stdin;
 
 
 --
--- TOC entry 2941 (class 0 OID 25021)
--- Dependencies: 215
 -- Data for Name: venda; Type: TABLE DATA; Schema: faturamento; Owner: postgres
 --
 
-COPY faturamento.venda (usr_codigo, eve_codigo, ven_codigo, siv_codigo, ven_data) FROM stdin;
+COPY faturamento.venda (usr_codigo, eve_codigo, ven_codigo, siv_codigo, ven_data, ven_qtd) FROM stdin;
 \.
 
 
 --
--- TOC entry 2942 (class 0 OID 25024)
--- Dependencies: 216
 -- Data for Name: venda_ingresso; Type: TABLE DATA; Schema: faturamento; Owner: postgres
 --
 
@@ -716,8 +636,6 @@ COPY faturamento.venda_ingresso (vei_nome, vei_documento, vei_utilizado, ven_cod
 
 
 --
--- TOC entry 2943 (class 0 OID 25027)
--- Dependencies: 217
 -- Data for Name: venda_pagamento; Type: TABLE DATA; Schema: faturamento; Owner: postgres
 --
 
@@ -726,8 +644,6 @@ COPY faturamento.venda_pagamento (vep_valor, vep_qtd_parcelas, fop_codigo, vep_c
 
 
 --
--- TOC entry 2944 (class 0 OID 25030)
--- Dependencies: 218
 -- Data for Name: controle_acesso; Type: TABLE DATA; Schema: usuario; Owner: postgres
 --
 
@@ -736,8 +652,6 @@ COPY usuario.controle_acesso (usr_codigo, coa_codigo, coa_data) FROM stdin;
 
 
 --
--- TOC entry 2946 (class 0 OID 25035)
--- Dependencies: 220
 -- Data for Name: nivel; Type: TABLE DATA; Schema: usuario; Owner: postgres
 --
 
@@ -749,8 +663,6 @@ COPY usuario.nivel (nvl_codigo, nvl_descricao) FROM stdin;
 
 
 --
--- TOC entry 2948 (class 0 OID 25040)
--- Dependencies: 222
 -- Data for Name: usuario; Type: TABLE DATA; Schema: usuario; Owner: postgres
 --
 
@@ -761,8 +673,6 @@ COPY usuario.usuario (usr_codigo, nvl_codigo, usr_nome, usr_email, usr_login, us
 
 
 --
--- TOC entry 2972 (class 0 OID 0)
--- Dependencies: 206
 -- Name: artista_art_codigo_seq; Type: SEQUENCE SET; Schema: evento; Owner: postgres
 --
 
@@ -770,8 +680,6 @@ SELECT pg_catalog.setval('evento.artista_art_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2973 (class 0 OID 0)
--- Dependencies: 224
 -- Name: evento_eve_codigo_seq; Type: SEQUENCE SET; Schema: evento; Owner: postgres
 --
 
@@ -779,8 +687,6 @@ SELECT pg_catalog.setval('evento.evento_eve_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2974 (class 0 OID 0)
--- Dependencies: 209
 -- Name: local_loc_codigo_seq; Type: SEQUENCE SET; Schema: evento; Owner: postgres
 --
 
@@ -788,8 +694,6 @@ SELECT pg_catalog.setval('evento.local_loc_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2975 (class 0 OID 0)
--- Dependencies: 211
 -- Name: tipo_evento_tie_codigo_seq; Type: SEQUENCE SET; Schema: evento; Owner: postgres
 --
 
@@ -797,8 +701,6 @@ SELECT pg_catalog.setval('evento.tipo_evento_tie_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2976 (class 0 OID 0)
--- Dependencies: 213
 -- Name: forma_pagamento_fop_codigo_seq; Type: SEQUENCE SET; Schema: faturamento; Owner: postgres
 --
 
@@ -806,8 +708,6 @@ SELECT pg_catalog.setval('faturamento.forma_pagamento_fop_codigo_seq', 1, false)
 
 
 --
--- TOC entry 2977 (class 0 OID 0)
--- Dependencies: 228
 -- Name: situacao_venda_siv_codigo_seq; Type: SEQUENCE SET; Schema: faturamento; Owner: postgres
 --
 
@@ -815,8 +715,6 @@ SELECT pg_catalog.setval('faturamento.situacao_venda_siv_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2978 (class 0 OID 0)
--- Dependencies: 226
 -- Name: venda_ingresso_vei_codigo_seq; Type: SEQUENCE SET; Schema: faturamento; Owner: postgres
 --
 
@@ -824,8 +722,6 @@ SELECT pg_catalog.setval('faturamento.venda_ingresso_vei_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2979 (class 0 OID 0)
--- Dependencies: 227
 -- Name: venda_pagamento_vep_codigo_seq; Type: SEQUENCE SET; Schema: faturamento; Owner: postgres
 --
 
@@ -833,8 +729,6 @@ SELECT pg_catalog.setval('faturamento.venda_pagamento_vep_codigo_seq', 1, false)
 
 
 --
--- TOC entry 2980 (class 0 OID 0)
--- Dependencies: 225
 -- Name: venda_ven_codigo_seq; Type: SEQUENCE SET; Schema: faturamento; Owner: postgres
 --
 
@@ -842,8 +736,6 @@ SELECT pg_catalog.setval('faturamento.venda_ven_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2981 (class 0 OID 0)
--- Dependencies: 219
 -- Name: controle_acesso_coa_codigo_seq; Type: SEQUENCE SET; Schema: usuario; Owner: postgres
 --
 
@@ -851,8 +743,6 @@ SELECT pg_catalog.setval('usuario.controle_acesso_coa_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2982 (class 0 OID 0)
--- Dependencies: 221
 -- Name: nivel_nvl_codigo_seq; Type: SEQUENCE SET; Schema: usuario; Owner: postgres
 --
 
@@ -860,8 +750,6 @@ SELECT pg_catalog.setval('usuario.nivel_nvl_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2983 (class 0 OID 0)
--- Dependencies: 223
 -- Name: usuario_usr_codigo_seq; Type: SEQUENCE SET; Schema: usuario; Owner: postgres
 --
 
@@ -869,7 +757,6 @@ SELECT pg_catalog.setval('usuario.usuario_usr_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2770 (class 2606 OID 25053)
 -- Name: artista art_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres
 --
 
@@ -878,7 +765,6 @@ ALTER TABLE ONLY evento.artista
 
 
 --
--- TOC entry 2772 (class 2606 OID 25144)
 -- Name: evento eve_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres
 --
 
@@ -887,7 +773,6 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- TOC entry 2774 (class 2606 OID 25057)
 -- Name: local loc_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres
 --
 
@@ -896,7 +781,6 @@ ALTER TABLE ONLY evento.local
 
 
 --
--- TOC entry 2776 (class 2606 OID 25059)
 -- Name: tipo_evento tie_codigo; Type: CONSTRAINT; Schema: evento; Owner: postgres
 --
 
@@ -905,7 +789,6 @@ ALTER TABLE ONLY evento.tipo_evento
 
 
 --
--- TOC entry 2778 (class 2606 OID 25061)
 -- Name: forma_pagamento fop_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -914,7 +797,6 @@ ALTER TABLE ONLY faturamento.forma_pagamento
 
 
 --
--- TOC entry 2780 (class 2606 OID 25192)
 -- Name: situacao_venda siv_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -923,7 +805,6 @@ ALTER TABLE ONLY faturamento.situacao_venda
 
 
 --
--- TOC entry 2784 (class 2606 OID 25166)
 -- Name: venda_ingresso vei_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -932,7 +813,6 @@ ALTER TABLE ONLY faturamento.venda_ingresso
 
 
 --
--- TOC entry 2782 (class 2606 OID 25157)
 -- Name: venda ven_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -941,7 +821,6 @@ ALTER TABLE ONLY faturamento.venda
 
 
 --
--- TOC entry 2786 (class 2606 OID 25179)
 -- Name: venda_pagamento vep_codigo; Type: CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -950,7 +829,6 @@ ALTER TABLE ONLY faturamento.venda_pagamento
 
 
 --
--- TOC entry 2788 (class 2606 OID 25071)
 -- Name: controle_acesso coa_codigo; Type: CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
@@ -959,7 +837,6 @@ ALTER TABLE ONLY usuario.controle_acesso
 
 
 --
--- TOC entry 2790 (class 2606 OID 25073)
 -- Name: nivel nivel_pkey; Type: CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
@@ -968,7 +845,6 @@ ALTER TABLE ONLY usuario.nivel
 
 
 --
--- TOC entry 2792 (class 2606 OID 25075)
 -- Name: usuario usr_codigo; Type: CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
@@ -977,7 +853,6 @@ ALTER TABLE ONLY usuario.usuario
 
 
 --
--- TOC entry 2793 (class 2606 OID 25076)
 -- Name: evento art_codigo; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
 --
 
@@ -986,7 +861,6 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- TOC entry 2794 (class 2606 OID 25081)
 -- Name: evento loc_codigo; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
 --
 
@@ -995,7 +869,6 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- TOC entry 2795 (class 2606 OID 25086)
 -- Name: evento tie_codigo; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
 --
 
@@ -1004,7 +877,6 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- TOC entry 2796 (class 2606 OID 25091)
 -- Name: evento usr_codigo_abertura; Type: FK CONSTRAINT; Schema: evento; Owner: postgres
 --
 
@@ -1013,7 +885,6 @@ ALTER TABLE ONLY evento.evento
 
 
 --
--- TOC entry 2798 (class 2606 OID 25145)
 -- Name: venda eve_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -1022,7 +893,6 @@ ALTER TABLE ONLY faturamento.venda
 
 
 --
--- TOC entry 2801 (class 2606 OID 25096)
 -- Name: venda_pagamento fop_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -1031,7 +901,6 @@ ALTER TABLE ONLY faturamento.venda_pagamento
 
 
 --
--- TOC entry 2799 (class 2606 OID 25193)
 -- Name: venda siv_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -1040,7 +909,6 @@ ALTER TABLE ONLY faturamento.venda
 
 
 --
--- TOC entry 2797 (class 2606 OID 25106)
 -- Name: venda usr_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -1049,7 +917,6 @@ ALTER TABLE ONLY faturamento.venda
 
 
 --
--- TOC entry 2800 (class 2606 OID 25167)
 -- Name: venda_ingresso ven_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -1058,7 +925,6 @@ ALTER TABLE ONLY faturamento.venda_ingresso
 
 
 --
--- TOC entry 2802 (class 2606 OID 25198)
 -- Name: venda_pagamento ven_codigo; Type: FK CONSTRAINT; Schema: faturamento; Owner: postgres
 --
 
@@ -1067,7 +933,6 @@ ALTER TABLE ONLY faturamento.venda_pagamento
 
 
 --
--- TOC entry 2804 (class 2606 OID 25126)
 -- Name: usuario nlv_codigo; Type: FK CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
@@ -1076,15 +941,12 @@ ALTER TABLE ONLY usuario.usuario
 
 
 --
--- TOC entry 2803 (class 2606 OID 25131)
 -- Name: controle_acesso usr_codigo; Type: FK CONSTRAINT; Schema: usuario; Owner: postgres
 --
 
 ALTER TABLE ONLY usuario.controle_acesso
     ADD CONSTRAINT usr_codigo FOREIGN KEY (usr_codigo) REFERENCES usuario.usuario(usr_codigo);
 
-
--- Completed on 2020-06-08 20:42:43
 
 --
 -- PostgreSQL database dump complete
