@@ -3,10 +3,9 @@ package br.com.ies.frontend.util;
 public enum RelatoriosDisponiveis {
 	INGRESSOS_DISPONIVEIS("Ingressos Disponíveis"
 			, "Cód., Titulo, Ing. Disponiveis, Ing. Vendidos"
-			," select evento.eve_codigo, eve_titulo, eve_qtd_ingressos as disponivel, COUNT (vei_codigo) as vendidos from evento.evento " + 
-			" INNER JOIN faturamento.venda ON venda.eve_codigo = evento.eve_codigo " + 
-			" INNER JOIN faturamento.venda_ingresso ON venda_ingresso.ven_codigo = venda.ven_codigo " + 
-			" GROUP BY evento.eve_codigo, eve_titulo, eve_qtd_ingressos "),
+			,"select evento.eve_codigo, eve_titulo, eve_qtd_ingressos as disponivel, SUM(venda.ven_qtd) as vendidos from evento.evento   " + 
+			"			 INNER JOIN faturamento.venda ON venda.eve_codigo = evento.eve_codigo  " + 
+			"			 GROUP BY evento.eve_codigo, eve_titulo, eve_qtd_ingressos "),
 	VENDAS_POR_SITUACAO("Vendas por situação"
 			, "Situação, Quantidade"
 			," SELECT siv_descricao, COUNT(venda.ven_codigo) as quantidade FROM faturamento.situacao_venda " + 
