@@ -47,7 +47,7 @@ public class AdministratorDashboard {
 		
 		frame.getContentPane().add(ComponentBuilder.buildButton("RELATORIOS", "Franklin Gothic Medium", Font.PLAIN, 13, 94, 238, 300, 130, null, null, 
 				() -> {
-			new RelatorioVendas().toggleFrame();
+			new Relatorio().toggleFrame();
 			toggleFrame();
 				}));
 		

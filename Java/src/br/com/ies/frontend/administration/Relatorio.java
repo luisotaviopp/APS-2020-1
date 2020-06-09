@@ -1,8 +1,10 @@
 package br.com.ies.frontend.administration;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -10,24 +12,31 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.ies.backend.Main;
 import br.com.ies.backend.dto.PersistenceParameterDTO;
 import br.com.ies.backend.type.PersistenceType;
 import br.com.ies.backend.util.Util;
+import br.com.ies.frontend.Login;
 import br.com.ies.frontend.builder.ComponentBuilder;
+import br.com.ies.frontend.util.CSVUtils;
 import br.com.ies.frontend.util.RelatoriosDisponiveis;
 
 public class Relatorio {
 
 	private JFrame frame;
 	private JScrollPane scrollPaneTabela = new JScrollPane();
+	
+	private String[][] currentValue;
+	private String[] currentColumn;
 
 	/**
 	 * Launch the application.
@@ -49,7 +58,7 @@ public class Relatorio {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JPanel panelBotoes = new JPanel(new GridLayout(RelatoriosDisponiveis.values().length, 1));
+		JPanel panelBotoes = new JPanel(new GridLayout(RelatoriosDisponiveis.values().length + 1, 1));
 		panelBotoes.setIgnoreRepaint(true);
 		for (RelatoriosDisponiveis relatorio : RelatoriosDisponiveis.values()) {
 			panelBotoes.add(ComponentBuilder.buildButton(relatorio.getTitulo(), "Franklin Gothic Medium", Font.PLAIN, 13,0, 0, 200, 50, null, null,
@@ -58,14 +67,27 @@ public class Relatorio {
 				}));
 		}
 		
+		panelBotoes.add(ComponentBuilder.buildButton("Salvar como CSV", "Franklin Gothic Medium", Font.PLAIN, 13,0, 0, 200, 50, new Color(120, 255, 120), null,
+				() -> {
+					if(currentValue != null && currentValue.length > 0 ) {
+						openSaveDialog();
+					} else {
+						Util.showMessage("Nenhum dado para ser exportado");
+					}
+				}));
+		
 		JScrollPane scrollPaneBotoes = new JScrollPane(panelBotoes);
 		scrollPaneBotoes.setBounds(50,63, 200, 400);
 		scrollPaneBotoes.setIgnoreRepaint(true);
 		
 		frame.getContentPane().add(scrollPaneBotoes);
-
-		frame.getContentPane().add(ComponentBuilder.buildLabel("RELATÓRIOS","Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 341, 20, 200, 30, null));
 		
+		frame.getContentPane().add(ComponentBuilder.buildLabel("RELATÓRIOS","Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 341, 20, 200, 30, null));
+		frame.getContentPane().add(ComponentBuilder.buildButton("VOLTAR", "Franklin Gothic Medium", Font.PLAIN, 13,281, 480, 335, 40, null, null,
+				() -> {
+					new AdministratorDashboard().toggleFrame();
+					toggleFrame();
+				}));
 	}
 
 	public void selectRel(RelatoriosDisponiveis relatorio) {
@@ -96,6 +118,9 @@ public class Relatorio {
 					frame.getContentPane().add(scrollPaneTabela);
 					
 					this.frame.repaint();
+					
+					currentColumn = columns;
+					currentValue = data;
 				});
 
 	}
@@ -110,7 +135,7 @@ public class Relatorio {
 			for (int j = 0; j < lista.get(i).length; j++) {
 				if(lista.get(i)[j] instanceof Double || lista.get(i)[j] instanceof Float) {
 					ret[i][j] = numberFormat.format((Number) lista.get(i)[j]);
-				} if (lista.get(i)[j] instanceof Date) {
+				} else if (lista.get(i)[j] instanceof Date) {
 					ret[i][j] = dateFormat.format((Date) lista.get(i)[j]);
 				} else {
 					ret[i][j] = lista.get(i)[j].toString();
@@ -119,6 +144,39 @@ public class Relatorio {
 		}
 		
 		return ret;
+	}
+	
+	public void openSaveDialog() {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Specify a file to save");   
+		 
+		int userSelection = fileChooser.showSaveDialog(frame);
+		 
+		if (userSelection == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			String extName = null;
+			
+			if(file.getName().lastIndexOf(".") != -1){
+				extName = file.getName().substring(file.getName().lastIndexOf("."));
+			}  else if (file.getName().isEmpty()) {
+			}
+			
+			if(extName == null){
+				file = new File(file.toString() + ".csv");
+			} else if(!extName.equals(".csv")) {
+			    file = new File(file.toString().replace(extName, ".csv")); 
+			}
+			
+			exportCsv(file);
+		}
+	}
+	
+	public void exportCsv(File file) {
+		Boolean exported = CSVUtils.saveToCSV(file, currentValue, currentColumn);
+		
+		if(!exported) {
+			Util.showMessage("Erro ao exportar arquivo");
+		}
 	}
 	
 	public JFrame getFrame() {

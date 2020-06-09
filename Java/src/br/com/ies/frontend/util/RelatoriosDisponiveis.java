@@ -25,7 +25,48 @@ public enum RelatoriosDisponiveis {
 					"	GROUP BY usr_codigo " + 
 					") sq " + 
 					"INNER JOIN usuario.usuario ON usuario.usr_codigo = sq.usr_codigo " + 
-					"GROUP BY sq.usr_codigo, usr_nome");
+					"GROUP BY sq.usr_codigo, usr_nome"),
+	VENDAS_TRIMESTRE("Vendas por Trimestre",
+					 "Cód., Artista, T1, T2, T3, T4",
+					 "select sq.art_codigo, art_nome, SUM(Q1) as q1, SUM (Q2) as q2, SUM (Q3) as q3, SUM(Q4) as q4 " + 
+					 "from  " + 
+					 " " + 
+					 "( " + 
+					 "	select art.art_codigo, art_nome, SUM (ven_qtd * eve_valor_ingresso) as Q1, 0 AS Q2, 0 AS Q3, 0 AS Q4 " + 
+					 "	from faturamento.venda " + 
+					 "	INNER JOIN evento.evento AS eve ON eve.eve_codigo = venda.eve_codigo " + 
+					 "	INNER JOIN evento.artista as art ON art.art_codigo = eve.art_codigo " + 
+					 "	WHERE extract(quarter from venda.ven_data) = 1 AND extract(year from venda.ven_data) = extract(year from current_date) " + 
+					 "	GROUP BY art.art_codigo, art_nome " + 
+					 " " + 
+					 "	UNION " + 
+					 " " + 
+					 "	select art.art_codigo, art_nome, 0, SUM (ven_qtd * eve_valor_ingresso) as Q2, 0, 0 " + 
+					 "	from faturamento.venda " + 
+					 "	INNER JOIN evento.evento AS eve ON eve.eve_codigo = venda.eve_codigo " + 
+					 "	INNER JOIN evento.artista as art ON art.art_codigo = eve.art_codigo " + 
+					 "	WHERE extract(quarter from venda.ven_data) = 2 AND extract(year from venda.ven_data) = extract(year from current_date) " + 
+					 "	GROUP BY art.art_codigo, art_nome " + 
+					 " " + 
+					 "	UNION  " + 
+					 " " + 
+					 "	select art.art_codigo, art_nome, 0, 0, SUM (ven_qtd * eve_valor_ingresso) as Q3, 0 " + 
+					 "	from faturamento.venda " + 
+					 "	INNER JOIN evento.evento AS eve ON eve.eve_codigo = venda.eve_codigo " + 
+					 "	INNER JOIN evento.artista as art ON art.art_codigo = eve.art_codigo " + 
+					 "	WHERE extract(quarter from venda.ven_data) = 3 AND extract(year from venda.ven_data) = extract(year from current_date) " + 
+					 "	GROUP BY art.art_codigo, art_nome " + 
+					 " " + 
+					 "	UNION " + 
+					 " " + 
+					 "	select art.art_codigo, art_nome, 0, 0, 0, SUM (ven_qtd * eve_valor_ingresso) as Q4 " + 
+					 "	from faturamento.venda " + 
+					 "	INNER JOIN evento.evento AS eve ON eve.eve_codigo = venda.eve_codigo " + 
+					 "	INNER JOIN evento.artista as art ON art.art_codigo = eve.art_codigo " + 
+					 "	WHERE extract(quarter from venda.ven_data) = 4 AND extract(year from venda.ven_data) = extract(year from current_date) " + 
+					 "	GROUP BY art.art_codigo, art_nome " + 
+					 ") sq " + 
+					 "GROUP BY art_codigo, art_nome");
 	
 	private String titulo;
 	private String colunas;
