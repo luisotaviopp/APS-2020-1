@@ -79,11 +79,11 @@ public class ListaEventos {
 						new UserDashboard().toggleFrame();
 						toggleFrame();
 					}));
-		JLabel firstLine = ComponentBuilder.buildLabel("EVENTO 01", "Tahoma", Font.BOLD, 14, SwingConstants.LEFT, null, null, null, 470, 59, 350, 30, null);
-		JLabel secondLine = ComponentBuilder.buildLabel("20/05/2020 - 21:05:33", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 470, 102, 350, 30, null);
-		JLabel thirdLine = ComponentBuilder.buildLabel("Descrição de evento", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, SwingConstants.TOP, null, 470, 145, 350, 131, null);
-		JLabel forthLine = ComponentBuilder.buildLabel("Rua xxx, 666, centro, lalala", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, SwingConstants.LEFT, SwingConstants.TOP, 0.5F, 470, 386, 350, 30, null);
-		JLabel fifthLine = ComponentBuilder.buildLabel("R$200,00", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, SwingConstants.LEFT, SwingConstants.TOP, null, 470, 429, 350, 30, null);
+		JLabel firstLine = ComponentBuilder.buildLabel("", "Tahoma", Font.BOLD, 14, SwingConstants.LEFT, null, null, null, 470, 59, 350, 30, null);
+		JLabel secondLine = ComponentBuilder.buildLabel("", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 470, 102, 350, 30, null);
+		JLabel thirdLine = ComponentBuilder.buildLabel("", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, SwingConstants.TOP, null, 470, 145, 350, 131, null);
+		JLabel forthLine = ComponentBuilder.buildLabel("", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, SwingConstants.LEFT, SwingConstants.TOP, 0.5F, 470, 386, 350, 30, null);
+		JLabel fifthLine = ComponentBuilder.buildLabel("", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, SwingConstants.LEFT, SwingConstants.TOP, null, 470, 429, 350, 30, null);
 		
 		frame.getContentPane().add(firstLine);
 		frame.getContentPane().add(secondLine);
