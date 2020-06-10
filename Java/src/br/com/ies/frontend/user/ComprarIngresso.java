@@ -1,10 +1,10 @@
 package br.com.ies.frontend.user;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.util.Date;
 
-import javax.swing.JButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,19 +13,21 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import br.com.ies.backend.Main;
+import br.com.ies.backend.entity.FormaPagamentoEntity;
+import br.com.ies.backend.entity.SituacaoVendaEntity;
+import br.com.ies.backend.entity.VendaEntity;
+import br.com.ies.backend.entity.VendaPagamentoEntity;
+import br.com.ies.backend.util.PersistenceUtil;
+import br.com.ies.backend.util.Util;
 import br.com.ies.frontend.builder.ComponentBuilder;
+import br.com.ies.frontend.util.Constants;
 
 public class ComprarIngresso {
 
 	private JFrame frame;
 	private JPanel contentPane;
-	private JTextField inputNumeroCartao;
-	private JTextField inputCVV;
-	private JTextField inputVencimento;
 
-	/**
-	 * Launch the application.
-	 */
 	/**
 	 * Create the frame.
 	 */
@@ -35,29 +37,20 @@ public class ComprarIngresso {
 		frame.setBounds(100, 100, 900, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
 		frame.setContentPane(contentPane);
 		
-		frame.getContentPane().add(ComponentBuilder.buildLabel("TÍTULO DO EVENTO", "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 30, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("ARTISTA", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 85, 734, 28, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("Quantos ingressos você deseja comprar?", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 126, 734, 16, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel(Main.getUserManager().getEvento().getEveTitulo().trim(), "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 30, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel(Main.getUserManager().getEvento().getArtistaEntity().getArtNome().trim(), "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 85, 734, 28, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("Quantos ingressos vocÃª deseja comprar?", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 126, 734, 16, null));
 		
 		
-		JButton btnMenos = new JButton("-");
-		btnMenos.setBounds(344, 169, 56, 41);
-		
-		JLabel lblQtdIngressos = new JLabel("1");
-		lblQtdIngressos.setBounds(412, 168, 56, 41);
-		lblQtdIngressos.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 16));
-		lblQtdIngressos.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JButton btnMais = new JButton("+");
-		btnMais.setBounds(480, 168, 56, 41);
-		
-		JRadioButton radioCredito = new JRadioButton("Cr\u00E9dito");
+		JRadioButton radioCredito = new JRadioButton("CrÃ©dito");
+		radioCredito.setSelected(true);
 		radioCredito.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
 		radioCredito.setBounds(70, 352, 69, 25);
 		
-		JRadioButton radioDebito = new JRadioButton("D\u00E9bito");
+		JRadioButton radioDebito = new JRadioButton("DÃ©bito");
 		radioDebito.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
 		radioDebito.setBounds(70, 382, 65, 25);
 		
@@ -65,48 +58,100 @@ public class ComprarIngresso {
 		radioDinheiro.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
 		radioDinheiro.setBounds(70, 415, 75, 25);
 		
+		ButtonGroup buttonGroup = new ButtonGroup();
+		buttonGroup.add(radioCredito);
+		buttonGroup.add(radioDebito);
+		buttonGroup.add(radioDinheiro);
+		
+		frame.getContentPane().add(radioCredito);
+		frame.getContentPane().add(radioDebito);
+		frame.getContentPane().add(radioDinheiro);
+		
+		
+		JLabel lblValorIngressos = ComponentBuilder.buildLabel(Main.getUserManager().getEvento().getEveValorIngresso().toString(), "Franklin Gothic Medium", Font.BOLD, 16, SwingConstants.CENTER, null, null, null, 74, 223, 734, 41, null);
+		frame.getContentPane().add(lblValorIngressos);
+		
+		JLabel lblQtdIngressos = ComponentBuilder.buildLabel("1", "Franklin Gothic Medium", Font.PLAIN, 16, SwingConstants.CENTER, null, null, null, 412, 168, 56, 41, null);
+		frame.getContentPane().add(lblQtdIngressos);
+		
+		contentPane.add(ComponentBuilder.buildButton("+", "Franklin Gothic Medium", Font.PLAIN, 16, 480, 168, 56, 41, null, null,
+				() -> {
+					Integer value = Integer.valueOf(lblQtdIngressos.getText());
+					lblQtdIngressos.setText(Integer.toString(value + 1));
+					lblValorIngressos.setText(Double.toString(Integer.valueOf(lblQtdIngressos.getText()) * Main.getUserManager().getEvento().getEveValorIngresso()));
+				}));
+		
+		contentPane.add( ComponentBuilder.buildButton("-", "Franklin Gothic Medium", Font.PLAIN, 16,344, 169, 56, 41, null, null,
+				() ->{
+					Integer value = Integer.valueOf(lblQtdIngressos.getText());
+					
+					if(value > 1) 
+						lblQtdIngressos.setText(Integer.toString(value - 1));
+					
+					lblValorIngressos.setText(Double.toString(Integer.valueOf(lblQtdIngressos.getText()) * Main.getUserManager().getEvento().getEveValorIngresso()));
+				}));
+		
 		frame.getContentPane().add(ComponentBuilder.buildLabel("Qual a forma de pagamento?", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 70, 327, 167, 16, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("Caso a opção desejada seja dinheiro, por favor compareça na bilheteria do local com 30 minutos de antecedência", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 70, 266, 734, 41, null));
-		
-		contentPane.setLayout(null);
-		contentPane.add(btnMenos);
-		contentPane.add(lblQtdIngressos);
-		contentPane.add(btnMais);
-		contentPane.add(radioCredito);
-		contentPane.add(radioDebito);
-		contentPane.add(radioDinheiro);
-
-		
-		frame.getContentPane().add(ComponentBuilder.buildLabel("R$100,00", "Franklin Gothic Medium", Font.BOLD, 16, SwingConstants.CENTER, null, null, null, 74, 223, 734, 41, null));
-		
-		inputNumeroCartao = new JTextField();
-		inputNumeroCartao.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
-		inputNumeroCartao.setBounds(475, 345, 335, 32);
-		contentPane.add(inputNumeroCartao);
-		inputNumeroCartao.setColumns(10);
-		
-		inputCVV = new JTextField();
-		inputCVV.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
-		inputCVV.setBounds(475, 408, 163, 32);
-		contentPane.add(inputCVV);
-		inputCVV.setColumns(10);
-		
-		inputVencimento = new JTextField();
-		inputVencimento.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
-		inputVencimento.setColumns(10);
-		inputVencimento.setBounds(647, 408, 163, 32);
-		contentPane.add(inputVencimento);
-		
-		frame.getContentPane().add(ComponentBuilder.buildLabel("Número do cartão", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 475, 327, 331, 16, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("Caso a opÃ§Ã£o desejada seja dinheiro, por favor compareÃ§a na bilheteria do local com 30 minutos de antecedÃªncia", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 70, 266, 734, 41, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("NÃºmero do cartÃ£o", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 475, 327, 331, 16, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("CVV", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 475, 391, 78, 16, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("Vencimento", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 647, 391, 78, 16, null));
-		frame.getContentPane().add(ComponentBuilder.buildButton("VOLTAR", "Franklin Gothic Medium", Font.PLAIN, 13, 70, 470, 335, 40, null, null,
-				 () -> {
-						
-					}));
+		
+		JTextField inputNumeroCartao = ComponentBuilder.buildTextField("Franklin Gothic Medium", Font.PLAIN, 13, 475, 345, 335, 32, 10);
+		JTextField inputCVV = ComponentBuilder.buildTextField("Franklin Gothic Medium", Font.PLAIN, 13, 475, 408, 163, 32, 10);
+		JTextField inputVencimento = ComponentBuilder.buildTextField("Franklin Gothic Medium", Font.PLAIN, 13, 647, 408, 163, 32, 10);
+		
+		contentPane.add(inputVencimento);
+		contentPane.add(inputCVV);
+		contentPane.add(inputNumeroCartao);
+		
 		frame.getContentPane().add(ComponentBuilder.buildButton("CONFIRMAR PAGAMENTO", "Franklin Gothic Medium", Font.PLAIN, 13, 475, 470, 335, 40, new Color(0, 250, 154), null,
 				 () -> {
-						
+					 Integer formaPagamentoValue = -1;
+					 
+					 if(radioCredito.isSelected()) { 
+						 if(inputNumeroCartao.getText().isEmpty() || inputCVV.getText().isEmpty() || inputVencimento.getText().isEmpty()) {
+							 Util.showMessage(Constants.NEED_TO_FILL_ALL_FIELDS);
+							 return;
+						 }
+						 formaPagamentoValue = 1;
+					 }
+					 else if(radioDebito.isSelected()) {
+						 if(inputNumeroCartao.getText().isEmpty() || inputCVV.getText().isEmpty() || inputVencimento.getText().isEmpty()) {
+							 Util.showMessage(Constants.NEED_TO_FILL_ALL_FIELDS);
+							 return;
+						 }
+						 formaPagamentoValue = 2;
+					 }
+					 else if(radioDinheiro.isSelected()) 
+						 formaPagamentoValue = 3;
+					 
+					 FormaPagamentoEntity formaPagamento = new FormaPagamentoEntity();
+					 formaPagamento.setFopCodigo(formaPagamentoValue);
+					 
+					 VendaEntity venda = new VendaEntity();
+					 venda.setEventoEntity(Main.getUserManager().getEvento());
+					 venda.setUsuarioEntity(Main.getUserManager().getUsuario());
+					 
+					 SituacaoVendaEntity situacaoVenda = new SituacaoVendaEntity();
+					 situacaoVenda.setSivCodigo(3);
+					 venda.setSituacaoVendaEntity(situacaoVenda);
+					 
+					 venda.setVenData(new Date());
+					 venda.setVenQtd(Integer.valueOf(lblQtdIngressos.getText()));
+					 PersistenceUtil.persist(venda);
+					 
+					 VendaPagamentoEntity vendaPagamento = new VendaPagamentoEntity();
+					 vendaPagamento.setFormaPagamentoEntity(formaPagamento);
+					 vendaPagamento.setVepValor(Double.valueOf(lblValorIngressos.getText()));
+					 vendaPagamento.setVendaEntity(venda);
+					 vendaPagamento.setVepQtdParcelas(1);
+					 
+					 PersistenceUtil.persist(vendaPagamento);
+					 Util.showMessage(Constants.SUCCESSFUL_BUY);
+					 
+					 new UserDashboard().toggleFrame();
+					 toggleFrame();
 					}));
 		
 	}
