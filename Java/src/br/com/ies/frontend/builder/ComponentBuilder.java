@@ -8,8 +8,10 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 
 public class ComponentBuilder {
 
@@ -91,8 +93,18 @@ public class ComponentBuilder {
 		passwordField.setBounds(xBound, yBound, widthBound, heightBound);
 		return passwordField;
 	}
+	public static JList<Object> buildList(String fontName, int font, int fontSize, Color backgroundColor,int xBound, int yBound,int widthBound, int heightBound, int selectionMode, ListModel<Object> listModel){
+		JList<Object> list = new JList<>();
+		list.setBackground(backgroundColor);
+		list.setFont(new Font(fontName, font, fontSize));
+		list.setSelectionMode(selectionMode);
+		list.setModel(listModel);
+		list.setBounds(xBound, yBound, widthBound, heightBound);
+		return list;
+	}
+	
 
-	private static Component buildEventComponent(Component component, Runnable runnable) {
+	public static Component buildEventComponent(Component component, Runnable runnable) {
 		component.addMouseListener(new MouseListener() {
 
 			@Override
