@@ -162,4 +162,5 @@ public class ComprarIngresso {
 		frame.setVisible(!frame.isVisible());
 	}
 
+	
 }
