@@ -11,6 +11,8 @@ import javax.swing.SwingConstants;
 
 import br.com.ies.backend.Main;
 import br.com.ies.backend.dto.PersistenceParameterDTO;
+import br.com.ies.backend.entity.NivelEntity;
+import br.com.ies.backend.entity.UsuarioEntity;
 import br.com.ies.backend.type.PersistenceType;
 import br.com.ies.backend.util.Util;
 import br.com.ies.frontend.administration.AdministratorDashboard;
@@ -28,7 +30,6 @@ public class Login {
 	public Login() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -39,7 +40,7 @@ public class Login {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		//Título
+		//TÃ­tulo
 //		JLabel lblTitulo = new JLabel("BILHETERIA");
 //		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 //		lblTitulo.setForeground(Color.DARK_GRAY);
@@ -57,7 +58,7 @@ public class Login {
 		frame.getContentPane().add(ComponentBuilder.buildButton("ENTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266, 321, 350, 40, new Color(0, 250, 154), null, () -> {
 			
 			PersistenceParameterDTO<String> persistenceParameterDTO = new PersistenceParameterDTO<>();
-			persistenceParameterDTO.setParameter(String.format("SELECT usr_login, usr_senha, nvl_descricao FROM usuario.usuario usr INNER JOIN usuario.nivel nvl ON nvl.nvl_codigo = usr.nvl_codigo WHERE usr.usr_login = '%s'", inputUsuario.getText()));
+			persistenceParameterDTO.setParameter(String.format("SELECT usr_codigo,usr_nome,usr_email,usr_login,usr_senha, nvl.nvl_codigo, nvl_descricao FROM usuario.usuario usr INNER JOIN usuario.nivel nvl ON nvl.nvl_codigo = usr.nvl_codigo WHERE usr.usr_login = '%s'", inputUsuario.getText()));
 			
 			Main.getPersistenceManager().getPersistance(PersistenceType.POSTGRES).select(persistenceParameterDTO, 
 					(u) ->{
@@ -66,8 +67,8 @@ public class Login {
 						if(!(list.isEmpty())) {
 							Object[] userObject = list.get(0);
 
-							String password = (String) userObject[1];
-							String level = (String) userObject[2];
+							String password = (String) userObject[4];
+							String level = (String) userObject[6];
 							
 							if(!(password.trim().equals(inputSenha.getText()))) {
 								Util.showMessage(Constants.INVALID_PASSWORD);
@@ -78,7 +79,18 @@ public class Login {
 							else
 								new UserDashboard().toggleFrame();
 							
-							
+							UsuarioEntity usuario = new UsuarioEntity();
+							NivelEntity nivel = new NivelEntity();
+							nivel.setNvlCodigo((Integer) userObject[5]);
+							nivel.setNvlDescricao(level);
+							usuario.setNivelEntity(nivel);
+							usuario.setUsrAtivo(Boolean.TRUE);
+							usuario.setUsrCodigo((Integer) userObject[0]);
+							usuario.setUsrEmail((String) userObject[2].toString().trim());
+							usuario.setUsrLogin((String) userObject[3].toString().trim());
+							usuario.setUsrNome((String) userObject[1].toString().trim());
+							usuario.setUsrSenha((String) userObject[4].toString().trim());
+							Main.getUserManager().setUsuario(usuario);
 							toggleFrame();
 						}else {
 							Util.showMessage(Constants.USER_DOESNT_EXIST);
@@ -92,7 +104,7 @@ public class Login {
 		// Label Senha
 		frame.getContentPane().add(ComponentBuilder.buildLabel("SENHA", "Franklin Gothic Medium", Font.BOLD, 16, SwingConstants.CENTER, null, null, null, 356, 197, 170, 40, null));
 		
-		// Botão Registrar
+		// BotÃ£o Registrar
 		frame.getContentPane().add(ComponentBuilder.buildButton("REGISTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266, 384, 350, 40, null, null,
 				 () -> {
 						new Registrar().toggleFrame();
