@@ -71,11 +71,11 @@ public class MeusIngressos {
 				}
 		});
 
-		JLabel firstLine = ComponentBuilder.buildLabel("Nenhum", "Franklin Gothic Medium", Font.BOLD, 16, SwingConstants.LEFT, null, null, null, 470, 59, 350, 30, null);
-		JLabel secondLine = ComponentBuilder.buildLabel("00/00/0000 - 0h", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 470, 102, 350, 30, null);
-		JLabel thirdLine = ComponentBuilder.buildLabel("Nenhum", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 470, 145, 350, 30, null);
-		JLabel forthLine = ComponentBuilder.buildLabel("0 ingressos", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, SwingConstants.LEFT, SwingConstants.TOP, null, 470, 191, 350, 30, null);
-		JLabel fifthLine = ComponentBuilder.buildLabel("R$0,00","Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, SwingConstants.LEFT, SwingConstants.TOP, null, 470, 234, 350, 30, null);
+		JLabel firstLine = ComponentBuilder.buildLabel("", "Franklin Gothic Medium", Font.BOLD, 16, SwingConstants.LEFT, null, null, null, 470, 59, 350, 30, null);
+		JLabel secondLine = ComponentBuilder.buildLabel("", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 470, 102, 350, 30, null);
+		JLabel thirdLine = ComponentBuilder.buildLabel("", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 470, 145, 350, 30, null);
+		JLabel forthLine = ComponentBuilder.buildLabel("", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, SwingConstants.LEFT, SwingConstants.TOP, null, 470, 191, 350, 30, null);
+		JLabel fifthLine = ComponentBuilder.buildLabel("","Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, SwingConstants.LEFT, SwingConstants.TOP, null, 470, 234, 350, 30, null);
 		
 		frame.getContentPane().add(firstLine);
 		frame.getContentPane().add(secondLine);
