@@ -42,15 +42,15 @@ public class ComprarIngresso {
 		
 		frame.getContentPane().add(ComponentBuilder.buildLabel(Main.getUserManager().getEvento().getEveTitulo().trim(), "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 30, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel(Main.getUserManager().getEvento().getArtistaEntity().getArtNome().trim(), "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 85, 734, 28, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("Quantos ingressos você deseja comprar?", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 126, 734, 16, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("Quantos ingressos vocÃª deseja comprar?", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 126, 734, 16, null));
 		
 		
-		JRadioButton radioCredito = new JRadioButton("Crédito");
+		JRadioButton radioCredito = new JRadioButton("Credito");
 		radioCredito.setSelected(true);
 		radioCredito.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
 		radioCredito.setBounds(70, 352, 69, 25);
 		
-		JRadioButton radioDebito = new JRadioButton("Débito");
+		JRadioButton radioDebito = new JRadioButton("Debito");
 		radioDebito.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 13));
 		radioDebito.setBounds(70, 382, 65, 25);
 		
@@ -92,8 +92,8 @@ public class ComprarIngresso {
 				}));
 		
 		frame.getContentPane().add(ComponentBuilder.buildLabel("Qual a forma de pagamento?", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 70, 327, 167, 16, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("Caso a opção desejada seja dinheiro, por favor compareça na bilheteria do local com 30 minutos de antecedência", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 70, 266, 734, 41, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("Número do cartão", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 475, 327, 331, 16, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("Caso a opcao desejada seja dinheiro, por favor compareca na bilheteria do local com 30 minutos de antecedencia", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 70, 266, 734, 41, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("Numero do cartao", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 475, 327, 331, 16, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("CVV", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 475, 391, 78, 16, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("Vencimento", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 647, 391, 78, 16, null));
 		
@@ -104,6 +104,12 @@ public class ComprarIngresso {
 		contentPane.add(inputVencimento);
 		contentPane.add(inputCVV);
 		contentPane.add(inputNumeroCartao);
+		
+		frame.getContentPane().add(ComponentBuilder.buildButton("VOLTAR", "Franklin Gothic Medium", Font.PLAIN, 13, 60, 470, 350, 40, null, null,
+				 () -> {
+						new UserDashboard().toggleFrame();
+						toggleFrame();
+					}));
 		
 		frame.getContentPane().add(ComponentBuilder.buildButton("CONFIRMAR PAGAMENTO", "Franklin Gothic Medium", Font.PLAIN, 13, 475, 470, 335, 40, new Color(0, 250, 154), null,
 				 () -> {
