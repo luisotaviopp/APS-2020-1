@@ -1,5 +1,6 @@
 package br.com.ies.backend.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -54,5 +55,16 @@ public class Util {
 			if (iterator.next().getColumn().equalsIgnoreCase(column))
 				iterator.remove();
 		}
+	}
+	public static Date dateFromString(String format, String string) {
+		try {
+			return new SimpleDateFormat(format).parse(string);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return new Date();
+	}
+	public static String stringFromDate(String format,Date date) {
+		return new SimpleDateFormat(format).format(date);
 	}
 }
