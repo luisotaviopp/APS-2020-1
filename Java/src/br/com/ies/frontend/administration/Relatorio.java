@@ -1,7 +1,6 @@
 package br.com.ies.frontend.administration;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.io.File;
@@ -18,14 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.ies.backend.Main;
 import br.com.ies.backend.dto.PersistenceParameterDTO;
 import br.com.ies.backend.type.PersistenceType;
 import br.com.ies.backend.util.Util;
-import br.com.ies.frontend.Login;
 import br.com.ies.frontend.builder.ComponentBuilder;
 import br.com.ies.frontend.util.CSVUtils;
 import br.com.ies.frontend.util.RelatoriosDisponiveis;
@@ -82,7 +79,7 @@ public class Relatorio {
 		
 		frame.getContentPane().add(scrollPaneBotoes);
 		
-		frame.getContentPane().add(ComponentBuilder.buildLabel("RELATÓRIOS","Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 341, 20, 200, 30, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("RELATÃ“RIOS","Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 341, 20, 200, 30, null));
 		frame.getContentPane().add(ComponentBuilder.buildButton("VOLTAR", "Franklin Gothic Medium", Font.PLAIN, 13,281, 480, 335, 40, null, null,
 				() -> {
 					new AdministratorDashboard().toggleFrame();
@@ -105,8 +102,13 @@ public class Relatorio {
 					String[][] data = dataFormat(columns.length, list);
 					
 					final JTable table = new JTable(new DefaultTableModel(data, columns) {
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = -7518643323382537984L;
+
 						@Override
-						public Class getColumnClass(int column) {
+						public Class<?> getColumnClass(int column) {
 							return getValueAt(0, column).getClass();
 						}
 					});
