@@ -108,8 +108,8 @@ public class Usuarios {
 		frame.getContentPane().add(selectNivel);
 
 		
-		frame.getContentPane().add(ComponentBuilder.buildLabel("USUÃ�RIOS", "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 30, null));
-		frame.getContentPane().add(ComponentBuilder.buildButton("DELETAR USUÃ�RIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 365, 255, 40, UIManager.getColor("Button.background"), null,
+		frame.getContentPane().add(ComponentBuilder.buildLabel("USUARIOS", "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 30, null));
+		frame.getContentPane().add(ComponentBuilder.buildButton("DELETAR USUARIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 365, 255, 40, UIManager.getColor("Button.background"), null,
 				() -> {
 					if(listaUsuarios.getSelectedValue() ==null)return;
 					Integer id = Integer.valueOf(listaUsuarios.getSelectedValue().toString().split(" - ")[0]);
@@ -123,7 +123,7 @@ public class Usuarios {
 						e.printStackTrace();
 					}
 				}));
-		frame.getContentPane().add(ComponentBuilder.buildButton("EDITAR USUÃ�RIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 424, 255, 40, null, null,
+		frame.getContentPane().add(ComponentBuilder.buildButton("EDITAR USUARIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 424, 255, 40, null, null,
 				() -> {
 					if(listaUsuarios.getSelectedValue() ==null)return;
 					Integer id = Integer.valueOf(listaUsuarios.getSelectedValue().toString().split(" - ")[0]);
@@ -178,19 +178,20 @@ public class Usuarios {
 					toggleFrame();
 				}));
 
-		frame.getContentPane().add(ComponentBuilder.buildLabel("SELECIONE OU CRIE UM USUÃ�RIO", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 29, 79, 258, 16, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("SELECIONE OU CRIE UM USUARIO", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 29, 79, 258, 16, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("EMAIL", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 312, 154, 127, 40, null));
 		frame.getContentPane().add(ComponentBuilder.buildButton("CONSULTAR LOGS", "Franklin Gothic Medium", Font.PLAIN, 13, 312, 424, 540, 40, new Color(204, 255, 102), null,
 				() -> {
-
+					new Logs().toggleFrame();
+					toggleFrame();
 				}));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("NOME", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 311, 101, 127, 40, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("USUARIO", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 312, 207, 127, 40, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("SENHA PROVISÃ�RIA", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 312, 260, 127, 40, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("NÃ�VEL DE ACESSO", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 312, 312, 127, 40, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("SENHA", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 312, 260, 127, 40, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("NIVEL DE ACESSO", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 312, 312, 127, 40, null));
 
 
-		frame.getContentPane().add(ComponentBuilder.buildButton("DESATIVAR USUÃ�RIO", "Franklin Gothic Medium", Font.PLAIN, 13, 312, 365, 540, 40, Color.WHITE, null,
+		frame.getContentPane().add(ComponentBuilder.buildButton("DESATIVAR USUARIO", "Franklin Gothic Medium", Font.PLAIN, 13, 312, 365, 540, 40, Color.WHITE, null,
 				() -> {
 					PersistenceParameterDTO<String> persistenceParameterDTO = new PersistenceParameterDTO<>();
 					persistenceParameterDTO.setParameter(String.format("SELECT 8 FROM usuario.usuario WHERE usr_login = '%s'", inputUsuario.getText()));
