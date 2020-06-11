@@ -2,6 +2,7 @@ package br.com.ies.frontend.administration;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.IntStream;
@@ -111,7 +112,17 @@ public class Usuarios {
 		frame.getContentPane().add(ComponentBuilder.buildLabel("USUÁRIOS", "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 30, null));
 		frame.getContentPane().add(ComponentBuilder.buildButton("DELETAR USUÁRIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 365, 255, 40, UIManager.getColor("Button.background"), null,
 				() -> {
-
+					if(listaUsuarios.getSelectedValue() ==null)return;
+					Integer id = Integer.valueOf(listaUsuarios.getSelectedValue().toString().split(" - ")[0]);
+					try {
+					PreparedStatement preparedStatement = Main.getConnectionFactory().getPreparedStatement(String.format("DELETE FROM usuario.usuario WHERE usr_codigo = '%s'", id));
+					preparedStatement.execute();
+					preparedStatement.close();
+					new Usuarios().toggleFrame();
+					toggleFrame();
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
 				}));
 		frame.getContentPane().add(ComponentBuilder.buildButton("EDITAR USUÁRIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 424, 255, 40, null, null,
 				() -> {
