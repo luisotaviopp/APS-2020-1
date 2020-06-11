@@ -42,7 +42,7 @@ public class ComprarIngresso {
 		
 		frame.getContentPane().add(ComponentBuilder.buildLabel(Main.getUserManager().getEvento().getEveTitulo().trim(), "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 30, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel(Main.getUserManager().getEvento().getArtistaEntity().getArtNome().trim(), "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 85, 734, 28, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("Quantos ingressos vocÃª deseja comprar?", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 126, 734, 16, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("Quantos ingressos voce deseja comprar?", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 74, 126, 734, 16, null));
 		
 		
 		JRadioButton radioCredito = new JRadioButton("Credito");
