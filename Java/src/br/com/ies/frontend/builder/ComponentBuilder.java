@@ -6,7 +6,9 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPasswordField;
@@ -101,6 +103,14 @@ public class ComponentBuilder {
 		list.setModel(listModel);
 		list.setBounds(xBound, yBound, widthBound, heightBound);
 		return list;
+	}
+	
+	public static JComboBox<Object> buildComboBox(String fontName, int font, int fontSize, int xBound, int yBound,int widthBound, int heightBound, ComboBoxModel<Object> comboModel){
+		JComboBox<Object> comboBox = new JComboBox<>();
+		comboBox.setFont(new Font(fontName, font, fontSize));
+		comboBox.setModel(comboModel);
+		comboBox.setBounds(xBound, yBound, widthBound, heightBound);
+		return comboBox;
 	}
 	
 
