@@ -58,7 +58,7 @@ public class Login {
 		frame.getContentPane().add(ComponentBuilder.buildButton("ENTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266, 321, 350, 40, new Color(0, 250, 154), null, () -> {
 			
 			PersistenceParameterDTO<String> persistenceParameterDTO = new PersistenceParameterDTO<>();
-			persistenceParameterDTO.setParameter(String.format("SELECT usr_codigo,usr_nome,usr_email,usr_login,usr_senha, nvl.nvl_codigo, nvl_descricao FROM usuario.usuario usr INNER JOIN usuario.nivel nvl ON nvl.nvl_codigo = usr.nvl_codigo WHERE usr.usr_login = '%s'", inputUsuario.getText()));
+			persistenceParameterDTO.setParameter(String.format("SELECT usr_codigo,usr_nome,usr_email,usr_login,usr_senha, nvl.nvl_codigo, nvl_descricao,usr_ativo FROM usuario.usuario usr INNER JOIN usuario.nivel nvl ON nvl.nvl_codigo = usr.nvl_codigo WHERE usr.usr_login = '%s'", inputUsuario.getText()));
 			
 			Main.getPersistenceManager().getPersistance(PersistenceType.POSTGRES).select(persistenceParameterDTO, 
 					(u) ->{
@@ -69,6 +69,11 @@ public class Login {
 
 							String password = (String) userObject[4];
 							String level = (String) userObject[6];
+							
+							if(!((boolean) userObject[7])) {
+								Util.showMessage(Constants.USER_DISABLED_2);
+								return;
+							}
 							
 							if(!(password.trim().equals(inputSenha.getText()))) {
 								Util.showMessage(Constants.INVALID_PASSWORD);
@@ -84,7 +89,7 @@ public class Login {
 							nivel.setNvlCodigo((Integer) userObject[5]);
 							nivel.setNvlDescricao(level);
 							usuario.setNivelEntity(nivel);
-							usuario.setUsrAtivo(Boolean.TRUE);
+							usuario.setUsrAtivo((boolean) userObject[7]);
 							usuario.setUsrCodigo((Integer) userObject[0]);
 							usuario.setUsrEmail((String) userObject[2].toString().trim());
 							usuario.setUsrLogin((String) userObject[3].toString().trim());
