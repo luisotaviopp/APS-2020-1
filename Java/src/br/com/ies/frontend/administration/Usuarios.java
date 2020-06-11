@@ -74,7 +74,6 @@ public class Usuarios {
 		});
 		
 		JList<Object> listaUsuarios = ComponentBuilder.buildList("Franklin Gothic Medium", Font.PLAIN, 16, Color.LIGHT_GRAY, 29, 101, 258, 251, ListSelectionModel.SINGLE_SELECTION, defaultList);
-		listaUsuarios.setSelectedIndex(0);
 		frame.getContentPane().add(listaUsuarios);
 		
 		JTextField inputNome =  ComponentBuilder.buildTextField("Franklin Gothic Medium", Font.PLAIN, 13, 438, 101, 414, 40, 10);
@@ -109,8 +108,8 @@ public class Usuarios {
 		frame.getContentPane().add(selectNivel);
 
 		
-		frame.getContentPane().add(ComponentBuilder.buildLabel("USUÁRIOS", "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 30, null));
-		frame.getContentPane().add(ComponentBuilder.buildButton("DELETAR USUÁRIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 365, 255, 40, UIManager.getColor("Button.background"), null,
+		frame.getContentPane().add(ComponentBuilder.buildLabel("USUÃ�RIOS", "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 30, null));
+		frame.getContentPane().add(ComponentBuilder.buildButton("DELETAR USUÃ�RIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 365, 255, 40, UIManager.getColor("Button.background"), null,
 				() -> {
 					if(listaUsuarios.getSelectedValue() ==null)return;
 					Integer id = Integer.valueOf(listaUsuarios.getSelectedValue().toString().split(" - ")[0]);
@@ -124,7 +123,7 @@ public class Usuarios {
 						e.printStackTrace();
 					}
 				}));
-		frame.getContentPane().add(ComponentBuilder.buildButton("EDITAR USUÁRIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 424, 255, 40, null, null,
+		frame.getContentPane().add(ComponentBuilder.buildButton("EDITAR USUÃ�RIO", "Franklin Gothic Medium", Font.PLAIN, 13, 29, 424, 255, 40, null, null,
 				() -> {
 					if(listaUsuarios.getSelectedValue() ==null)return;
 					Integer id = Integer.valueOf(listaUsuarios.getSelectedValue().toString().split(" - ")[0]);
@@ -160,36 +159,26 @@ public class Usuarios {
 		
 		frame.getContentPane().add(ComponentBuilder.buildButton("CRIAR/ATUALIZAR USUARIO", "Franklin Gothic Medium", Font.PLAIN, 13, 312, 479, 540, 40, new Color(0, 250, 154), null,
 				() -> {
+					UsuarioEntity usuario = new UsuarioEntity();
+					NivelEntity nivelEntity = new NivelEntity();
+					nivelEntity.setNvlCodigo(Integer.valueOf(selectNivel.getSelectedItem().toString().split(" - ")[0]));
 					
-					PersistenceParameterDTO<String> persistenceParameterDTO = new PersistenceParameterDTO<>();
-					persistenceParameterDTO.setParameter(String.format("SELECT 8 FROM usuario.usuario WHERE usr_login = '%s'", inputUsuario.getText()));
-					
-					Main.getPersistenceManager().getPersistance(PersistenceType.POSTGRES).select(persistenceParameterDTO, 
-							(object) ->
-					{
-						
-						if(!(Util.castObjectToList(object).isEmpty())) {
-							UsuarioEntity usuario = new UsuarioEntity();
-							NivelEntity nivelEntity = new NivelEntity();
-							nivelEntity.setNvlCodigo(Integer.valueOf(selectNivel.getSelectedItem().toString().split(" - ")[0]));
-							usuario.setUsrCodigo(Integer.valueOf(Integer.valueOf(listaUsuarios.getSelectedValue().toString().split(" - ")[0])));
-							usuario.setNivelEntity(nivelEntity);
-							usuario.setUsrAtivo(Boolean.TRUE);
-							usuario.setUsrNome(inputNome.getText());
-							usuario.setUsrEmail(inputEmail.getText());
-							usuario.setUsrLogin(inputUsuario.getText());
-							usuario.setUsrSenha(inputSenhaProvisoria.getText());
+					if(listaUsuarios.getSelectedValue() != null)
+						usuario.setUsrCodigo(Integer.valueOf(Integer.valueOf(listaUsuarios.getSelectedValue().toString().split(" - ")[0])));
+					usuario.setNivelEntity(nivelEntity);
+					usuario.setUsrAtivo(Boolean.TRUE);
+					usuario.setUsrNome(inputNome.getText());
+					usuario.setUsrEmail(inputEmail.getText());
+					usuario.setUsrLogin(inputUsuario.getText());
+					usuario.setUsrSenha(inputSenhaProvisoria.getText());
 
-							PersistenceUtil.persist(usuario);
-							Util.showMessage(Constants.USER_CHANGED);
-							new Usuarios().toggleFrame();
-							toggleFrame();
-						}
-					}
-							);
+					PersistenceUtil.persist(usuario);
+					Util.showMessage(Constants.USER_CHANGED);
+					new Usuarios().toggleFrame();
+					toggleFrame();
 				}));
 
-		frame.getContentPane().add(ComponentBuilder.buildLabel("SELECIONE OU CRIE UM USUÁRIO", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 29, 79, 258, 16, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("SELECIONE OU CRIE UM USUÃ�RIO", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 29, 79, 258, 16, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("EMAIL", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 312, 154, 127, 40, null));
 		frame.getContentPane().add(ComponentBuilder.buildButton("CONSULTAR LOGS", "Franklin Gothic Medium", Font.PLAIN, 13, 312, 424, 540, 40, new Color(204, 255, 102), null,
 				() -> {
@@ -197,11 +186,11 @@ public class Usuarios {
 				}));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("NOME", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 311, 101, 127, 40, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("USUARIO", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 312, 207, 127, 40, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("SENHA PROVISÁRIA", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 312, 260, 127, 40, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("NÍVEL DE ACESSO", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 312, 312, 127, 40, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("SENHA PROVISÃ�RIA", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 312, 260, 127, 40, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("NÃ�VEL DE ACESSO", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 312, 312, 127, 40, null));
 
 
-		frame.getContentPane().add(ComponentBuilder.buildButton("DESATIVAR USUÁRIO", "Franklin Gothic Medium", Font.PLAIN, 13, 312, 365, 540, 40, Color.WHITE, null,
+		frame.getContentPane().add(ComponentBuilder.buildButton("DESATIVAR USUÃ�RIO", "Franklin Gothic Medium", Font.PLAIN, 13, 312, 365, 540, 40, Color.WHITE, null,
 				() -> {
 					PersistenceParameterDTO<String> persistenceParameterDTO = new PersistenceParameterDTO<>();
 					persistenceParameterDTO.setParameter(String.format("SELECT 8 FROM usuario.usuario WHERE usr_login = '%s'", inputUsuario.getText()));
