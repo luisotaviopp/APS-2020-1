@@ -31,39 +31,45 @@ public class AdministratorDashboard {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		frame.getContentPane().add(ComponentBuilder.buildLabel("ADIMINISTRAÇÃO", "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 30, 882, 30, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("ADIMINISTRADOR", "Franklin Gothic Medium", Font.BOLD, 20, SwingConstants.CENTER, null, null, null, 0, 30, 882, 30, null));
 		
-		frame.getContentPane().add(ComponentBuilder.buildButton("EVENTOS", "Franklin Gothic Medium", Font.PLAIN, 13, 94, 82, 300, 130, null, null,
+		frame.getContentPane().add(ComponentBuilder.buildButton("EVENTOS", "Franklin Gothic Medium", Font.PLAIN, 13, 94, 82, 300, 100, null, null,
 				() -> {
 			new Eventos().toggleFrame();
 			toggleFrame();
 				}));
 		
-		frame.getContentPane().add(ComponentBuilder.buildButton("USUARIOS", "Franklin Gothic Medium", Font.PLAIN, 13, 488, 82, 300, 130, null, null, 
+		frame.getContentPane().add(ComponentBuilder.buildButton("USUARIOS", "Franklin Gothic Medium", Font.PLAIN, 13, 488, 82, 300, 100, null, null, 
 				() -> {
 			new Usuarios().toggleFrame();
 			toggleFrame();
 				}));
 		
-		frame.getContentPane().add(ComponentBuilder.buildButton("RELATORIOS", "Franklin Gothic Medium", Font.PLAIN, 13, 94, 238, 300, 130, null, null, 
+		frame.getContentPane().add(ComponentBuilder.buildButton("RELATORIOS", "Franklin Gothic Medium", Font.PLAIN, 13, 94, 208, 300, 100, null, null, 
 				() -> {
 			new Relatorio().toggleFrame();
 			toggleFrame();
 				}));
 		
-		frame.getContentPane().add(ComponentBuilder.buildButton("ARTISTAS", "Franklin Gothic Medium", Font.PLAIN, 13, 488, 238, 300, 130, null, null, 
+		frame.getContentPane().add(ComponentBuilder.buildButton("ARTISTAS", "Franklin Gothic Medium", Font.PLAIN, 13, 488, 208, 300, 100, null, null, 
 				() -> {
 			new Artistas().toggleFrame();
 			toggleFrame();
 				}));
 		
-		frame.getContentPane().add(ComponentBuilder.buildButton("LOGS", "Franklin Gothic Medium", Font.PLAIN, 13, 94, 394, 300, 130, null, null, 
+		frame.getContentPane().add(ComponentBuilder.buildButton("LOGS", "Franklin Gothic Medium", Font.PLAIN, 13, 94, 334, 300, 100, null, null, 
 				() -> {
 			new Logs().toggleFrame();
 			toggleFrame();
 				}));
 		
-		frame.getContentPane().add(ComponentBuilder.buildButton("SAIR", "Franklin Gothic Medium", Font.PLAIN, 13, 488, 394, 300, 130, null, null, 
+		frame.getContentPane().add(ComponentBuilder.buildButton("LOCAL", "Franklin Gothic Medium", Font.PLAIN, 13, 488, 334, 300, 100, null, null, 
+				() -> {
+			new Local().toggleFrame();
+			toggleFrame();
+				}));
+		
+		frame.getContentPane().add(ComponentBuilder.buildButton("SAIR", "Franklin Gothic Medium", Font.PLAIN, 13, 288, 460, 300, 95, null, null, 
 				() -> {
 					System.exit(0);
 				}));
