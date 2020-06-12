@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -136,7 +137,7 @@ public class PersistenceUtil {
 				preparedStatement.setBoolean(index, (boolean) value);
 				break;
 			case "java.util.Date":
-				preparedStatement.setDate(index, new java.sql.Date(((Date) value).getTime()));
+				preparedStatement.setTimestamp(index, new Timestamp(((Date)value).getTime()));
 				break;
 			case "null":
 				preparedStatement.setString(index, new String());
