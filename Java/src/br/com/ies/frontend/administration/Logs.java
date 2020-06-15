@@ -57,7 +57,7 @@ public class Logs {
 		JList<Object> listaLogs = ComponentBuilder.buildList("Franklin Gothic Medium", Font.PLAIN, 16, Color.LIGHT_GRAY, 60, 63, 350, 396, ListSelectionModel.SINGLE_SELECTION, defaultList);
 		PersistenceParameterDTO<String> select = new PersistenceParameterDTO<String>();
 		select.setParameter("SELECT ca.coa_codigo,usr_login, coa_data FROM usuario.controle_acesso ca " + 
-				"INNER JOIN usuario.usuario usr ON ca.usr_codigo = ca.usr_codigo");
+				"INNER JOIN usuario.usuario usr ON ca.usr_codigo = usr.usr_codigo");
 		Main.getPersistenceManager().getPersistance(PersistenceType.POSTGRES).select(select,
 				(u) ->{
 					List<Object[]> list = Util.castObjectToList(u);
@@ -80,7 +80,7 @@ public class Logs {
 				() -> {
 					PersistenceParameterDTO<String> select1 = new PersistenceParameterDTO<String>();
 					select1.setParameter(String.format("SELECT ca.coa_codigo,usr_login, coa_data FROM usuario.controle_acesso ca " + 
-							"INNER JOIN usuario.usuario usr ON ca.usr_codigo = ca.usr_codigo WHERE ca.coa_codigo = '%s'", Integer.parseInt(listaLogs.getSelectedValue().toString().split(" - ")[0])));
+							"INNER JOIN usuario.usuario usr ON ca.usr_codigo = usr.usr_codigo WHERE ca.coa_codigo = '%s'", Integer.parseInt(listaLogs.getSelectedValue().toString().split(" - ")[0])));
 					Main.getPersistenceManager().getPersistance(PersistenceType.POSTGRES).select(select1, 
 							(u) ->{
 								List<Object[]> list = Util.castObjectToList(u);
