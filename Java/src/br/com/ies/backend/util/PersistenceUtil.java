@@ -27,17 +27,13 @@ public class PersistenceUtil {
 
 	private static final ExecutorService EXECUTORS = Executors.newFixedThreadPool(2);
 	
-	public static void persist(Serializable object) {
-		EXECUTORS.execute( 
-			() -> {
+		public static void persist(Serializable object) {
 			try {
 				PersistenceDTO buildObject = QueryBuilder.build(object);
 				Main.getPersistenceManager().getPersistenceList().stream().forEachOrdered(persist -> persist.persist(buildObject));
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
-		}
-				);
 	}
 	
 	public static void execute(Runnable runnable) {
