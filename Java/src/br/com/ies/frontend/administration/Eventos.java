@@ -192,6 +192,7 @@ public class Eventos {
 						evento.setEveTitulo(inputNome.getText());
 						evento.setEveData(Util.dateFromString("dd/MM/yyyy HH:mm", inputData.getText()));
 						evento.setEveQtdIngressos(Integer.parseInt(inputQuantidade.getText()));
+						
 						evento.setEveValorIngresso(Double.parseDouble(inputValor.getText()));
 						LocalEntity local = new LocalEntity();
 						local.setLocCodigo(Integer.parseInt(selectLocal.getSelectedItem().toString().split(" - ")[0]));
@@ -211,7 +212,7 @@ public class Eventos {
 					 
 					}));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("SELECIONE OU CRIE UM EVENTO", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 54, 79, 258, 16, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("ENDEREÇO", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 332, 209, 148, 38, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("ENDEREÃ‡O", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 332, 209, 148, 38, null));
 		frame.getContentPane().add(inputValor);
 		frame.getContentPane().add(ComponentBuilder.buildLabel("ARTISTA", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 332, 367, 148, 38, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("TIPO DE EVENTO", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.LEFT, null, null, null, 332, 426, 148, 38, null));
@@ -229,7 +230,7 @@ public class Eventos {
 						PersistenceParameterDTO<String> select1 = new PersistenceParameterDTO<>();
 						
 						
-						select1.setParameter(String.format("SELECT eve_titulo,eve_data,loc_logradouro,loc_lotacao_maxima,eve_valor_ingresso, art.art_nome, tie.tie_descricao FROM evento.evento e INNER JOIN evento.local el ON e.loc_codigo = el.loc_codigo INNER JOIN evento.artista art ON e.art_codigo = art.art_codigo "
+						select1.setParameter(String.format("SELECT eve_titulo,eve_data,loc_logradouro,eve_qtd_ingressos,eve_valor_ingresso, art.art_nome, tie.tie_descricao FROM evento.evento e INNER JOIN evento.local el ON e.loc_codigo = el.loc_codigo INNER JOIN evento.artista art ON e.art_codigo = art.art_codigo "
 								+ "INNER JOIN evento.tipo_evento tie ON e.tie_codigo = tie.tie_codigo WHERE e.eve_codigo = '%s'" ,id));
 						
 						Main.getPersistenceManager().getPersistance(PersistenceType.POSTGRES).select(select1,
