@@ -56,7 +56,7 @@ public class Registrar {
 		
 		frame.getContentPane().add(ComponentBuilder.buildLabel("REGISTRO", "Franklin Gothic Medium", Font.PLAIN, 20, SwingConstants.CENTER, null, null, null, 0, 20, 882, 34, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("NOME COMPLETO","Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 382, 91, 118, 16, null));
-		frame.getContentPane().add(ComponentBuilder.buildLabel("Usu·rio", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 413, 173, 56, 16, null));
+		frame.getContentPane().add(ComponentBuilder.buildLabel("Usu√°rio", "Franklin Gothic Medium", Font.PLAIN, 13, null, null, null, null, 413, 173, 56, 16, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("EMAIL", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 413, 261, 56, 16, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("SENHA", "Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 240, 354, 56, 16, null));
 		frame.getContentPane().add(ComponentBuilder.buildLabel("CONFIRMAR SENHA","Franklin Gothic Medium", Font.PLAIN, 13, SwingConstants.CENTER, null, null, null, 550, 354, 126, 16, null));
@@ -83,7 +83,7 @@ public class Registrar {
 						if(Util.castObjectToList(object).isEmpty()) {
 							UsuarioEntity usuario = new UsuarioEntity();
 							NivelEntity nivelEntity = new NivelEntity();
-							nivelEntity.setNvlCodigo(1);
+							nivelEntity.setNvlCodigo(2);
 							usuario.setNivelEntity(nivelEntity);
 							usuario.setUsrAtivo(Boolean.TRUE);
 							usuario.setUsrEmail(inputEmail.getText());
