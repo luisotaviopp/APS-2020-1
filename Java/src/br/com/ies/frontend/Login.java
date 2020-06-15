@@ -2,6 +2,7 @@ package br.com.ies.frontend;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -11,9 +12,11 @@ import javax.swing.SwingConstants;
 
 import br.com.ies.backend.Main;
 import br.com.ies.backend.dto.PersistenceParameterDTO;
+import br.com.ies.backend.entity.ControleAcessoEntity;
 import br.com.ies.backend.entity.NivelEntity;
 import br.com.ies.backend.entity.UsuarioEntity;
 import br.com.ies.backend.type.PersistenceType;
+import br.com.ies.backend.util.PersistenceUtil;
 import br.com.ies.backend.util.Util;
 import br.com.ies.frontend.administration.AdministratorDashboard;
 import br.com.ies.frontend.builder.ComponentBuilder;
@@ -40,7 +43,7 @@ public class Login {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		//Título
+		//TÃ­tulo
 //		JLabel lblTitulo = new JLabel("BILHETERIA");
 //		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 //		lblTitulo.setForeground(Color.DARK_GRAY);
@@ -96,6 +99,12 @@ public class Login {
 							usuario.setUsrNome((String) userObject[1].toString().trim());
 							usuario.setUsrSenha((String) userObject[4].toString().trim());
 							Main.getUserManager().setUsuario(usuario);
+							
+							ControleAcessoEntity controleAcesso = new ControleAcessoEntity();
+							controleAcesso.setUsuarioEntity(usuario);
+							controleAcesso.setCoaData(new Date());
+							PersistenceUtil.persist(controleAcesso);
+							
 							toggleFrame();
 						}else {
 							Util.showMessage(Constants.USER_DOESNT_EXIST);
@@ -109,7 +118,7 @@ public class Login {
 		// Label Senha
 		frame.getContentPane().add(ComponentBuilder.buildLabel("SENHA", "Franklin Gothic Medium", Font.BOLD, 16, SwingConstants.CENTER, null, null, null, 356, 197, 170, 40, null));
 		
-		// Botão Registrar
+		// BotÃ£o Registrar
 		frame.getContentPane().add(ComponentBuilder.buildButton("REGISTRAR", "Franklin Gothic Medium", Font.PLAIN, 13, 266, 384, 350, 40, null, null,
 				 () -> {
 						new Registrar().toggleFrame();
